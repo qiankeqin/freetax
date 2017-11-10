@@ -167,11 +167,10 @@
         <bean class="com.movision.security.resubmit.AvoidDuplicateSubmissionInterceptor"/>
     </mvc:interceptors>-->
 
-    <mvc:interceptors>
-        <!--<bean class="com.movision.aop.TimeoutInterceptor"/>-->
-        <bean class="com.freetax.aop.InitLoginMemberInterceptor"/>
-        <!--<bean class="com.movision.aop.UserAccessInterceptor"/>-->
-    </mvc:interceptors>
+    <!--去除登录拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<bean class="com.freetax.aop.InitLoginMemberInterceptor"/>-->
+    <!--</mvc:interceptors>-->
 
 
     <!--AOP-->
