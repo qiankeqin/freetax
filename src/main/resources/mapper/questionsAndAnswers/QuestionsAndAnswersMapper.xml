@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.freetax.mybatis.questionsAndAnswers.mapper.QuestionsAndAnswersMapper" >
-  <resultMap id="BaseResultMap" type="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="ask" property="ask" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="number" property="number" jdbcType="INTEGER" />
-    <result column="intime" property="intime" jdbcType="TIMESTAMP" />
-    <result column="isdel" property="isdel" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.freetax.mybatis.questionsAndAnswers.mapper.QuestionsAndAnswersMapper">
+    <resultMap id="BaseResultMap" type="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ask" property="ask" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="INTEGER"/>
+        <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
+        <result column="isdel" property="isdel" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, ask, answer, number, intime, isdel
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from fr_questions_and_answers
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from fr_questions_and_answers
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from fr_questions_and_answers
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" >
+    <insert id="insert" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
     insert into fr_questions_and_answers (id, ask, answer, 
       number, intime, isdel
       )
@@ -30,71 +30,72 @@
       #{number,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" >
-    insert into fr_questions_and_answers
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="ask != null" >
-        ask,
-      </if>
-      <if test="answer != null" >
-        answer,
-      </if>
-      <if test="number != null" >
-        number,
-      </if>
-      <if test="intime != null" >
-        intime,
-      </if>
-      <if test="isdel != null" >
-        isdel,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="ask != null" >
-        #{ask,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null" >
-        #{number,jdbcType=INTEGER},
-      </if>
-      <if test="intime != null" >
-        #{intime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isdel != null" >
-        #{isdel,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" >
-    update fr_questions_and_answers
-    <set >
-      <if test="ask != null" >
-        ask = #{ask,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        answer = #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null" >
-        number = #{number,jdbcType=INTEGER},
-      </if>
-      <if test="intime != null" >
-        intime = #{intime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isdel != null" >
-        isdel = #{isdel,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" >
+    <insert id="insertSelective" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
+        insert into fr_questions_and_answers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ask != null">
+                ask,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="intime != null">
+                intime,
+            </if>
+            <if test="isdel != null">
+                isdel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="ask != null">
+                #{ask,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="intime != null">
+                #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                #{isdel,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
+        update fr_questions_and_answers
+        <set>
+            <if test="ask != null">
+                ask = #{ask,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="intime != null">
+                intime = #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                isdel = #{isdel,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
     update fr_questions_and_answers
     set ask = #{ask,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
@@ -103,4 +104,25 @@
       isdel = #{isdel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <update id="deleteQuestionsAndAnswers" parameterType="java.lang.Integer">
+    UPDATE fr_questions_and_answers
+    set isdel = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findAllQueryQAList" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers"
+            resultType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
+      SELECT *
+      FROM fr_questions_and_answers
+      <where>
+          <if test="ask != null">
+              ask LIKE concat('%',#{ask,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="answer != null">
+              answer LIKE concat('%',#{answer,jdbcType=VARCHAR},'%')
+          </if>
+      </where>
+      ORDER BY number DESC
+    </select>
 </mapper>
