@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="freetax:war exploded">
-    <output-path>$PROJECT_DIR$/target/movision</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/freetax_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="freetax-1.0.0" />
+          <element id="module-output" name="freetax" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.4.RELEASE" />
@@ -130,10 +130,7 @@
           <element id="library" level="project" name="Maven: jxl:jxl_2.6:2.6" />
         </element>
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/movision/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="javaee-facet-resources" facet="freetax-1.0.0/web/Web" />
+      <element id="javaee-facet-resources" facet="freetax/web/Web" />
     </root>
   </artifact>
 </component>
