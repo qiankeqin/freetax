@@ -1,7 +1,9 @@
 package com.freetax.mybatis.questionsAndAnswers.mapper;
 
 import com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface QuestionsAndAnswersMapper {
     int deleteByPrimaryKey(Integer id);
 
