@@ -124,4 +124,20 @@ public class InformationController {
         response.setData(pag);
         return response;
     }
+
+    /**
+     * 根据咨询文章id查询资讯详情
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/query_information_id",method = RequestMethod.POST)
+    @ApiOperation(value = "查询资讯详情",notes = "根据咨询文章id查询资讯详情",response = Response.class)
+    public Response queryInformationById(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        Information information = informationFacade.queryInformationById(id);
+        response.setMessage("查询成功");
+        response.setData(information);
+        return response;
+    }
 }

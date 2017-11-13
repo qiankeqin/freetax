@@ -121,4 +121,13 @@ public class InformationFacade {
         }
         return informationService.findAllQueryInformationByList(information,pag);
     }
+
+    /**
+     * 根据id查询资讯文章详情
+     * @param id
+     * @return
+     */
+    public Information queryInformationById(String id){
+        return informationService.queryInformationById(Integer.parseInt(id));
+    }
 }
