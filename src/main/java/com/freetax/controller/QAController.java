@@ -93,8 +93,8 @@ public class QAController {
     @ApiOperation(value = "条件查询QA列表",response = Response.class)
     public Response queryQAList(@ApiParam(value = "问题")@RequestParam(required = false) String ask,
                                 @ApiParam(value = "答案")@RequestParam(required = false) String answer,
-                                @ApiParam(value = "当前页")@RequestParam String pageNo,
-                                @ApiParam(value = "每页几条")@RequestParam String pageSize){
+                                @ApiParam(value = "当前页")@RequestParam(defaultValue = "1") String pageNo,
+                                @ApiParam(value = "每页几条")@RequestParam(defaultValue = "10") String pageSize){
         Response response = new Response();
         Paging<QuestionsAndAnswers> pag = new Paging<QuestionsAndAnswers>(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
         List<QuestionsAndAnswers> list = questionsAndAnswersFacade.queryQAList(ask,answer,pag);

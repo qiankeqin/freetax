@@ -28,7 +28,7 @@ public class QuestionsAndAnswersFacade {
      */
     public void insertQuestionsAndAnswers(String ask,String answer,String number){
         QuestionsAndAnswers andAnswers = new QuestionsAndAnswers();
-        andAnswers.setAnswer(ask);
+        andAnswers.setAsk(ask);
         andAnswers.setAnswer(answer);
         if (StringUtils.isNotEmpty(number)) {
             andAnswers.setNumber(Integer.parseInt(number));

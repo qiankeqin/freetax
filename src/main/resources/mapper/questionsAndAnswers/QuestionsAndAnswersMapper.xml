@@ -117,10 +117,10 @@
       FROM fr_questions_and_answers
       <where>
           <if test="ask != null">
-              ask LIKE concat('%',#{ask,jdbcType=VARCHAR},'%')
+              AND ask LIKE concat('%',#{ask,jdbcType=VARCHAR},'%')
           </if>
           <if test="answer != null">
-              answer LIKE concat('%',#{answer,jdbcType=VARCHAR},'%')
+              AND answer LIKE concat('%',#{answer,jdbcType=VARCHAR},'%')
           </if>
       </where>
       ORDER BY number DESC
