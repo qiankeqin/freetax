@@ -27,4 +27,6 @@ public interface InformationMapper {
     void deleteInformation(Integer id);
 
     List<Information> findAllQueryInformationByList(Information information, RowBounds rowBounds);
+
+    Information queryInformationById(Integer id);
 }

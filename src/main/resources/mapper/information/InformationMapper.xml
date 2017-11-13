@@ -198,4 +198,8 @@
             AND title LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
         </if>
     </select>
+
+    <select id="queryInformationById" resultType="com.freetax.mybatis.information.entity.Information" parameterType="java.lang.Integer">
+        SELECT * FROM fr_information WHERE id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

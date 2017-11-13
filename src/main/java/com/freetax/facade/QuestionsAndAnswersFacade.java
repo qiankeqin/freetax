@@ -89,5 +89,14 @@ public class QuestionsAndAnswersFacade {
         return questionsAndAnswersService.queryQAList(andAnswers,pag);
     }
 
+    /**
+     * 根据id查询问答详情
+     * @param id
+     * @return
+     */
+    public QuestionsAndAnswers queryQAById(String id){
+        return questionsAndAnswersService.queryQAById(Integer.parseInt(id));
+    }
+
 
 }

@@ -93,4 +93,19 @@ public class InformationService {
             throw e;
         }
     }
+
+    /**
+     * 根据id查询资讯文章详情
+     * @param id
+     * @return
+     */
+    public Information queryInformationById(Integer id){
+        try {
+            log.info("根据id查询资讯文章详情");
+            return informationMapper.queryInformationById(id);
+        } catch (Exception e) {
+            log.error("根据id查询资讯文章详情异常",e);
+            throw e;
+        }
+    }
 }
