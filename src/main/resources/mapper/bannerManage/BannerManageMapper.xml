@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.freetax.mybatis.bannerManage.mapper.BannerManageMapper" >
+  <resultMap id="BaseResultMap" type="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="banner" property="banner" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="orderid" property="orderid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+    <result column="intime" property="intime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, banner, describe, orderid, title, location, isdel, intime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fr_banner_manage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fr_banner_manage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    insert into fr_banner_manage (id, banner, describe, 
+      orderid, title, location, 
+      isdel, intime)
+    values (#{id,jdbcType=INTEGER}, #{banner,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{orderid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{location,jdbcType=INTEGER}, 
+      #{isdel,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    insert into fr_banner_manage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="intime != null" >
+        intime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    update fr_banner_manage
+    <set >
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        intime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    update fr_banner_manage
+    set banner = #{banner,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      orderid = #{orderid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      location = #{location,jdbcType=INTEGER},
+      isdel = #{isdel,jdbcType=INTEGER},
+      intime = #{intime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryIndexBannerOrInformation" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage">
+    SELECT * FROM fr_banner_manage WHERE location IN (1,2,3,6) AND isdel = 0
+  </select>
+</mapper>
