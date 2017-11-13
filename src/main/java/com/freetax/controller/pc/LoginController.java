@@ -2,6 +2,7 @@ package com.freetax.controller.pc;
 
 import com.freetax.common.Response;
 import com.freetax.facade.user.PcRegisterFacade;
+import com.freetax.mybatis.user.entity.User;
 import com.freetax.utils.ValidateUtils;
 import com.freetax.utils.VerifyCodeUtils;
 import com.taobao.api.ApiException;
@@ -64,6 +65,17 @@ public class LoginController {
             response.setCode(300);
             response.setMessage("请输入正确的手机号！");
         }
+
+        return response;
+    }
+
+    @ApiOperation(value = "用户注册接口（PC端用户注册接口）", notes = "用户注册接口（PC端用户注册接口）", response = Response.class)
+    @RequestMapping(value = "pc_register", method = RequestMethod.POST)
+    public Response pcRegister(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
+                            @ApiParam(value = "验证码（手机收到的验证码）") @RequestParam String phcode,
+                            @ApiParam(value = "密码（用户设置的密码）") @RequestParam String passwd){
+
+        Response response = pcRegisterFacade.pcRegister(mobile, phcode, passwd);
 
         return response;
     }

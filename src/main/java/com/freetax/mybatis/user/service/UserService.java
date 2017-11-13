@@ -40,4 +40,14 @@ public class UserService {
             throw e;
         }
     }
+
+    public void pcRegister(User user){
+        try {
+            log.info("注册插入用户信息");
+            userMapper.insertSelective(user);
+        }catch (Exception e){
+            log.error("注册插入用户信息失败", e);
+            throw e;
+        }
+    }
 }
