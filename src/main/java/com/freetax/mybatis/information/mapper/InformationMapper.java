@@ -1,6 +1,7 @@
 package com.freetax.mybatis.information.mapper;
 
 import com.freetax.mybatis.information.entity.Information;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface InformationMapper {
     int updateByPrimaryKey(Information record);
 
     List<Information> queryInformationIsHot();
+
+    void deleteInformation(Integer id);
+
+    List<Information> findAllQueryInformationByList(Information information, RowBounds rowBounds);
 }

@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.freetax.mybatis.information.mapper.InformationMapper" >
-  <resultMap id="BaseResultMap" type="com.freetax.mybatis.information.entity.Information" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="subhead" property="subhead" jdbcType="VARCHAR" />
-    <result column="coverimg" property="coverimg" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="ishot" property="ishot" jdbcType="INTEGER" />
-    <result column="source" property="source" jdbcType="VARCHAR" />
-    <result column="intime" property="intime" jdbcType="TIMESTAMP" />
-    <result column="isdel" property="isdel" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.freetax.mybatis.information.entity.Information" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.freetax.mybatis.information.mapper.InformationMapper">
+    <resultMap id="BaseResultMap" type="com.freetax.mybatis.information.entity.Information">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="subhead" property="subhead" jdbcType="VARCHAR"/>
+        <result column="coverimg" property="coverimg" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="ishot" property="ishot" jdbcType="INTEGER"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
+        <result column="isdel" property="isdel" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.freetax.mybatis.information.entity.Information"
+               extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, title, subhead, coverimg, type, ishot, source, intime, isdel
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from fr_information
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from fr_information
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from fr_information
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.freetax.mybatis.information.entity.Information" >
+    <insert id="insert" parameterType="com.freetax.mybatis.information.entity.Information">
     insert into fr_information (id, title, subhead, 
       coverimg, type, ishot, 
       source, intime, isdel, 
@@ -43,107 +44,107 @@
       #{source,jdbcType=VARCHAR}, #{intime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.freetax.mybatis.information.entity.Information" >
-    insert into fr_information
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="subhead != null" >
-        subhead,
-      </if>
-      <if test="coverimg != null" >
-        coverimg,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="ishot != null" >
-        ishot,
-      </if>
-      <if test="source != null" >
-        source,
-      </if>
-      <if test="intime != null" >
-        intime,
-      </if>
-      <if test="isdel != null" >
-        isdel,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subhead != null" >
-        #{subhead,jdbcType=VARCHAR},
-      </if>
-      <if test="coverimg != null" >
-        #{coverimg,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="ishot != null" >
-        #{ishot,jdbcType=INTEGER},
-      </if>
-      <if test="source != null" >
-        #{source,jdbcType=VARCHAR},
-      </if>
-      <if test="intime != null" >
-        #{intime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isdel != null" >
-        #{isdel,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.information.entity.Information" >
-    update fr_information
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subhead != null" >
-        subhead = #{subhead,jdbcType=VARCHAR},
-      </if>
-      <if test="coverimg != null" >
-        coverimg = #{coverimg,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="ishot != null" >
-        ishot = #{ishot,jdbcType=INTEGER},
-      </if>
-      <if test="source != null" >
-        source = #{source,jdbcType=VARCHAR},
-      </if>
-      <if test="intime != null" >
-        intime = #{intime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isdel != null" >
-        isdel = #{isdel,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.freetax.mybatis.information.entity.Information" >
+    <insert id="insertSelective" parameterType="com.freetax.mybatis.information.entity.Information">
+        insert into fr_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="subhead != null">
+                subhead,
+            </if>
+            <if test="coverimg != null">
+                coverimg,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="ishot != null">
+                ishot,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="intime != null">
+                intime,
+            </if>
+            <if test="isdel != null">
+                isdel,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subhead != null">
+                #{subhead,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="ishot != null">
+                #{ishot,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="intime != null">
+                #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                #{isdel,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.information.entity.Information">
+        update fr_information
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subhead != null">
+                subhead = #{subhead,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                coverimg = #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="ishot != null">
+                ishot = #{ishot,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="intime != null">
+                intime = #{intime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                isdel = #{isdel,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.freetax.mybatis.information.entity.Information">
     update fr_information
     set title = #{title,jdbcType=VARCHAR},
       subhead = #{subhead,jdbcType=VARCHAR},
@@ -156,7 +157,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.information.entity.Information" >
+    <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.information.entity.Information">
     update fr_information
     set title = #{title,jdbcType=VARCHAR},
       subhead = #{subhead,jdbcType=VARCHAR},
@@ -169,7 +170,32 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="queryInformationIsHot" resultType="com.freetax.mybatis.information.entity.Information">
+    <select id="queryInformationIsHot" resultType="com.freetax.mybatis.information.entity.Information">
     SELECT * FROM fr_information WHERE ishot = 1 AND isdel = 0
   </select>
+
+    <update id="deleteInformation" parameterType="java.lang.Integer">
+    UPDATE fr_information
+    SET isdel = 1
+    WHERE isdel = 0 AND  id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findAllQueryInformationByList" resultType="com.freetax.mybatis.information.entity.Information"
+            parameterType="com.freetax.mybatis.information.entity.Information">
+        SELECT *
+        FROM fr_information
+        WHERE isdel = 0
+        <if test="ishot != null">
+            AND ishot = #{ishot,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            AND source = #{source,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            AND type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="title != null">
+            AND title LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
 </mapper>
