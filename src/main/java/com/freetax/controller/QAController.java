@@ -103,4 +103,19 @@ public class QAController {
         response.setData(pag);
         return response;
     }
+
+    /**
+     * 查询问答详情
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询问答详情",notes = "查询问答详情",response = Response.class)
+    @RequestMapping(value = "queryQAById",method = RequestMethod.POST)
+    public Response queryQAById(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        QuestionsAndAnswers andAnswers = questionsAndAnswersFacade.queryQAById(id);
+        response.setMessage("查询成功");
+        response.setData(andAnswers);
+        return response;
+    }
 }

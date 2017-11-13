@@ -125,4 +125,8 @@
       </where>
       ORDER BY number DESC
     </select>
+
+    <select id="queryQAById" resultType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers" parameterType="java.lang.Integer">
+        SELECT * FROM fr_questions_and_answers WHERE id = #{id,jdbcType=INTEGER} AND isdel = 0
+    </select>
 </mapper>

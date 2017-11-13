@@ -80,4 +80,19 @@ public class QuestionsAndAnswersService {
             throw e;
         }
     }
+
+    /**
+     * 根据id查询问答详情
+     * @param id
+     * @return
+     */
+    public QuestionsAndAnswers queryQAById(Integer id){
+        try {
+            log.info("根据id查询问答详情");
+            return questionsAndAnswersMapper.queryQAById(id);
+        } catch (Exception e) {
+            log.error("根据id查询问答详情异常",e);
+            throw e;
+        }
+    }
 }

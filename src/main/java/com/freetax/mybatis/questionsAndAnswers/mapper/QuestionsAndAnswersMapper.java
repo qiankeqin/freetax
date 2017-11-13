@@ -23,4 +23,6 @@ public interface QuestionsAndAnswersMapper {
     void deleteQuestionsAndAnswers(Integer id);
 
     List<QuestionsAndAnswers> findAllQueryQAList(QuestionsAndAnswers andAnswers, RowBounds rowBounds);
+
+    QuestionsAndAnswers queryQAById(Integer id);
 }
