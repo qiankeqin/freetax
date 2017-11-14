@@ -2,6 +2,7 @@ package com.freetax.mybatis.partner.service;
 
 import com.freetax.mybatis.partner.entity.Partner;
 import com.freetax.mybatis.partner.mapper.PartnerMapper;
+import com.freetax.utils.pagination.model.Paging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,80 @@ public class PartnerService {
             return partnerMapper.queryPartnerList();
         } catch (Exception e) {
             log.error("查询首页合作伙伴列表异常",e);
+            throw e;
+        }
+    }
+
+
+    /**
+     * 新增合作伙伴
+     * @param partner
+     */
+    public void insertPartner(Partner partner){
+        try {
+            log.info("新增合作伙伴");
+            partnerMapper.insertSelective(partner);
+        } catch (Exception e) {
+            log.error("新增合作伙伴异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 根据id查询合作伙伴详情
+     * @param id
+     * @return
+     */
+    public Partner queryPartnerById(Integer id){
+        try {
+            log.info("根据id查询合作伙伴详情");
+            return partnerMapper.selectByPrimaryKey(id);
+        } catch (Exception e) {
+            log.error("根据id查询合作伙伴异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 条件查询合作伙伴列表
+     * @param partner
+     * @param pag
+     * @return
+     */
+    public List<Partner> queryPartnerByList(Partner partner , Paging<Partner> pag){
+        try {
+            log.info("条件查询合作伙伴列表");
+            return partnerMapper.findAllQueryPartnerByList(partner,pag.getRowBounds());
+        } catch (Exception e) {
+            log.error("条件查询合作伙伴列表异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 修改合作伙伴
+     * @param partner
+     */
+    public void updatePartnerById(Partner partner){
+        try {
+            log.info("修改合作伙伴");
+            partnerMapper.updateByPrimaryKeySelective(partner);
+        } catch (Exception e) {
+            log.error("溪丢该合作伙伴异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 删除合作伙伴
+     * @param partner
+     */
+    public void deletePartner(Partner partner){
+        try {
+            log.info("根据id删除合作伙伴");
+            partnerMapper.deletePartner(partner);
+        } catch (Exception e) {
+            log.error("根据id删除合作伙伴异常",e);
             throw e;
         }
     }

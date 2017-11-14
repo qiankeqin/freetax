@@ -1,6 +1,7 @@
 package com.freetax.mybatis.partner.mapper;
 
 import com.freetax.mybatis.partner.entity.Partner;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface PartnerMapper {
     int updateByPrimaryKey(Partner record);
 
     List<Partner> queryPartnerList();
+
+    List<Partner> findAllQueryPartnerByList(Partner partner, RowBounds rowBounds);
+
+    void deletePartner(Partner partner);
 }
