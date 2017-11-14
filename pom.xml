@@ -638,7 +638,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>2.1.1</version>
         <configuration>
-          <webappDirectory>${basedir}/target/movision</webappDirectory>
+          <webappDirectory>${basedir}/target/freetax</webappDirectory>
           <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
         </configuration>
       </plugin>
