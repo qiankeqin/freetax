@@ -35,4 +35,19 @@ public class BannerManageService {
             throw e;
         }
     }
+
+    /**
+     * pc中根据类型查询banner
+     * @param type
+     * @return
+     */
+    public List<BannerManage> queryBannerByType(Integer type){
+        try {
+            log.info("pc中根据类型查询banner");
+            return bannerManageMapper.queryBannerByType(type);
+        } catch (Exception e) {
+            log.error("pc中根据类型查询banner异常",e);
+            throw e;
+        }
+    }
 }

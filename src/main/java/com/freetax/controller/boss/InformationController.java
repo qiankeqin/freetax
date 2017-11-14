@@ -1,6 +1,7 @@
 package com.freetax.controller.boss;
 
 import com.freetax.common.Response;
+import com.freetax.facade.BannerManageFacade;
 import com.freetax.facade.InformationFacade;
 import com.freetax.mybatis.information.entity.Information;
 import com.freetax.utils.pagination.model.Paging;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class InformationController {
 
     @Autowired
     private InformationFacade informationFacade;
+
+    @Autowired
+    private BannerManageFacade bannerManageFacade;
 
     /**
      * 新增资讯文章
@@ -138,6 +143,29 @@ public class InformationController {
         Information information = informationFacade.queryInformationById(id);
         response.setMessage("查询成功");
         response.setData(information);
+        return response;
+    }
+
+    /**
+     * 切割banner图
+     * @param file
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @return
+     */
+    @ApiOperation(value = "切割banner图",notes = "用于切割所有banner图片",response = Response.class)
+    @RequestMapping(value = "bannerImgIncision",method = RequestMethod.POST)
+    public Response bannerImgIncision(@ApiParam(value = "文件")@RequestParam MultipartFile file,
+                                      @ApiParam(value = "x坐标")@RequestParam String x,
+                                      @ApiParam(value = "y坐标")@RequestParam String y,
+                                      @ApiParam(value = "w宽")@RequestParam String w,
+                                      @ApiParam(value = "h高")@RequestParam String h){
+        Response response = new Response();
+        String url = bannerManageFacade.bannerImgIncision(file,x,y,w,h);
+        response.setMessage("操作成功");
+        response.setData(url);
         return response;
     }
 }

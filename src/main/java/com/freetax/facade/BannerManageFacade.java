@@ -5,11 +5,20 @@ import com.freetax.mybatis.bannerManage.entity.IndexInformation;
 import com.freetax.mybatis.bannerManage.service.BannerManageService;
 import com.freetax.mybatis.information.entity.Information;
 import com.freetax.mybatis.information.service.InformationService;
+import com.freetax.utils.ImcisionImgUtils;
+import com.freetax.utils.MovisionOssClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * @Author zhurui
@@ -23,6 +32,12 @@ public class BannerManageFacade {
 
     @Autowired
     private InformationService informationService;
+
+    @Autowired
+    private ImcisionImgUtils imcisionImgUtils;
+
+    @Autowired
+    private MovisionOssClient movisionOssClient;
 
     public IndexInformation queryIndexBannerOrInformation(){
         IndexInformation indexInformation = new IndexInformation();
@@ -66,5 +81,36 @@ public class BannerManageFacade {
             return null;
         }
         return indexInformation;
+    }
+
+    /**
+     * 查询pc中banner
+     * @param type
+     * @return
+     */
+    public List<BannerManage> queryBannerByType(String type){
+        return bannerManageService.queryBannerByType(Integer.parseInt(type));
+    }
+
+
+
+    public String bannerImgIncision(MultipartFile file,String x,String y,String w,String h){
+        //1上传到服务器
+        Map m = movisionOssClient.uploadMultipartFileObject(file);
+        String url = String.valueOf(m.get("url"));//获取上传到服务器上的原图
+        System.out.println("上传banner的原图url==" + url);
+
+        //切割图片
+        Map whs = new HashMap();
+        whs.put("w", w);
+        whs.put("h", h);
+        whs.put("x", x);
+        whs.put("y", y);
+        Map tmpurl = imcisionImgUtils.imgCuttingUpload(url, whs);
+
+        //3获取本地服务器中切割完成后的图片
+        String tmpurls = String.valueOf(tmpurl.get("new"));
+        System.out.println("切割完成后图片路径===" + tmpurls);
+        return tmpurls;
     }
 }
