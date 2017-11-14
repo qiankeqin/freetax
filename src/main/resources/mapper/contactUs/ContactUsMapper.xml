@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="subsidiary" property="subsidiary" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="site" property="site" jdbcType="VARCHAR" />
     <result column="banner" property="banner" jdbcType="VARCHAR" />
     <result column="intime" property="intime" jdbcType="TIMESTAMP" />
@@ -29,7 +29,7 @@
       phone, site, banner, 
       intime, isdel)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{subsidiary,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=INTEGER}, #{site,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR},
       #{intime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.freetax.mybatis.contactUs.entity.ContactUs" >
@@ -71,7 +71,7 @@
         #{subsidiary,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="site != null" >
         #{site,jdbcType=VARCHAR},
@@ -97,7 +97,7 @@
         subsidiary = #{subsidiary,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="site != null" >
         site = #{site,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
     update fr_contact_us
     set name = #{name,jdbcType=VARCHAR},
       subsidiary = #{subsidiary,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
       site = #{site,jdbcType=VARCHAR},
       banner = #{banner,jdbcType=VARCHAR},
       intime = #{intime,jdbcType=TIMESTAMP},

@@ -9,7 +9,7 @@ public class ContactUs {
 
     private String subsidiary;
 
-    private Integer phone;
+    private String phone;
 
     private String site;
 
@@ -43,11 +43,11 @@ public class ContactUs {
         this.subsidiary = subsidiary == null ? null : subsidiary.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

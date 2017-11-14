@@ -35,7 +35,7 @@ public class ContactUsFacade {
             contactUs.setSubsidiary(subsidiary);
         }
         if (StringUtils.isNotEmpty(phone)){
-            contactUs.setPhone(Integer.parseInt(phone));
+            contactUs.setPhone(phone);
         }
         if (StringUtils.isNotEmpty(site)){
             contactUs.setSite(site);
@@ -78,7 +78,7 @@ public class ContactUsFacade {
             contactUs.setSubsidiary(subsidiary);
         }
         if (StringUtils.isNotEmpty(phone)){
-            contactUs.setPhone(Integer.parseInt(phone));
+            contactUs.setPhone(phone);
         }
         if (StringUtils.isNotEmpty(site)){
             contactUs.setSite(site);
