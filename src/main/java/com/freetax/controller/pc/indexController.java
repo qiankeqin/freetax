@@ -2,8 +2,10 @@ package com.freetax.controller.pc;
 
 import com.freetax.common.Response;
 import com.freetax.facade.BannerManageFacade;
+import com.freetax.facade.boss.PartnerFacade;
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
 import com.freetax.mybatis.bannerManage.entity.IndexInformation;
+import com.freetax.mybatis.partner.entity.Partner;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class indexController {
 
     @Autowired
     private BannerManageFacade bannerManageFacade;
+
+    @Autowired
+    private PartnerFacade partnerFacade;
 
     /**
      * 查询首页信息
@@ -53,6 +58,20 @@ public class indexController {
         List<BannerManage> bannerManages = bannerManageFacade.queryBannerByType(type);
         response.setMessage("查询成功");
         response.setData(bannerManages);
+        return response;
+    }
+
+    /**
+     * 首页查询合作伙伴
+     * @return
+     */
+    @ApiOperation(value = "查询合作伙伴",notes = "用于首页查询合作伙伴",response = Response.class)
+    @RequestMapping(value = "queryPartnerList",method = RequestMethod.POST)
+    public Response queryPartnerList(){
+        Response response = new Response();
+        List<Partner> partners = partnerFacade.queryPartnerList();
+        response.setMessage("查询成功");
+        response.setData(partners);
         return response;
     }
 }
