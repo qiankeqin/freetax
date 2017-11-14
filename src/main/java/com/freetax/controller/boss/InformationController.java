@@ -168,4 +168,21 @@ public class InformationController {
         response.setData(url);
         return response;
     }
+
+    /**
+     * 设置资讯文章热门/取消热门
+     * @param id
+     * @param ishot
+     * @return
+     */
+    @ApiOperation(value = "设置热门/取消热门",notes = "设置热门/取消热门",response = Response.class)
+    @RequestMapping(value = "insertInformationByIsHot",method = RequestMethod.POST)
+    public Response insertInformationByIsHot(@ApiParam(value = "id")@RequestParam String id,
+                                             @ApiParam(value = "是否设为热门 0 否 1是")@RequestParam String ishot){
+        Response response = new Response();
+        informationFacade.insertInformationByIsHot(id,ishot);
+        response.setMessage("操作成功");
+        response.setData(1);
+        return response;
+    }
 }

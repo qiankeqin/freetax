@@ -29,4 +29,6 @@ public interface InformationMapper {
     List<Information> findAllQueryInformationByList(Information information, RowBounds rowBounds);
 
     Information queryInformationById(Integer id);
+
+    void insertInformationByIsHot(Information information);
 }

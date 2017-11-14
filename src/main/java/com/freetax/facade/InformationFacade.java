@@ -130,4 +130,20 @@ public class InformationFacade {
     public Information queryInformationById(String id){
         return informationService.queryInformationById(Integer.parseInt(id));
     }
+
+    /**
+     * 资讯文章设为精选/取消精选
+     * @param id
+     * @param ishot
+     */
+    public void insertInformationByIsHot(String id,String ishot){
+        Information information = new Information();
+        if (StringUtils.isNotEmpty(id)){
+            information.setId(Integer.parseInt(id));
+        }
+        if (StringUtils.isNotEmpty(ishot)){
+            information.setIshot(Integer.parseInt(ishot));
+        }
+        informationService.insertInformationByIsHot(information);
+    }
 }

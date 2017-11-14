@@ -7,6 +7,7 @@ import com.freetax.mybatis.information.entity.Information;
 import com.freetax.mybatis.information.service.InformationService;
 import com.freetax.utils.ImcisionImgUtils;
 import com.freetax.utils.MovisionOssClient;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

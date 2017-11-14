@@ -108,4 +108,18 @@ public class InformationService {
             throw e;
         }
     }
+
+    /**
+     * 资讯文章设为精选/取消精选
+     * @param information
+     */
+    public void insertInformationByIsHot(Information information){
+        try {
+            log.info("资讯文章设为精选/取消精选");
+            informationMapper.insertInformationByIsHot(information);
+        } catch (Exception e) {
+            log.error("资讯文章设为精选/取消精选异常",e);
+            throw e;
+        }
+    }
 }
