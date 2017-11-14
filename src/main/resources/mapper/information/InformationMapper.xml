@@ -199,11 +199,12 @@
         </if>
     </select>
 
-    <select id="queryInformationById" resultType="com.freetax.mybatis.information.entity.Information" parameterType="java.lang.Integer">
+    <select id="queryInformationById" resultType="com.freetax.mybatis.information.entity.Information"
+            parameterType="java.lang.Integer">
         SELECT * FROM fr_information WHERE id = #{id,jdbcType=INTEGER}
     </select>
 
-    <update id="insertInformationByIsHot" parameterType="com.freetax.mybatis.information.entity.Information" >
+    <update id="insertInformationByIsHot" parameterType="com.freetax.mybatis.information.entity.Information">
         UPDATE fr_information
         SET ishot = #{ishot,jdbcType=INTEGER}
         WHERE id = #{id,jdbcType=INTEGER}

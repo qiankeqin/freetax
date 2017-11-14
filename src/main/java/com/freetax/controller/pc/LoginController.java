@@ -47,7 +47,7 @@ public class LoginController {
     public Response getMobileCode(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
                                   HttpServletRequest request) throws IOException, ApiException {
         log.info("获得手机验证码,  手机号mobile==" + mobile);
-        log.info("获取到的request method>>>>"+request.getMethod());
+        log.info("获取到的request method>>>>" + request.getMethod());
         Response response = new Response();
         if (ValidateUtils.isMobile(mobile)) {
             // 生成随机字串（验证码长度6）
@@ -72,8 +72,8 @@ public class LoginController {
     @ApiOperation(value = "用户注册接口（PC端用户注册接口）", notes = "用户注册接口（PC端用户注册接口）", response = Response.class)
     @RequestMapping(value = "pc_register", method = RequestMethod.POST)
     public Response pcRegister(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
-                            @ApiParam(value = "验证码（手机收到的验证码）") @RequestParam String phcode,
-                            @ApiParam(value = "密码（用户设置的密码）") @RequestParam String passwd){
+                               @ApiParam(value = "验证码（手机收到的验证码）") @RequestParam String phcode,
+                               @ApiParam(value = "密码（用户设置的密码）") @RequestParam String passwd) {
 
         Response response = pcRegisterFacade.pcRegister(mobile, phcode, passwd);
 

@@ -136,9 +136,9 @@ public class InformationController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/query_information_id",method = RequestMethod.POST)
-    @ApiOperation(value = "查询资讯详情",notes = "根据咨询文章id查询资讯详情",response = Response.class)
-    public Response queryInformationById(@ApiParam(value = "id")@RequestParam String id){
+    @RequestMapping(value = "/query_information_id", method = RequestMethod.POST)
+    @ApiOperation(value = "查询资讯详情", notes = "根据咨询文章id查询资讯详情", response = Response.class)
+    public Response queryInformationById(@ApiParam(value = "id") @RequestParam String id) {
         Response response = new Response();
         Information information = informationFacade.queryInformationById(id);
         response.setMessage("查询成功");
@@ -148,6 +148,7 @@ public class InformationController {
 
     /**
      * 切割banner图
+     *
      * @param file
      * @param x
      * @param y
@@ -155,15 +156,15 @@ public class InformationController {
      * @param h
      * @return
      */
-    @ApiOperation(value = "切割banner图",notes = "用于切割所有banner图片",response = Response.class)
-    @RequestMapping(value = "bannerImgIncision",method = RequestMethod.POST)
-    public Response bannerImgIncision(@ApiParam(value = "文件")@RequestParam MultipartFile file,
-                                      @ApiParam(value = "x坐标")@RequestParam String x,
-                                      @ApiParam(value = "y坐标")@RequestParam String y,
-                                      @ApiParam(value = "w宽")@RequestParam String w,
-                                      @ApiParam(value = "h高")@RequestParam String h){
+    @ApiOperation(value = "切割banner图", notes = "用于切割所有banner图片", response = Response.class)
+    @RequestMapping(value = "bannerImgIncision", method = RequestMethod.POST)
+    public Response bannerImgIncision(@ApiParam(value = "文件") @RequestParam MultipartFile file,
+                                      @ApiParam(value = "x坐标") @RequestParam String x,
+                                      @ApiParam(value = "y坐标") @RequestParam String y,
+                                      @ApiParam(value = "w宽") @RequestParam String w,
+                                      @ApiParam(value = "h高") @RequestParam String h) {
         Response response = new Response();
-        String url = bannerManageFacade.bannerImgIncision(file,x,y,w,h);
+        String url = bannerManageFacade.bannerImgIncision(file, x, y, w, h);
         response.setMessage("操作成功");
         response.setData(url);
         return response;
@@ -171,16 +172,17 @@ public class InformationController {
 
     /**
      * 设置资讯文章热门/取消热门
+     *
      * @param id
      * @param ishot
      * @return
      */
-    @ApiOperation(value = "设置热门/取消热门",notes = "设置热门/取消热门",response = Response.class)
-    @RequestMapping(value = "insertInformationByIsHot",method = RequestMethod.POST)
-    public Response insertInformationByIsHot(@ApiParam(value = "id")@RequestParam String id,
-                                             @ApiParam(value = "是否设为热门 0 否 1是")@RequestParam String ishot){
+    @ApiOperation(value = "设置热门/取消热门", notes = "设置热门/取消热门", response = Response.class)
+    @RequestMapping(value = "insertInformationByIsHot", method = RequestMethod.POST)
+    public Response insertInformationByIsHot(@ApiParam(value = "id") @RequestParam String id,
+                                             @ApiParam(value = "是否设为热门 0 否 1是") @RequestParam String ishot) {
         Response response = new Response();
-        informationFacade.insertInformationByIsHot(id,ishot);
+        informationFacade.insertInformationByIsHot(id, ishot);
         response.setMessage("操作成功");
         response.setData(1);
         return response;
