@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:cache="http://www.springframework.org/schema/cache" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-lazy-init="true">
     <description>安全配置</description>
 
+
+    <!-- 扫描realm -->
+    <!--<context:component-scan base-package="com.jsh.shiro"/>-->
+
     <!-- 凭证匹配器
         实现密码验证服务    -->
-    <bean id="credentialsMatcher"
+    <!--<bean id="credentialsMatcher"
           class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
     </bean>
-    <!-- Realm实现 -->
-    <bean id="userRealm" class="com.freetax.shiro.realm.ShiroRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <property name="cachingEnabled" value="true"/>
-    </bean>
+    &lt;!&ndash; Realm实现 &ndash;&gt;
 
-    <!-- Realm实现运营管理系统 -->
-    <bean id="omsRealm" class="com.freetax.shiro.realm.BossRealm">
+
+    &lt;!&ndash; Realm实现运营管理系统 &ndash;&gt;
+    <bean id="omsRealm" class="com.jsh.shiro.realm.BosRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <property name="cachingEnabled" value="true"/>
-    </bean>
+    </bean>-->
+
 
     <!-- 用户授权信息Cache, 采用EhCache
     <bean id="ehcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
@@ -32,51 +35,52 @@
     </bean>  -->
 
     <!--  session失效时间： (12h)43200000 | (6h)21600000 | *(3h)10800000* | (10m)600000-->
-    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-        <!-- session的失效时长，单位毫秒 -->
-        <property name="globalSessionTimeout" value="10800000"/>
-        <!-- 删除失效的session -->
-        <property name="deleteInvalidSessions" value="true"/>
-        <property name="sessionValidationSchedulerEnabled" value="true"/>
-        <property name="sessionDAO" ref="redisSessionDAO"/>
-        <property name="cacheManager" ref="cacheManager"/>
-    </bean>
+    <!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+         &lt;!&ndash; session的失效时长，单位毫秒 &ndash;&gt;
+         <property name="globalSessionTimeout" value="10800000"/>
+         &lt;!&ndash; 删除失效的session &ndash;&gt;
+         <property name="deleteInvalidSessions" value="true"/>
+         <property name="sessionValidationSchedulerEnabled" value="true"/>
+         <property name="sessionDAO" ref="redisSessionDAO"/>
+         <property name="cacheManager" ref="cacheManager"/>
+     </bean>-->
 
     <!-- shiro redisManager -->
-    <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+    <!--<bean id="redisManager" class="org.crazycake.shiro.RedisManager">
         <property name="host" value="${redis.host}"/>
         <property name="port" value="${redis.port}"/>
         <property name="expire" value="${redis.expire}"/>
-    </bean>
+    </bean>-->
 
     <!-- redisSessionDAO -->
-    <bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
-        <property name="redisManager" ref="redisManager"/>
-    </bean>
+    <!--  <bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+          <property name="redisManager" ref="redisManager"/>
+      </bean>-->
 
     <!-- cacheManager -->
     <!--<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
         <property name="redisManager" ref="redisManager"/>
     </bean>-->
 
-    <bean id="cacheManager" class="com.freetax.shiro.cache.SpringCacheManagerWrapper">
+    <!--<bean id="cacheManager" class="com.jsh.shiro.cache.SpringCacheManagerWrapper">
         <property name="cacheManager" ref="redisCacheManager"/>
-    </bean>
+    </bean>-->
 
     <!-- 安全管理器 配置权限管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--<property name="realm" ref="userRealm"/>-->
-        <property name="authenticator" ref="authenticator"/>
+        <property name="realm" ref="bosrealm"/>
+        <!--<property name="authenticator" ref="authenticator"/>
         <property name="realms">
             <list>
                 <ref bean="userRealm"/>
                 <ref bean="omsRealm"/>
             </list>
         </property>
-        <!-- 注入session管理器 -->
+        &lt;!&ndash; 注入session管理器 &ndash;&gt;
         <property name="sessionManager" ref="sessionManager"/>
-        <!-- 注入缓存管理器 -->
-        <property name="cacheManager" ref="cacheManager"/>
+        &lt;!&ndash; 注入缓存管理器 &ndash;&gt;
+        <property name="cacheManager" ref="cacheManager"/>-->
     </bean>
 
     <!--所有的realm依然都会被调用。
@@ -110,14 +114,14 @@
         <property name="passwordParam" value="password"/>
         <!-- 记住我input的名称,默认为rememberMe -->
         <property name="rememberMeParam" value="rememberMe"/>
-        <property name="loginUrl" value="/auth/login"/>
+        <property name="loginUrl" value="/auth/login.html"/>
     </bean>
-    <bean id="orRolesAuthorizationFilter"
-          class="com.freetax.shiro.filter.OrRolesAuthorizationFilter">
+    <!--<bean id="orRolesAuthorizationFilter"
+          class="com.jsh.shiro.filter.OrPermissionsAuthorizationFilter">
     </bean>
     <bean id="orPermissionsAuthorizationFilter"
-          class="com.freetax.shiro.filter.OrPermissionsAuthorizationFilter">
-    </bean>
+          class="com.jsh.shiro.filter.OrPermissionsAuthorizationFilter">
+    </bean>-->
     <!-- web.xml中shiro的filter对应的bean -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- 管理器，必须设置 -->
@@ -127,31 +131,34 @@
         <!-- 认证成功统一跳转到/admin/index.do，建议不配置，shiro认证成功自动到上一个请求路径 -->
         <property name="successUrl" value="/index.html"/>
         <!-- 自定义filter，可用来更改默认的表单名称配置 -->
-        <property name="filters">
+        <!--<property name="filters">
             <util:map>
-                <!--需要登录-->
+                &lt;!&ndash;需要登录&ndash;&gt;
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <!--<entry key="orroles" value-ref="orRolesAuthorizationFilter"/>-->
-                <!--<entry key="orperms" value-ref="orPermissionsAuthorizationFilter"/>-->
+                &lt;!&ndash;<entry key="orroles" value-ref="orRolesAuthorizationFilter"/>&ndash;&gt;
+                &lt;!&ndash;<entry key="orperms" value-ref="orPermissionsAuthorizationFilter"/>&ndash;&gt;
             </util:map>
-        </property>
+        </property>-->
+        <!-- 添加各种验证过滤器 -->
+       <!-- <property name="filters">
+            <map>
+                <entry key="roleRo" value-ref="roleRo"/>
+            </map>
+        </property>-->
         <property name="filterChainDefinitions">
             <value>
                 <!--需要登录的接口-->
-                /app/mine/**=authc
+                <!--/app/mine/**=authc
                 /app/post/inAccusation = authc
-                <!--/app/post/partActive = authc-->
+                &lt;!&ndash;/app/post/partActive = authc&ndash;&gt;
                 /app/post/recommendGoodsList=authc
                 /app/post/releasePost=authc
                 /app/post/updateZan=authc
-                /app/post/get_circle_category_when_post=authc
-
                 /app/comment/CommentZanSum=authc
                 /app/comment/comment=authc
                 /app/cart/**=authc
                 /app/submission/commitSubmission=authc
                 /app/collection/**=authc
-                <!--/app/msg_center/**=authc-->
 
                 /app/** = anon
 
@@ -160,7 +167,26 @@
 
                 /swagger/** = anon
                 /static/**=anon
-                /rest/** = anon
+                /rest/** = anon-->
+                /boss/login/login = anon
+                /boss/menu/** = authc
+                /boss/user/** = authc
+                /boss/contactUs/** = authc
+                /boss/information/** = authc
+                <!--/materiel/** = authc
+                /jurisdiction/** = authc
+                /materielPrice/** = authc
+                /temporary/** = authc
+                /enquiry/** = authc
+                /excleAnalysis/** = authc,roleRo["超级管理员"]
+                /supplier/** = authc
+                /menu/** = authc
+                /boss/logOut = authc
+                /boss/login = anon
+                /batch/delete/** = authc,roleRo["超级管理员"]
+                /activitySecond/** = authc
+                /materielSecond/** = authc-->
+
             </value>
         </property>
 
@@ -168,5 +194,5 @@
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
+    <!--<bean id="roleRo" class="com.jsh.shiro.file.OrRolesAuthorizationFilter"/>-->
 </beans> 

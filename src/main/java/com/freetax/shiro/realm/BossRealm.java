@@ -1,13 +1,9 @@
 package com.freetax.shiro.realm;
 
-import com.freetax.common.constant.ImConstant;
 import com.freetax.common.constant.SessionConstant;
 import com.freetax.common.constant.UserConstants;
-import com.freetax.facade.im.ImFacade;
-import com.freetax.facade.user.BossUserFacade;
-import com.freetax.facade.user.UserRoleRelationFacade;
-import com.freetax.mybatis.bossUser.entity.BossUser;
-import com.freetax.mybatis.imuser.entity.ImUser;
+import com.freetax.mybatis.adminUser.entity.AdminUser;
+import com.freetax.mybatis.adminUser.service.AdminUserService;
 import com.freetax.utils.pagination.util.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -20,6 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,55 +26,33 @@ import java.util.Date;
  * 验证boss主体的安全数据源
  * @author zhuangyuhao
  */
+@Service("bosrealm")
 public class BossRealm extends AuthorizingRealm {
     private static final Logger log = LoggerFactory.getLogger(BossRealm.class);
     @Autowired
-    private UserRoleRelationFacade userRoleRelationFacade;
-    @Autowired
-    private BossUserFacade bossUserFacade;
-
-    @Autowired
-    private ImFacade imFacade;
+    private AdminUserService adminUserService;
 
     /**
      * 认证回调函数,登录时调用.
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(
-            AuthenticationToken token) throws AuthenticationException {
-        log.info("boss 登录认证");
-        String userName = (String) token.getPrincipal();    //用户名
-        BossUser bossUser = bossUserFacade.getByUsername(userName);
-        if (bossUser != null) {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        log.info("——认证方法。。。。。。。。。。");
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        //根据用户名查询用户密码
+        String phone = token.getUsername();
+        AdminUser logginUser = adminUserService.queryUserPasswordByName(phone);
+        if (logginUser == null) {
+            throw new UnknownAccountException();
+        } else {
+            //用户存在
             log.info("该用户在数据库中存在");
-            if (bossUser.getIsdel() == 1) {
+            if (logginUser.getIsdel() == 1) {
                 throw new LockedAccountException("该账号已经被删除");
             }
-        }  else{
-            throw new UnknownAccountException();
         }
-        // 获取用户的角色
-        int roleid = userRoleRelationFacade.getRoleidByUserid(bossUser.getId());
-        ImUser imUser = imFacade.getImuser(bossUser.getId(), ImConstant.TYPE_BOSS);
-        String accid = null == imUser ? null : imUser.getAccid();
-        String imtoken = null == imUser ? null : imUser.getToken();
-
-        //封装自定义principle对象
-        ShiroBossUser shiroBossUser = new ShiroBossUser(bossUser.getId(), bossUser.getName(), bossUser.getPhone(), bossUser.getUsername(),
-                bossUser.getPassword(), bossUser.getIssuper(), bossUser.getStatus(), bossUser.getIsdel(), bossUser.getCreatetime(),
-                bossUser.getAfterlogintime(), bossUser.getBeforelogintime(), roleid, accid, imtoken,
-                bossUser.getIscircle(), bossUser.getCirclemanagement(), bossUser.getContributing(), bossUser.getCommon());
-
-        log.info("realm name = " + getName());
-        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                shiroBossUser, // 自定义principle对象
-                bossUser.getPassword(), // 密码，这里密码是加密的
-                getName() // realm name
-        );
-
-        // 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配
-        return authenticationInfo;
-
+        System.out.println(logginUser + "--" + logginUser.getPassword() + "0---" + getName());
+        return new SimpleAuthenticationInfo(logginUser, logginUser.getPassword(), getName());
     }
 
     /**

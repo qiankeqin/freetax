@@ -1,11 +1,15 @@
 package com.freetax.mybatis.adminMenu.service;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
+import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 import com.freetax.mybatis.adminMenu.mapper.AdminMenuMapper;
+import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author zhurui
@@ -19,12 +23,31 @@ public class AdminMenuService {
     @Autowired
     private AdminMenuMapper adminMenuMapper;
 
-    public void insertMenu(AdminMenu adminMenu){
+    /**
+     * 查询父级菜单列表
+     * @return
+     */
+    public List<AdminMenuVo> queryMenuListByVariation(UserMenuRelation relation){
         try {
-            log.info("新增菜单");
-            adminMenuMapper.insertSelective(adminMenu);
+            log.info("查询父级菜单列表");
+            return adminMenuMapper.queryMenuListByVariation(relation);
         } catch (Exception e) {
-            log.error("新增菜单异常",e);
+            log.error("查询父级菜单列表异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 查询子菜单列表
+     * @param relation
+     * @return
+     */
+    public List<AdminMenu> queryMenuListBySon(UserMenuRelation relation){
+        try {
+            log.info("查询子菜单列表");
+            return adminMenuMapper.queryMenuListBySon(relation);
+        } catch (Exception e) {
+            log.error("查询子菜单列表异常",e);
             throw e;
         }
     }
