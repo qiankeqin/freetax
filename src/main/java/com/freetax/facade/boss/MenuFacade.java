@@ -36,6 +36,7 @@ public class MenuFacade {
         List<AdminMenuVo> menus = new ArrayList<>();
         //获取当前登录用户
         AdminUser adminUser = (AdminUser)SecurityUtils.getSubject().getPrincipal();
+        System.out.println("登录用户id:----------------------"+adminUser.getId());
         if (adminUser != null){
             if (adminUser.getIsadmin() == 1) {//超级管理员
                 //查询所有父菜单
