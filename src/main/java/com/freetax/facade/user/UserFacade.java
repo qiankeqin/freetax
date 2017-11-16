@@ -60,16 +60,18 @@ public class UserFacade {
      * 修改用户个人资料
      * @param id
      * @param name
+     * @param photo
      * @param company
      * @param email
      * @return
      */
-    public Response updatePersonInfo(String id, String name, String company, String email){
+    public Response updatePersonInfo(String id, String photo, String name, String company, String email){
         Response response = new Response();
 
         try {
             User user = new User();
             user.setId(Integer.parseInt(id));
+            user.setPhoto(photo);
             user.setName(name);
             user.setCompany(company);
             user.setEmail(email);

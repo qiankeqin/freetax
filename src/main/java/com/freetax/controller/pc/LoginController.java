@@ -133,11 +133,12 @@ public class LoginController {
     @ApiOperation(value = "修改个人资料（PC端）", notes = "修改个人资料（PC端）", response = Response.class)
     @RequestMapping(value = "update_person_info", method = RequestMethod.POST)
     public Response updatePersonInfo(@ApiParam(value = "用户id") @RequestParam String id,
+                                     @ApiParam(value = "头像图片url") @RequestParam String photo,
                                      @ApiParam(value = "联系人") @RequestParam(required = false) String name,
                                      @ApiParam(value = "公司名称") @RequestParam(required = false) String company,
                                      @ApiParam(value = "邮箱") @RequestParam(required = false) String email){
 
-        Response response = userFacade.updatePersonInfo(id, name, company, email);
+        Response response = userFacade.updatePersonInfo(id, photo, name, company, email);
 
         return response;
     }
