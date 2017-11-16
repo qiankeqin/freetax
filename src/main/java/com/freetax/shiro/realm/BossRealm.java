@@ -1,10 +1,17 @@
 package com.freetax.shiro.realm;
 
+import com.freetax.common.constant.ImConstant;
 import com.freetax.common.constant.SessionConstant;
 import com.freetax.common.constant.UserConstants;
+import com.freetax.facade.im.ImFacade;
+import com.freetax.facade.user.BossUserFacade;
+import com.freetax.facade.user.UserRoleRelationFacade;
 import com.freetax.mybatis.adminUser.entity.AdminUser;
 import com.freetax.mybatis.adminUser.service.AdminUserService;
+import com.freetax.mybatis.bossUser.entity.BossUser;
+import com.freetax.mybatis.imuser.entity.ImUser;
 import com.freetax.utils.pagination.util.StringUtils;
+import net.sf.json.JSONArray;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -16,7 +23,6 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,9 +32,10 @@ import java.util.Date;
  * 验证boss主体的安全数据源
  * @author zhuangyuhao
  */
-@Service("bosrealm")
 public class BossRealm extends AuthorizingRealm {
+
     private static final Logger log = LoggerFactory.getLogger(BossRealm.class);
+
     @Autowired
     private AdminUserService adminUserService;
 
@@ -40,8 +47,8 @@ public class BossRealm extends AuthorizingRealm {
         log.info("——认证方法。。。。。。。。。。");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //根据用户名查询用户密码
-        String phone = token.getUsername();
-        AdminUser logginUser = adminUserService.queryUserPasswordByName(phone);
+        String name = token.getUsername();
+        AdminUser logginUser = adminUserService.queryUserPasswordByName(name);
         if (logginUser == null) {
             throw new UnknownAccountException();
         } else {
@@ -51,7 +58,7 @@ public class BossRealm extends AuthorizingRealm {
                 throw new LockedAccountException("该账号已经被删除");
             }
         }
-        System.out.println(logginUser + "--" + logginUser.getPassword() + "0---" + getName());
+        System.out.println(logginUser + "登录密码--" + logginUser.getPassword() + "当前登录密码--" + JSONArray.fromObject(token.getPassword()).toString());
         return new SimpleAuthenticationInfo(logginUser, logginUser.getPassword(), getName());
     }
 
@@ -60,9 +67,8 @@ public class BossRealm extends AuthorizingRealm {
      * 查询回调函数, 进行鉴权， 当缓存中无用户的授权信息时调用，否则从缓存中调用
      */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(
-            PrincipalCollection principals) {
-
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+/*
         this.clearCachedAuthorizationInfo(principals);
         log.info("清除Boss用户授权信息缓存");
         //  获取当前登录principle
@@ -81,8 +87,10 @@ public class BossRealm extends AuthorizingRealm {
             // 添加用户角色到授权信息
             info.addRole(String.valueOf(roleid));
             return info;
-        }
-        return null;
+        }*/
+        log.info("——授权方法。。。。。。。。。。");
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        return authorizationInfo;
     }
 
     /**

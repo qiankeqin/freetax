@@ -16,8 +16,8 @@
     </bean>
     <!-- Realm实现 -->
     <bean id="userRealm" class="com.freetax.shiro.realm.ShiroRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <property name="cachingEnabled" value="true"/>
+       <!-- <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="true"/>-->
     </bean>
 
     <!-- Realm实现运营管理系统 -->
@@ -67,10 +67,11 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--<property name="realm" ref="userRealm"/>-->
         <property name="authenticator" ref="authenticator"/>
+        <!--<property name="realm" ref="bosrealm"/>-->
         <property name="realms">
             <list>
-                <ref bean="userRealm"/>
                 <ref bean="omsRealm"/>
+                <ref bean="userRealm"/>
             </list>
         </property>
         <!-- 注入session管理器 -->
@@ -135,9 +136,9 @@
         <property name="filterChainDefinitions">
             <value>
                 <!--需要登录的接口-->
-                /app/mine/**=authc
+               <!-- /app/mine/**=authc
                 /app/post/inAccusation = authc
-                <!--/app/post/partActive = authc-->
+                &lt;!&ndash;/app/post/partActive = authc&ndash;&gt;
                 /app/post/recommendGoodsList=authc
                 /app/post/releasePost=authc
                 /app/post/updateZan=authc
@@ -148,16 +149,16 @@
                 /app/cart/**=authc
                 /app/submission/commitSubmission=authc
                 /app/collection/**=authc
-                <!--/app/msg_center/**=authc-->
+                &lt;!&ndash;/app/msg_center/**=authc&ndash;&gt;
 
-                /app/** = anon
+                /app/** = anon-->
 
                 /boss/login = anon
                 /boss/** = anon
 
-                /swagger/** = anon
+                <!--/swagger/** = anon
                 /static/**=anon
-                /rest/** = anon
+                /rest/** = anon-->
             </value>
         </property>
 

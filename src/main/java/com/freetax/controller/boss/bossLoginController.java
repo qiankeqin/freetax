@@ -32,7 +32,7 @@ public class bossLoginController {
         UsernamePasswordToken token;
         Subject subject = SecurityUtils.getSubject();
         try {
-            token = new UsernamePasswordToken(name, MD5Util.MD5Encode(password, "UTF-8"));//对密码加密比对
+            token = new UsernamePasswordToken(name, password);//对密码加密比对
             subject.login(token);
             response.setMessage("登录成功");
             Subject ject = SecurityUtils.getSubject();

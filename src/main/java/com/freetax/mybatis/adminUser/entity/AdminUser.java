@@ -1,8 +1,9 @@
 package com.freetax.mybatis.adminUser.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AdminUser {
+public class AdminUser implements Serializable{
     private Integer id;
 
     private String email;
