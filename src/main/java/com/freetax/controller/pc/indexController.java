@@ -1,6 +1,7 @@
 package com.freetax.controller.pc;
 
 import com.freetax.common.Response;
+import com.freetax.facade.AdvisoryFacade;
 import com.freetax.facade.BannerManageFacade;
 import com.freetax.facade.boss.PartnerFacade;
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
@@ -29,6 +30,9 @@ public class indexController {
 
     @Autowired
     private PartnerFacade partnerFacade;
+
+    @Autowired
+    private AdvisoryFacade advisoryFacade;
 
     /**
      * 查询首页信息
@@ -73,6 +77,22 @@ public class indexController {
         List<Partner> partners = partnerFacade.queryPartnerList();
         response.setMessage("查询成功");
         response.setData(partners);
+        return response;
+    }
+
+
+    /**
+     * 咨询
+     * @param phone
+     * @return
+     */
+    @ApiOperation(value = "pc咨询",notes = "用于咨询使用",response = Response.class)
+    @RequestMapping(value = "/insertAdvisory",method = RequestMethod.POST)
+    public Response insertAdvisory(@ApiParam(value = "手机号")@RequestParam String phone){
+        Response response = new Response();
+        advisoryFacade.insertAdvisory(phone);
+        response.setMessage("操作成功");
+        response.setData(1);
         return response;
     }
 }
