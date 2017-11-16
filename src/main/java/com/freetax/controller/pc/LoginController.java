@@ -2,6 +2,7 @@ package com.freetax.controller.pc;
 
 import com.freetax.common.Response;
 import com.freetax.facade.user.PcRegisterFacade;
+import com.freetax.facade.user.UserFacade;
 import com.freetax.mybatis.user.entity.User;
 import com.freetax.utils.JsonUtils;
 import com.freetax.utils.ValidateUtils;
@@ -38,6 +39,9 @@ public class LoginController {
 
     @Autowired
     PcRegisterFacade pcRegisterFacade;
+
+    @Autowired
+    UserFacade userFacade;
 
     /**
      * 手机注册账号时发送的验证码
@@ -116,12 +120,24 @@ public class LoginController {
         return response;
     }
 
-    @ApiOperation(value = "用户退出接口（PC端口）", notes = "用户退出接口（PC端口）", response = Response.class)
+    @ApiOperation(value = "用户退出接口（PC端）", notes = "用户退出接口（PC端）", response = Response.class)
     @RequestMapping(value = "pc_login_out", method = RequestMethod.POST)
     public void pcLoginOut(HttpServletResponse response) throws IOException {
         SecurityUtils.getSubject().logout();
         Response jsonResult = new Response();
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(JsonUtils.getJsonStringFromObj(jsonResult));
+    }
+
+    @ApiOperation(value = "修改个人资料（PC端）", notes = "修改个人资料（PC端）", response = Response.class)
+    @RequestMapping(value = "update_person_info", method = RequestMethod.POST)
+    public Response updatePersonInfo(@ApiParam(value = "用户id") @RequestParam String id,
+                                     @ApiParam(value = "联系人") @RequestParam(required = false) String name,
+                                     @ApiParam(value = "公司名称") @RequestParam(required = false) String company,
+                                     @ApiParam(value = "邮箱") @RequestParam(required = false) String email){
+
+        Response response = userFacade.updatePersonInfo(id, name, company, email);
+
+        return response;
     }
 }

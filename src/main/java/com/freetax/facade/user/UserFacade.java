@@ -1,5 +1,6 @@
 package com.freetax.facade.user;
 
+import com.freetax.common.Response;
 import com.freetax.common.constant.MsgCodeConstant;
 import com.freetax.exception.AuthException;
 import com.freetax.mybatis.user.entity.*;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,5 +50,32 @@ public class UserFacade {
         return userService.selectLoginuserByUserid(mobile);
     }
 
+    /**
+     * 修改用户个人资料
+     * @param id
+     * @param name
+     * @param company
+     * @param email
+     * @return
+     */
+    public Response updatePersonInfo(String id, String name, String company, String email){
+        Response response = new Response();
 
+        try {
+            User user = new User();
+            user.setId(Integer.parseInt(id));
+            user.setName(name);
+            user.setCompany(company);
+            user.setEmail(email);
+            userService.updatePersonInfo(user);
+            response.setCode(200);
+            response.setMessage("修改成功");
+        }catch (Exception e){
+            response.setCode(300);
+            response.setMessage("修改失败");
+            throw e;
+        }
+
+        return response;
+    }
 }

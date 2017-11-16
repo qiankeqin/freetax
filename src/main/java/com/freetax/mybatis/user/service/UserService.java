@@ -53,6 +53,16 @@ public class UserService {
         }
     }
 
+    public void updatePersonInfo(User user){
+        try {
+            log.info("个人资料修改成功");
+            userMapper.updateByPrimaryKeySelective(user);
+        }catch (Exception e){
+            log.error("个人资料修改失败");
+            throw e;
+        }
+    }
+
     public void pcRegister(User user){
         try {
             log.info("注册插入用户信息");
