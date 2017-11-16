@@ -5,8 +5,7 @@ import com.freetax.common.constant.MsgCodeConstant;
 import com.freetax.exception.AuthException;
 import com.freetax.mybatis.user.entity.*;
 import com.freetax.mybatis.user.service.UserService;
-import com.freetax.utils.pagination.model.Paging;
-import org.apache.commons.lang.StringUtils;
+import com.freetax.utils.propertiesLoader.PropertiesLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * APP用户 facade
@@ -231,6 +231,8 @@ public class UserFacade {
             if (type!=null){// 判断文件类型是否为空
                 if ("GIF".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
 
+                    //PC访问时的服务器前缀路径
+                    String urlsuf = PropertiesLoader.getValue("urlsuf");
                     // 项目在容器中实际发布运行的根路径
                     String realPath=request.getSession().getServletContext().getRealPath("/");
                     // 自定义的文件名称
@@ -243,6 +245,7 @@ public class UserFacade {
                     log.info("上传成功");
                     response.setCode(200);
                     response.setMessage("上传成功");
+                    response.setData(urlsuf + trueFileName);
 
                 }else {
                     log.info("系统不支持该文件类型,请重新上传");
