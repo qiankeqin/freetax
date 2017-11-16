@@ -219,6 +219,13 @@ public class PcRegisterFacade {
         return response;
     }
 
+    /**
+     * PC用户修改密码
+     * @param mobile
+     * @param phcode
+     * @param passwd
+     * @return
+     */
     public Response pcUpdatePasswd(String mobile, String phcode, String passwd){
         Response response = new Response();
 

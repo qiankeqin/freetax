@@ -3,11 +3,13 @@ package com.freetax.controller.pc;
 import com.freetax.common.Response;
 import com.freetax.facade.user.PcRegisterFacade;
 import com.freetax.mybatis.user.entity.User;
+import com.freetax.utils.JsonUtils;
 import com.freetax.utils.ValidateUtils;
 import com.freetax.utils.VerifyCodeUtils;
 import com.taobao.api.ApiException;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import org.apache.shiro.SecurityUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -111,5 +114,14 @@ public class LoginController {
         Response response = pcRegisterFacade.pcUpdatePasswd(mobile, phcode, passwd);
 
         return response;
+    }
+
+    @ApiOperation(value = "用户退出接口（PC端口）", notes = "用户退出接口（PC端口）", response = Response.class)
+    @RequestMapping(value = "pc_login_out", method = RequestMethod.POST)
+    public void pcLoginOut(HttpServletResponse response) throws IOException {
+        SecurityUtils.getSubject().logout();
+        Response jsonResult = new Response();
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(JsonUtils.getJsonStringFromObj(jsonResult));
     }
 }
