@@ -220,7 +220,7 @@ public class PcRegisterFacade {
 
     /**
      * 登录成功后，更新用户的部分信息：
-     * 登录时间， ip， ip所在城市，经度， 纬度
+     * 最后一次登录时间
      *
      * @param mobile
      * @param loginTime
