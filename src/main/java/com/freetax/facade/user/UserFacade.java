@@ -238,9 +238,9 @@ public class UserFacade {
                     //PC访问时的服务器前缀路径
                     String urlsuf = PropertiesLoader.getValue("urlsuf");
                     // 项目在容器中实际发布运行的根路径
-                    String realPath=request.getSession().getServletContext().getRealPath("/");
+                    String realPath = PropertiesLoader.getValue("realPath");
                     // 自定义的文件名称
-                    String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
+                    String trueFileName=String.valueOf(System.currentTimeMillis()+"."+type);
                     // 设置存放图片文件的路径
                     path=realPath+trueFileName;
                     log.info("存放图片文件的路径:"+path);
