@@ -161,33 +161,38 @@ public class PcRegisterFacade {
 //            session.setAttribute("appuser", appuser);
             //用户id
 //            int appuserid = appuser.getId();
-            //7 返回用户是否是第一次登录（根据登录时间和注册时间的间隔判断，若间隔小于10秒，则认为是第一次登录，否则不是）
-            Date loginTime = new Date();
-            //8 登录验证成功后，更新用户信息
-            updateLoginUserInfo(mobile, loginTime);
-            //9 返回登录人的信息
-            LoginUser loginuser = userFacade.getLoginuserByUserid(mobile);//根据phone查询当前用户的实体对象
-            ShiroRealm.ShiroUser shiroUser = ShiroUtil.getShiroUserFromLoginUser(loginuser);//将LoginUser实体转化为ShiroUser对象
-            session.setAttribute("appuser", shiroUser);
 
             System.out.println("测试服务端接收到的密码" + passwd);
             System.out.println("测试MD5加密后的字符串" + MD5Util.MD5EncodeByUTF8(passwd));
 //            UsernamePasswordToken upToken = new UsernamePasswordToken(mobile, MD5Util.MD5EncodeByUTF8(passwd));
 //            upToken.setRememberMe(true);
             //查询数据库中的用户实体
+            Map<String, Object> parammap = new HashMap<>();
+            parammap.put("phone", mobile);
+            parammap.put("passwd", MD5Util.MD5EncodeByUTF8(passwd));
+            LoginUser user = userFacade.getLoginUserByToken(parammap);
 
-            if (null == loginuser){
+            if (null == user){
                 response.setCode(203);
                 response.setMessage("该用户不存在");
             }else {
-                if (loginuser.getStatus() == 1){
+                if (user.getStatus() == 1){
                     response.setCode(202);
                     response.setMessage("账户已被冻结！");
                 }else {
-                    if (MD5Util.MD5EncodeByUTF8(passwd) == loginuser.getPasswd()){
+                    if (MD5Util.MD5EncodeByUTF8(passwd) == user.getPasswd()){
                         response.setCode(201);
                         response.setMessage("手机号/密码不匹配！");
                     }else {
+                        //7 返回用户是否是第一次登录（根据登录时间和注册时间的间隔判断，若间隔小于10秒，则认为是第一次登录，否则不是）
+                        Date loginTime = new Date();
+                        //8 登录验证成功后，更新用户信息
+                        updateLoginUserInfo(mobile, loginTime);
+                        //9 返回登录人的信息
+                        LoginUser loginuser = userFacade.getLoginuserByUserid(mobile);//根据phone查询当前用户的实体对象
+                        ShiroRealm.ShiroUser shiroUser = ShiroUtil.getShiroUserFromLoginUser(loginuser);//将LoginUser实体转化为ShiroUser对象
+                        session.setAttribute("appuser", shiroUser);
+
                         response.setCode(200);
                         response.setMessage("登录成功");
                         response.setData(shiroUser);
@@ -253,7 +258,7 @@ public class PcRegisterFacade {
                     response.setMessage("密码修改成功");
                 }else {
                     log.info("验证码错误");
-                    response.setCode(301);
+                    response.setCode(300);
                     response.setMessage("验证码错误");
                 }
 
