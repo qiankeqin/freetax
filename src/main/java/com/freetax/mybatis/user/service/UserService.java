@@ -72,4 +72,14 @@ public class UserService {
             throw e;
         }
     }
+
+    public void updatePasswd(Map<String, Object> parammap){
+        try {
+            log.info("PC用户修改密码");
+            userMapper.updatePasswd(parammap);
+        }catch (Exception e){
+            log.error("PC用户密码修改失败", e);
+            throw e;
+        }
+    }
 }

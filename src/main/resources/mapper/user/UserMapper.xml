@@ -235,6 +235,12 @@
         WHERE phone = #{phone,jdbcType=VARCHAR}
     </update>
 
+    <update id="updatePasswd" parameterType="java.util.Map" >
+        UPDATE fr_user
+        SET passwd = #{passwd,jdbcType=VARCHAR}
+        WHERE phone = #{phone,jdbcType=VARCHAR}
+    </update>
+
     <select id="selectLoginUserByToken" parameterType="java.util.Map"
             resultType="com.freetax.mybatis.user.entity.LoginUser">
         select u.* from fr_user u

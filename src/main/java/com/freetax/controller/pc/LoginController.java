@@ -101,4 +101,15 @@ public class LoginController {
 
         return response;
     }
+
+    @ApiOperation(value = "用户修改密码接口（PC端）", notes = "用户修改密码接口（PC端）", response = Response.class)
+    @RequestMapping(value = "pc_update_passwd", method = RequestMethod.POST)
+    public Response pcUpdatePasswd(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
+                                   @ApiParam(value = "验证码（手机收到的验证码）") @RequestParam String phcode,
+                                   @ApiParam(value = "新密码（用户设置的密码）") @RequestParam String passwd){
+
+        Response response = pcRegisterFacade.pcUpdatePasswd(mobile, phcode, passwd);
+
+        return response;
+    }
 }
