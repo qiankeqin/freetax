@@ -9,7 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,6 +78,60 @@ public class UserFacade {
             response.setCode(300);
             response.setMessage("修改失败");
             throw e;
+        }
+
+        return response;
+    }
+
+    /**
+     * 上传头像图片
+     * @param file
+     * @return
+     */
+    public Response uploadPhotoImg(HttpServletRequest request, MultipartFile file) throws IOException {
+        Response response = new Response();
+
+        if (file != null){//判断上传的文件是否为空
+
+            String path;// 文件路径
+            String type;// 文件类型
+            String fileName=file.getOriginalFilename();// 文件原名称
+            log.info("上传的文件原名称:"+fileName);
+
+            // 判断文件类型
+            type=fileName.indexOf(".")!=-1?fileName.substring(fileName.lastIndexOf(".")+1, fileName.length()):null;
+
+            if (type!=null){// 判断文件类型是否为空
+                if ("GIF".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
+
+                    // 项目在容器中实际发布运行的根路径
+                    String realPath=request.getSession().getServletContext().getRealPath("/");
+                    // 自定义的文件名称
+                    String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
+                    // 设置存放图片文件的路径
+                    path=realPath+trueFileName;
+                    log.info("存放图片文件的路径:"+path);
+                    // 转存文件到指定的路径
+                    file.transferTo(new File(path));
+                    log.info("上传成功");
+                    response.setCode(200);
+                    response.setMessage("上传成功");
+
+                }else {
+                    log.info("系统不支持该文件类型,请重新上传");
+                    response.setCode(201);
+                    response.setMessage("系统不支持该文件类型,请重新上传");
+                }
+            }else{
+                log.info("文件类型为空，请重新选择");
+                response.setCode(202);
+                response.setMessage("文件类型为空，请重新选择");
+            }
+
+        }else {
+            log.info("未找到对应的文件，请选择图片文件");
+            response.setCode(203);
+            response.setMessage("未找到对应的文件，请选择图片文件");
         }
 
         return response;

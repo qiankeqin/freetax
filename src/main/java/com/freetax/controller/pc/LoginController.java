@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,6 +138,15 @@ public class LoginController {
                                      @ApiParam(value = "邮箱") @RequestParam(required = false) String email){
 
         Response response = userFacade.updatePersonInfo(id, name, company, email);
+
+        return response;
+    }
+
+    @ApiOperation(value = "上传用户头像图片（PC端）", notes = "上传用户头像图片（PC端）", response = Response.class)
+    @RequestMapping(value = "upload_photo_img", method = RequestMethod.POST)
+    public Response uploadPhotoImg(HttpServletRequest request,
+                                   @ApiParam(value = "头像图片file") @RequestParam MultipartFile file) throws IOException {
+        Response response = userFacade.uploadPhotoImg(request, file);
 
         return response;
     }
