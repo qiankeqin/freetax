@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -218,9 +219,50 @@ public class PcRegisterFacade {
         return response;
     }
 
+    public Response pcUpdatePasswd(String mobile, String phcode, String passwd){
+        Response response = new Response();
+
+        LoginUser loginuser = userFacade.getLoginuserByUserid(mobile);
+
+        if (null == loginuser){
+            log.info("该手机号未注册");
+            response.setCode(401);
+            response.setMessage("该手机号未注册");
+        }else {
+            try {
+                //从缓存中获取本手机号的验证码进行比对
+                Subject currentUser = SecurityUtils.getSubject();
+                Session session = currentUser.getSession(true);
+                Validateinfo info = (Validateinfo) session.getAttribute("r" + mobile);
+
+                if (phcode.equals(info.getCheckCode())) {
+                    Map<String, Object> parammap = new HashMap<>();
+                    parammap.put("phone", mobile);
+                    parammap.put("passwd", MD5Util.MD5EncodeByUTF8(passwd));
+                    userService.updatePasswd(parammap);
+
+                    log.info("密码修改成功");
+                    response.setCode(200);
+                    response.setMessage("密码修改成功");
+                }else {
+                    log.info("验证码错误");
+                    response.setCode(301);
+                    response.setMessage("验证码错误");
+                }
+
+            }catch (Exception e){
+                log.error("服务器繁忙，密码修改失败");
+                response.setCode(301);
+                response.setMessage("服务器繁忙，修改失败");
+            }
+        }
+
+        return response;
+    }
+
     /**
      * 登录成功后，更新用户的部分信息：
-     * 登录时间， ip， ip所在城市，经度， 纬度
+     * 最后一次登录时间
      *
      * @param mobile
      * @param loginTime

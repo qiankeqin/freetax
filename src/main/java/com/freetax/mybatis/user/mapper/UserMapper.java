@@ -17,6 +17,8 @@ public interface UserMapper {
 
     void updateLoginappuserInfo(User user);
 
+    void updatePasswd(Map<String, Object> parammap);
+
     User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
