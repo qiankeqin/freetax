@@ -1,4 +1,4 @@
-package com.freetax.controller;
+package com.freetax.controller.boss;
 
 import com.freetax.common.Response;
 import com.freetax.facade.QuestionsAndAnswersFacade;
