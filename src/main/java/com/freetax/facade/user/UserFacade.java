@@ -5,12 +5,18 @@ import com.freetax.common.constant.MsgCodeConstant;
 import com.freetax.exception.AuthException;
 import com.freetax.mybatis.user.entity.*;
 import com.freetax.mybatis.user.service.UserService;
+import com.freetax.utils.pagination.model.Paging;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +25,7 @@ import java.util.Map;
 
 /**
  * APP用户 facade
+ *
  * @Author shuxf
  * @Date 2017/10/30 20:20
  */
@@ -32,6 +39,7 @@ public class UserFacade {
 
     /**
      * 根据token获取app登录用户信息
+     *
      * @param parammap
      * @return
      */
@@ -54,6 +62,125 @@ public class UserFacade {
         return userService.selectLoginuserByUserid(mobile);
     }
 
+    /**
+     * 修改会员用户信息
+     *
+     * @param phone
+     * @param photo
+     * @param name
+     * @param company
+     * @param email
+     * @param infosource
+     */
+    public void updateUser(String id, String phone, String photo, String password, String name, String company, String email, String infosource) {
+        User user = new User();
+        user.setId(Integer.parseInt(id));
+        if (StringUtils.isNotEmpty(phone)) {
+            user.setPhone(phone);
+        }
+        if (StringUtils.isNotEmpty(photo)) {
+            user.setPhoto(photo);
+        }
+        if (StringUtils.isNotEmpty(password)){
+            user.setPasswd(password);
+        }
+        if (StringUtils.isNotEmpty(name)) {
+            user.setName(name);
+        }
+        if (StringUtils.isNotEmpty(company)) {
+            user.setCompany(company);
+        }
+        if (StringUtils.isNotEmpty(email)) {
+            user.setEmail(email);
+        }
+        if (StringUtils.isNotEmpty(infosource)) {
+            user.setInfosource(Integer.parseInt(infosource));
+        }
+        userService.updateUser(user);
+    }
+
+    /**
+     * 根据id查询会员用户详情
+     *
+     * @param id
+     * @return
+     */
+    public User queryUserById(String id) {
+        return userService.queryUserById(Integer.parseInt(id));
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param id
+     */
+    public void deleteUserById(String id) {
+        userService.deleteUserById(Integer.parseInt(id));
+    }
+
+    /**
+     * 更新用户联系状态
+     *
+     * @param id
+     */
+    public void updateUserByMark(String id, String mark) {
+        User user = new User();
+        user.setId(Integer.parseInt(id));
+        user.setMark(Integer.parseInt(mark));
+        userService.updateUserByMark(user);
+    }
+
+    public List<User> queryUserByList(String phone, String name, String company, String infosource, String mark,
+                                      String logbegin, String logend, String advicebiegin, String adviceend, Paging<User> pag) {
+        UserVo user = new UserVo();
+        if (StringUtils.isNotEmpty(phone)){
+            user.setPhone(phone);
+        }
+        if (StringUtils.isNotEmpty(name)){
+            user.setName(name);
+        }
+        if (StringUtils.isNotEmpty(company)){
+            user.setCompany(company);
+        }
+        if (StringUtils.isNotEmpty(infosource)){
+            user.setInfosource(Integer.parseInt(infosource));
+        }
+        if (StringUtils.isNotEmpty(mark)){
+            user.setMark(Integer.parseInt(mark));
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //时间操作
+        getTime(logbegin, logend, logbegin, logend, user, format);
+        //时间操作
+        getTime(logbegin, logend, advicebiegin, adviceend, user, format);
+
+        return userService.queryUserByList(user,pag);
+
+    }
+
+    /**
+     * 获取时间
+     * @param logbegin 登录开始
+     * @param logend 登录结束
+     * @param advicebiegin 咨询开始
+     * @param adviceend 咨询结束
+     * @param user 用户对象
+     * @param logformat format对象
+     */
+    private void getTime(String logbegin, String logend, String advicebiegin, String adviceend, UserVo user, SimpleDateFormat logformat) {
+        Date advicebeginTime;
+        Date adviceendTime;
+        if (StringUtils.isNotEmpty(advicebiegin) && StringUtils.isNotEmpty(adviceend)){
+            try {
+                advicebeginTime = logformat.parse(logbegin);
+                adviceendTime = logformat.parse(logend);
+                user.setAdviceBegin(advicebeginTime);
+                user.setAdviceEnd(adviceendTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * 修改用户个人资料
      * @param id

@@ -2,12 +2,14 @@ package com.freetax.mybatis.user.service;
 
 import com.freetax.mybatis.user.entity.*;
 import com.freetax.mybatis.user.mapper.UserMapper;
+import com.freetax.utils.pagination.model.Paging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,12 +85,84 @@ public class UserService {
         }
     }
 
+    /**
+     * 修改会员用户信息
+     * @param user
+     */
+    public void updateUser(User user){
+        try {
+            log.info("修改会员用户信息");
+            userMapper.updateByPrimaryKeySelective(user);
+        } catch (Exception e) {
+            log.error("修改会员用户信息异常",e);
+            throw e;
+        }
+    }
+
     public void updatePasswd(Map<String, Object> parammap){
         try {
             log.info("PC用户修改密码");
             userMapper.updatePasswd(parammap);
         }catch (Exception e){
             log.error("PC用户密码修改失败", e);
+            throw e;
+        }
+    }
+
+    /**
+     *  根据id查询用户信息
+     * @param id
+     * @return
+     */
+    public User queryUserById(Integer id){
+        try {
+            log.info("根据id查询用户信息");
+            return userMapper.selectByPrimaryKey(id);
+        } catch (Exception e) {
+            log.error("根据id查询用户信息异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     */
+    public void deleteUserById(Integer id){
+        try {
+            log.info("删除用户");
+            userMapper.deleteUserById(id);
+        } catch (Exception e) {
+            log.error("删除用户异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 更新用户联系状态
+     * @param user
+     */
+    public void updateUserByMark(User user){
+        try {
+            log.info("更新用户联系状态");
+            userMapper.updateUserByMark(user);
+        } catch (Exception e) {
+            log.error("更新用户联系状态异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 查询用户列表
+     * @param userVo
+     * @return
+     */
+    public List<User> queryUserByList(UserVo userVo, Paging<User> pag){
+        try {
+            log.info("查询用户列表");
+            return userMapper.findAllQueryUserByList(userVo,pag.getRowBounds());
+        } catch (Exception e) {
+            log.error("查询用户列表异常",e);
             throw e;
         }
     }

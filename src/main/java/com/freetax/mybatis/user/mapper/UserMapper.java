@@ -1,9 +1,12 @@
 package com.freetax.mybatis.user.mapper;
 
 import com.freetax.mybatis.user.entity.*;
+import com.freetax.utils.pagination.model.Paging;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -30,5 +33,11 @@ public interface UserMapper {
     Integer queryIsRegister(String mobile);
 
     LoginUser selectLoginuserByUserid(@Param("phone") String mobile);
+
+    void deleteUserById(Integer id);
+
+    void updateUserByMark(User user);
+
+    List<User> findAllQueryUserByList(UserVo user, RowBounds rowBounds);
 
 }

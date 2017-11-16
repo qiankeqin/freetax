@@ -28,23 +28,8 @@
     </select>
 
     <!--查询当前手机号是否已注册-->
-    <select id="queryIsRegister" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    <select id="queryIsRegister" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT count(*) FROM fr_user WHERE phone = #{mobile,jdbcType=VARCHAR}
-    </select>
-
-    <!--查询个人主页中的个人信息-->
-    <select id="queryUserInfo" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.user.entity.UserVo">
-        SELECT t.photo, t.level, t.nickname, t.sign,
-        (
-        SELECT COUNT(1) FROM yw_post WHERE userid = #{userid,jdbcType=INTEGER}
-        ) AS postsum,
-        (
-        SELECT sum(collectsum) FROM yw_post WHERE userid = #{userid,jdbcType=INTEGER}
-        ) AS becollectsum,
-        (
-        SELECT sum(forwardsum) FROM yw_post WHERE userid = #{userid,jdbcType=INTEGER}
-        ) AS besharesum
-        FROM fr_user t WHERE t.id = #{userid,jdbcType=INTEGER}
     </select>
 
     <!--根据用户id查询用户积分数-->
@@ -228,14 +213,14 @@
         </set>
         WHERE
     </update>
-    
-    <update id="updateLoginappuserInfo" parameterType="com.freetax.mybatis.user.entity.User" >
+
+    <update id="updateLoginappuserInfo" parameterType="com.freetax.mybatis.user.entity.User">
         UPDATE fr_user
         SET logintime = #{logintime,jdbcType=TIMESTAMP}
         WHERE phone = #{phone,jdbcType=VARCHAR}
     </update>
 
-    <update id="updatePasswd" parameterType="java.util.Map" >
+    <update id="updatePasswd" parameterType="java.util.Map">
         UPDATE fr_user
         SET passwd = #{passwd,jdbcType=VARCHAR}
         WHERE phone = #{phone,jdbcType=VARCHAR}
@@ -255,5 +240,44 @@
                 u.phone = #{phone}
             </if>
         </where>
+    </select>
+
+    <update id="deleteUserById" parameterType="java.lang.Integer">
+        UPDATE fr_user SET status = 1 WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateUserByMark" parameterType="com.freetax.mybatis.user.entity.User">
+        UPDATE fr_user SET mark = #{mark,jdbcType=INTEGER} WHERE  id = #{id,jdbcType=INTEGER} AND isdel = 0
+    </update>
+
+    <select id="findAllQueryUserByList" parameterType="com.freetax.mybatis.user.entity.UserVo"
+            resultType="com.freetax.mybatis.user.entity.User">
+        SELECT *
+        FROM fr_user
+        WHERE status = 0
+        <if test="name != null">
+            AND name LIKE CONCAT('$',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="phone != null">
+            AND phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="company != null">
+            AND company LIKE CONCAT('%',#{company,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="infosource != null">
+            AND infosource = #{infosource,jdbcType=INTEGER}
+        </if>
+        <if test="mark != null">
+            AND mark = #{mark,jdbcType=INTEGER}
+        </if>
+        <if test="logBegin != null and logEnd != null">
+            <![CDATA[ AND logintime >= #{logBegin,jdbcType=DATE}]]>
+            <![CDATA[ AND logintime <= #{logEnd,jdbcType=DATE}]]>
+        </if>
+        <if test="adviceBegin != null and adviceEnd != null">
+            <![CDATA[ AND advicetime>=#{adviceBegin,jdbcType=DATE}]]>
+            <![CDATA[ AND advicetime <=#{adviceEnd,jdbcType=DATE}]]>
+        </if>
+        ORDER BY intime DESC
     </select>
 </mapper>
