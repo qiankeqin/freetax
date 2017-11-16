@@ -27,6 +27,11 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <!--查询当前手机号是否已注册-->
+    <select id="queryIsRegister" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT count(*) FROM fr_user WHERE phone = #{mobile,jdbcType=VARCHAR}
+    </select>
+
     <!--查询个人主页中的个人信息-->
     <select id="queryUserInfo" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.user.entity.UserVo">
         SELECT t.photo, t.level, t.nickname, t.sign,
@@ -223,29 +228,25 @@
         </set>
         WHERE
     </update>
+    
+    <update id="updateLoginappuserInfo" parameterType="com.freetax.mybatis.user.entity.User" >
+        UPDATE fr_user
+        SET logintime = #{logintime,jdbcType=TIMESTAMP}
+        WHERE phone = #{phone,jdbcType=VARCHAR}
+    </update>
 
-    <select id="selectLoginUserByToken" parameterType="java.lang.String"
+    <select id="selectLoginUserByToken" parameterType="java.util.Map"
             resultType="com.freetax.mybatis.user.entity.LoginUser">
-        select
-        u.*, i.accid, i.token as imtoken
-        from fr_user u
-        LEFT JOIN yw_im_user i on u.id= i.userid AND i.type = 1
-        <where>
-            <if test="token != null || token != ''">
-                u.token = #{token}
-            </if>
-        </where>
+        select u.* from fr_user u
+        where u.phone = #{phone} AND u.passwd = #{passwd}
     </select>
 
-    <select id="selectLoginuserByUserid" parameterType="java.lang.Integer"
+    <select id="selectLoginuserByUserid" parameterType="java.lang.String"
             resultType="com.freetax.mybatis.user.entity.LoginUser">
-        select
-        u.*, i.accid, i.token as imtoken
-        from fr_user u
-        LEFT JOIN yw_im_user i on u.id= i.userid AND i.type = 1
+        select u.* from fr_user u
         <where>
-            <if test="id != null || id != ''">
-                u.id = #{id}
+            <if test="phone != null || phone != ''">
+                u.phone = #{phone}
             </if>
         </where>
     </select>

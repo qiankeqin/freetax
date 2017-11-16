@@ -4,6 +4,8 @@ import com.freetax.mybatis.user.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 @Repository
 public interface UserMapper {
 
@@ -13,14 +15,18 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
+    void updateLoginappuserInfo(User user);
+
     User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
 
-    LoginUser selectLoginUserByToken(@Param("token") String token);
+    LoginUser selectLoginUserByToken(Map<String, Object> parammap);
 
-    LoginUser selectLoginuserByUserid(@Param("id") Integer id);
+    Integer queryIsRegister(String mobile);
+
+    LoginUser selectLoginuserByUserid(@Param("phone") String mobile);
 
 }

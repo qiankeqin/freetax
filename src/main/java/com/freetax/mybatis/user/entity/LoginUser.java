@@ -16,149 +16,76 @@ public class LoginUser implements Serializable {
 
     private Integer id;
 
-    private String openid;
-
-    private String qq;
-
-    private String sina;
-
-    private String email;
-
     private String phone;
 
-    private String token;
-
-    private String invitecode;
-
-    private String referrals;
-
-    private String nickname;
-
-    private String sign;
-
-    private Integer attention;
-
-    private Integer fans;
-
-    private Integer points;
+    private String passwd;
 
     private String photo;
 
-    private Integer sex;
+    private String name;
 
-    private Date birthday;
+    private String company;
 
-    private String province;
-
-    private String city;
+    private String email;
 
     private Date intime;
 
-    private Integer growth;
+    private Date logintime;
 
-    private Integer level;
+    private Date advicetime;
+
+    private Integer infosource;
 
     private Integer status;
 
-    private Date applydate;
+    private Integer mark;
 
-    private String role;    //角色
-
-    private String accid;
-
-    private String imtoken;
-
-    private Integer heatValue;  //作者热度
-    private String ipCity; //根据用户登录的ip获取的所在的城市代码,对应yw_city的code
-
-    private String latitude;    //纬度
-    private String longitude;   //经度
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getLatitude() {
-
-        return latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setHeatValue(Integer heatValue) {
-        this.heatValue = heatValue;
-    }
-
-    public void setIpCity(String ipCity) {
-        this.ipCity = ipCity;
-    }
-
-    public Integer getHeatValue() {
-
-        return heatValue;
-    }
-
-    public String getIpCity() {
-        return ipCity;
-    }
-
-    public void setApplydate(Date applydate) {
-        this.applydate = applydate;
-    }
-
-    public void setAccid(String accid) {
-        this.accid = accid;
-    }
-
-    public void setImtoken(String imtoken) {
-        this.imtoken = imtoken;
-    }
-
-    public Date getApplydate() {
-
-        return applydate;
-    }
-
-    public String getAccid() {
-        return accid;
-    }
-
-    public String getImtoken() {
-        return imtoken;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getQq() {
-        return qq;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setQq(String qq) {
-        this.qq = qq;
+    public String getPasswd() {
+        return passwd;
     }
 
-    public String getSina() {
-        return sina;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
-    public void setSina(String sina) {
-        this.sina = sina;
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getEmail() {
@@ -169,200 +96,70 @@ public class LoginUser implements Serializable {
         this.email = email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public void setInvitecode(String invitecode) {
-        this.invitecode = invitecode;
-    }
-
-    public void setReferrals(String referrals) {
-        this.referrals = referrals;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public void setAttention(Integer attention) {
-        this.attention = attention;
-    }
-
-    public void setFans(Integer fans) {
-        this.fans = fans;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public Date getIntime() {
+        return intime;
     }
 
     public void setIntime(Date intime) {
         this.intime = intime;
     }
 
-    public void setGrowth(Integer growth) {
-        this.growth = growth;
+    public Date getLogintime() {
+        return logintime;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setLogintime(Date logintime) {
+        this.logintime = logintime;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public Date getAdvicetime() {
+        return advicetime;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAdvicetime(Date advicetime) {
+        this.advicetime = advicetime;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getInfosource() {
+        return infosource;
     }
 
-    public String getOpenid() {
-        return openid;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getInvitecode() {
-        return invitecode;
-    }
-
-    public String getReferrals() {
-        return referrals;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public Integer getAttention() {
-        return attention;
-    }
-
-    public Integer getFans() {
-        return fans;
-    }
-
-    public Integer getPoints() {
-        return points;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public Date getIntime() {
-        return intime;
-    }
-
-    public Integer getGrowth() {
-        return growth;
-    }
-
-    public Integer getLevel() {
-        return level == null ? 0 : level;
+    public void setInfosource(Integer infosource) {
+        this.infosource = infosource;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public String getRole() {
-        return role;
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getMark() {
+        return mark;
+    }
+
+    public void setMark(Integer mark) {
+        this.mark = mark;
     }
 
     @Override
     public String toString() {
         return "LoginUser{" +
                 "id=" + id +
-                ", openid='" + openid + '\'' +
-                ", qq='" + qq + '\'' +
-                ", sina='" + sina + '\'' +
-                ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", token='" + token + '\'' +
-                ", invitecode='" + invitecode + '\'' +
-                ", referrals='" + referrals + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", sign='" + sign + '\'' +
-                ", attention=" + attention +
-                ", fans=" + fans +
-                ", points=" + points +
+                ", passwd='" + passwd + '\'' +
                 ", photo='" + photo + '\'' +
-                ", sex=" + sex +
-                ", birthday=" + birthday +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", intime=" + intime +
-                ", growth=" + growth +
-                ", level=" + level +
+                ", name='" + name + '\'' +
+                ", company='" + company + '\'' +
+                ", email='" + email + '\'' +
+                ", intime='" + intime + '\'' +
+                ", logintime='" + logintime + '\'' +
+                ", advicetime='" + advicetime + '\'' +
+                ", infosource='" + infosource + '\'' +
                 ", status=" + status +
-                ", applydate=" + applydate +
-                ", role='" + role + '\'' +
-                ", accid='" + accid + '\'' +
-                ", imtoken='" + imtoken + '\'' +
-                ", heatValue=" + heatValue +
-                ", ipCity='" + ipCity + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
+                ", mark=" + mark +
                 '}';
     }
 }

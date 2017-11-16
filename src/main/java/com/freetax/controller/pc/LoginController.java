@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @Author shuxf
@@ -75,7 +77,27 @@ public class LoginController {
                                @ApiParam(value = "验证码（手机收到的验证码）") @RequestParam String phcode,
                                @ApiParam(value = "密码（用户设置的密码）") @RequestParam String passwd) {
 
-        Response response = pcRegisterFacade.pcRegister(mobile, phcode, passwd);
+        Response response = new Response();
+
+        //根据手机号查询当前手机号是否注册
+        int sum = pcRegisterFacade.queryIsRegister(mobile);
+
+        if (sum == 0) {
+            response = pcRegisterFacade.pcRegister(mobile, phcode, passwd);
+        }else if (sum > 0){
+            log.error("该手机号已注册！");
+            response.setCode(201);
+            response.setMessage("该手机号已注册！");
+        }
+        return response;
+    }
+
+    @ApiOperation(value = "用户登录接口（PC端用户登录接口）", notes = "用户登录接口（PC端用户登录接口）", response = Response.class)
+    @RequestMapping(value = "pc_login", method = RequestMethod.POST)
+    public Response pcLogin(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
+                            @ApiParam(value = "密码（用户设置的密码）") @RequestParam String passwd) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        Response response = pcRegisterFacade.pcLogin(mobile, passwd);
 
         return response;
     }

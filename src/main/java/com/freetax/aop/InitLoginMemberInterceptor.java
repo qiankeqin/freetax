@@ -83,7 +83,7 @@ public class InitLoginMemberInterceptor extends HandlerInterceptorAdapter {
                      * 根据点击的菜单中的URL去匹配，当匹配到了此菜单，判断是否有此菜单的权限，没有的话跳转到404页面
                      */
                     log.debug("拦截器，进入boss系统登录分支");
-                    int role = bossUser.getRole();
+                    int role = bossUser.getIsAdmin();
                     if (role == 1) {
                         //超管拥有所有权限
                         return true;
@@ -172,11 +172,9 @@ public class InitLoginMemberInterceptor extends HandlerInterceptorAdapter {
 
             if (null != bossUser) {
                 // 初始化登录信息
-                BossRealm.ShiroBossUser loginInfo = new BossRealm.ShiroBossUser(bossUser.getId(), bossUser.getName(),
-                        bossUser.getPhone(), bossUser.getUsername(),
-                        bossUser.getPassword(), bossUser.getIssuper(), bossUser.getStatus(), bossUser.getIsdel(), bossUser.getCreatetime(),
-                        bossUser.getAfterlogintime(), bossUser.getBeforelogintime(), roleid, accid, imtoken,
-                        bossUser.getIscircle(), bossUser.getCirclemanagement(), bossUser.getContributing(), bossUser.getCommon());
+                BossRealm.ShiroBossUser loginInfo = new BossRealm.ShiroBossUser(bossUser.getId(), bossUser.getEmail(),
+                        bossUser.getPhone(), bossUser.getIntime(),
+                        bossUser.getIsdel(), bossUser.getRemark(), bossUser.getNickname(), bossUser.getPassword(), bossUser.getIsAdmin());
 
                 //判断登录信息是否改变,若改变了则更新session，
                 if (this.loginBossInfoIsChange(bossuser, loginInfo)) {
@@ -250,15 +248,9 @@ public class InitLoginMemberInterceptor extends HandlerInterceptorAdapter {
      * @return
      */
     private boolean loginBossInfoIsChange(BossRealm.ShiroBossUser bossuser, BossRealm.ShiroBossUser loginInfo) {
-        boolean isChange = bossuser == null || loginInfo == null || bossuser.getRole() != loginInfo.getRole()
+        boolean isChange = bossuser == null || loginInfo == null || bossuser.getIsAdmin() != loginInfo.getIsAdmin()
                 || bossuser.getPhone() != loginInfo.getPhone() || bossuser.getPassword() != loginInfo.getPassword()
-                || bossuser.getUsername() != loginInfo.getUsername()
-                || bossuser.getAccid() != loginInfo.getAccid()
-                || bossuser.getImtoken() != loginInfo.getImtoken()
-                || bossuser.getCirclemanagement() != loginInfo.getCirclemanagement()
-                || bossuser.getCommon() != loginInfo.getCommon()
-                || bossuser.getContributing() != loginInfo.getContributing()
-                || bossuser.getIscircle() != loginInfo.getIscircle();
+                || bossuser.getNickname() != loginInfo.getNickname();
         return isChange;
     }
 }

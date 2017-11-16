@@ -10,66 +10,29 @@ import java.util.Date;
 public class BossUser implements Serializable {
     private Integer id;
 
-    @ApiModelProperty(value = "真实姓名")
-    private String name;
+    @ApiModelProperty(value = "邮箱")
+    private String email;
 
+    @ApiModelProperty(value = "联系人电话")
     private String phone;
-    @ApiModelProperty(value = "用户名")
-    private String username;
+
+    @ApiModelProperty(value = "注册时间")
+    private Date intime;
+
+    @ApiModelProperty(value = "是否删除 0否 1是")
+    private Integer isdel;
+
+    @ApiModelProperty(value = "备注")
+    private Integer remark;
+
+    @ApiModelProperty(value = "昵称")
+    private String nickname;
+
     @ApiModelProperty(value = "密码")
     private String password;
-    @ApiModelProperty(value = "是否是超级管理员：0 否 1 是")
-    private Integer issuper;
-    @ApiModelProperty(value = "账号状态: 0 正常 1 冻结")
-    private Integer status;
-    @ApiModelProperty(value = "是否被删除：0 未删除 1 已删除")
-    private Integer isdel;
-    @ApiModelProperty(value = "账号创建时间")
-    private Date createtime;
-    @ApiModelProperty(value = "上次登录时间")
-    private Date afterlogintime;
-    @ApiModelProperty(value = "本次登录时间")
-    private Date beforelogintime;
-    @ApiModelProperty(value = "是否是圈主 0否 1是")
-    private Integer iscircle;
-    @ApiModelProperty(value = "是否是圈子管理员 0否 1是")
-    private Integer circlemanagement;
-    @ApiModelProperty(value = "是否是特约嘉宾 0否 1是")
-    private Integer contributing;
-    @ApiModelProperty(value = "是否是普通管理员 0否 1是")
-    private Integer common;
 
-    public Integer getIscircle() {
-        return iscircle;
-    }
-
-    public void setIscircle(Integer iscircle) {
-        this.iscircle = iscircle;
-    }
-
-    public Integer getCirclemanagement() {
-        return circlemanagement;
-    }
-
-    public void setCirclemanagement(Integer circlemanagement) {
-        this.circlemanagement = circlemanagement;
-    }
-
-    public Integer getContributing() {
-        return contributing;
-    }
-
-    public void setContributing(Integer contributing) {
-        this.contributing = contributing;
-    }
-
-    public Integer getCommon() {
-        return common;
-    }
-
-    public void setCommon(Integer common) {
-        this.common = common;
-    }
+    @ApiModelProperty(value = "是否是管理员 0否 1是")
+    private Integer isAdmin;
 
     public Integer getId() {
         return id;
@@ -79,12 +42,12 @@ public class BossUser implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {
@@ -92,39 +55,15 @@ public class BossUser implements Serializable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
+    public Date getIntime() {
+        return intime;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public Integer getIssuper() {
-        return issuper;
-    }
-
-    public void setIssuper(Integer issuper) {
-        this.issuper = issuper;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setIntime(Date intime) {
+        this.intime = intime;
     }
 
     public Integer getIsdel() {
@@ -135,44 +74,50 @@ public class BossUser implements Serializable {
         this.isdel = isdel;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Integer getRemark() {
+        return remark;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setRemark(Integer remark) {
+        this.remark = remark;
     }
 
-    public Date getAfterlogintime() {
-        return afterlogintime;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setAfterlogintime(Date afterlogintime) {
-        this.afterlogintime = afterlogintime;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public Date getBeforelogintime() {
-        return beforelogintime;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBeforelogintime(Date beforelogintime) {
-        this.beforelogintime = beforelogintime;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override
     public String toString() {
         return "BossUser{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", issuper=" + issuper +
-                ", status=" + status +
-                ", isdel=" + isdel +
-                ", createtime=" + createtime +
-                ", afterlogintime=" + afterlogintime +
-                ", beforelogintime=" + beforelogintime +
+                ", intime='" + intime + '\'' +
+                ", isdel='" + isdel + '\'' +
+                ", remark=" + remark +
+                ", nickname=" + nickname +
+                ", password=" + password +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

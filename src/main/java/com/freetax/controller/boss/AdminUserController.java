@@ -46,7 +46,7 @@ public class AdminUserController {
                                     @ApiParam(value = "是否是超级管理员")@RequestParam String isAdmin){
         Response response = new Response();
         Map resault = adminUserFacade.insertAdminUser(email,phone,remark,nickname,password,isAdmin);
-        if (resault.get("code") == 200) {
+        if ((Integer)resault.get("code") == 200) {
             response.setMessage("操作成功");
             response.setData(1);
         } else {

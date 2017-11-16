@@ -3,41 +3,31 @@
 <mapper namespace="com.freetax.mybatis.bossUser.mapper.BossUserMapper">
     <resultMap id="BaseResultMap" type="com.freetax.mybatis.bossUser.entity.BossUser">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="issuper" property="issuper" jdbcType="INTEGER"/>
-        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
         <result column="isdel" property="isdel" jdbcType="INTEGER"/>
-        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
-        <result column="afterlogintime" property="afterlogintime" jdbcType="TIMESTAMP"/>
-        <result column="beforelogintime" property="beforelogintime" jdbcType="TIMESTAMP"/>
-        <result column="iscircle" property="iscircle" jdbcType="INTEGER"/>
-        <result column="circlemanagement" property="circlemanagement" jdbcType="INTEGER"/>
-        <result column="contributing" property="contributing" jdbcType="INTEGER"/>
-        <result column="common" property="common" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="INTEGER"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="isAdmin" property="isAdmin" jdbcType="INTEGER"/>
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, phone, username, password, issuper, status, isdel,
-        createtime,
-        afterlogintime,
-        beforelogintime,
-        iscircle,circlemanagement,contributing,common
+        id, email, phone, intime, isdel, remark, nickname, password, isAdmin
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from yw_admin_user
+        from fr_admin_user
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from yw_admin_user
+        delete from fr_admin_user
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.freetax.mybatis.bossUser.entity.BossUser">
-        insert into yw_admin_user (id, name, phone,
+        insert into fr_admin_user (id, name, phone,
         username, password, issuper,
         status, isdel, createtime,
         afterlogintime, beforelogintime,iscircle,circlemanagement,contributing,common)
@@ -50,7 +40,7 @@
     </insert>
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.freetax.mybatis.bossUser.entity.BossUser">
-        insert into yw_admin_user
+        insert into fr_admin_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -127,7 +117,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.bossUser.entity.BossUser">
-        update yw_admin_user
+        update fr_admin_user
         <set>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
@@ -173,7 +163,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.bossUser.entity.BossUser">
-        update yw_admin_user
+        update fr_admin_user
         set name = #{name,jdbcType=VARCHAR},
         phone = #{phone,jdbcType=VARCHAR},
         username = #{username,jdbcType=VARCHAR},
@@ -195,7 +185,7 @@
             resultType="com.freetax.mybatis.bossUser.entity.BossUser">
         select
         <include refid="Base_Column_List"/>
-        from yw_admin_user
+        from fr_admin_user
         WHERE phone = #{phone}
     </select>
 
@@ -203,19 +193,19 @@
             resultType="com.freetax.mybatis.bossUser.entity.BossUser">
         select
         <include refid="Base_Column_List"/>
-        from yw_admin_user
+        from fr_admin_user
         where username = #{username}
     </select>
 
     <update id="updateBossUserLoginTime" parameterType="com.freetax.mybatis.bossUser.entity.BossUser">
-        update yw_admin_user
+        update fr_admin_user
         SET afterlogintime = beforelogintime,
         beforelogintime = now()
         where id = #{id,jdbcType=INTEGER}
     </update>
 
     <update id="delBossUser" parameterType="int">
-        UPDATE yw_admin_user SET isdel = 1 WHERE id in
+        UPDATE fr_admin_user SET isdel = 1 WHERE id in
         <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -230,7 +220,7 @@
         date_format(u.beforelogintime,'%Y-%m-%d %H:%i:%s') beforelogintime,
         r.rolename, r.id as roleid
         FROM
-        yw_admin_user u
+        fr_admin_user u
         LEFT join yw_admin_user_role ur on u.id=ur.userid
         LEFT JOIN yw_admin_role r ON r.id = ur.roleid
         where u.status = 0 and u.isdel = 0
@@ -247,7 +237,7 @@
         select
         u.id as userid, u.name, u.phone, r.id as roleid, r.rolename, u.issuper, u.username,
         u.iscircle, u.circlemanagement, u.contributing, u.common
-        FROM yw_admin_user u
+        FROM fr_admin_user u
         LEFT JOIN yw_admin_user_role ur ON ur.userid = u.id
         LEFT JOIN yw_admin_role r ON r.id = ur.roleid
         WHERE u.id = #{uid}
@@ -257,17 +247,17 @@
             parameterType="java.lang.Integer">
         SELECT
         u.*
-        FROM yw_admin_user u
+        FROM fr_admin_user u
         LEFT JOIN yw_admin_user_role ur ON u.id = ur.userid
         WHERE ur.roleid = #{roleid}
     </select>
 
     <select id="isExistPhone" parameterType="java.lang.String" resultType="int">
-        SELECT COUNT(1) FROM yw_admin_user WHERE phone = #{phone}
+        SELECT COUNT(1) FROM fr_admin_user WHERE phone = #{phone}
     </select>
 
     <select id="isExistSameName" parameterType="com.freetax.mybatis.bossUser.entity.BossUser" resultType="int">
-        SELECT COUNT(1) FROM yw_admin_user
+        SELECT COUNT(1) FROM fr_admin_user
         WHERE username = #{username}
         <if test="id!=null and id!=''">
             <![CDATA[
@@ -277,27 +267,27 @@
     </select>
 
     <select id="queryUserById" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT u.id FROM yw_admin_user a LEFT JOIN yw_user u ON u.phone=a.phone WHERE a.id=#{userid,jdbcType=INTEGER}
+        SELECT u.id FROM fr_admin_user a LEFT JOIN yw_user u ON u.phone=a.phone WHERE a.id=#{userid,jdbcType=INTEGER}
     </select>
 
     <select id="queryUserIdBySpeciallyGuest" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        SELECT contributing FROM yw_admin_user WHERE id=#{userid,jdbcType=INTEGER} AND contributing=1
+        SELECT contributing FROM fr_admin_user WHERE id=#{userid,jdbcType=INTEGER} AND contributing=1
     </select>
 
     <select id="queryUserByAdministrator" parameterType="java.lang.Integer"
             resultType="com.freetax.mybatis.bossUser.entity.BossUser">
-        SELECT ad.* FROM yw_admin_user ad WHERE ad.id=#{userid,jdbcType=INTEGER}
+        SELECT ad.* FROM fr_admin_user ad WHERE ad.id=#{userid,jdbcType=INTEGER}
     </select>
 
     <!-- SELECT COUNT(1) FROM yw_circle_manager WHERE userid = (SELECT id FROM yw_user WHERE phone =(SELECT phone
-            FROM yw_admin_user WHERE id = id = #{userid,jdbcType=INTEGER}))
+            FROM fr_admin_user WHERE id = id = #{userid,jdbcType=INTEGER}))
             AND circleid = (SELECT circleid FROM yw_post p LEFT JOIN yw_circle c ON c.id=p.circleid WHERE p.id =
             #{kindid,jdbcType=INTEGER} AND p.isdel = 0 AND c.isdel = 0 AND c.status = 1) -->
     <select id="queryPostByUserid" parameterType="java.util.Map" resultType="java.lang.Integer">
         <if test="identity == 1">
             SELECT COUNT(1) FROM yw_circle
             WHERE id = (SELECT circleid FROM yw_post WHERE id = #{kindid,jdbcType=INTEGER} AND isdel <![CDATA[<>]]> 1)
-            AND phone = (SELECT phone FROM yw_admin_user WHERE id = #{userid,jdbcType=INTEGER})
+            AND phone = (SELECT phone FROM fr_admin_user WHERE id = #{userid,jdbcType=INTEGER})
             AND isdel =0 AND status =1
         </if>
         <if test="identity == 2">
@@ -308,20 +298,20 @@
     </select>
 
     <select id="queryCircleManageCommentByUserid" parameterType="java.util.Map" resultType="java.lang.Integer">
-        SELECT id FROM yw_admin_user WHERE phone=(SELECT phone FROM yw_circle WHERE id=(SELECT circleid FROM yw_post
+        SELECT id FROM fr_admin_user WHERE phone=(SELECT phone FROM yw_circle WHERE id=(SELECT circleid FROM yw_post
         WHERE id=(SELECT postid FROM yw_post_comment WHERE id=#{kindid,jdbcType=INTEGER}) AND isactive=0) AND isdel=0)
     </select>
 
     <select id="querySpeciallyCommentByUserid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT id FROM yw_admin_user WHERE phone=(SELECT phone FROM yw_user WHERE id=(SELECT userid FROM yw_post_comment WHERE id=#{id,jdbcType=INTEGER})) AND contributing=1
+        SELECT id FROM fr_admin_user WHERE phone=(SELECT phone FROM yw_user WHERE id=(SELECT userid FROM yw_post_comment WHERE id=#{id,jdbcType=INTEGER})) AND contributing=1
     </select>
 
     <select id="queryCircleIdToCircle" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT id FROM yw_admin_user WHERE phone=(SELECT phone FROM yw_circle WHERE id=#{circleid,jdbcType=INTEGER})
+        SELECT id FROM fr_admin_user WHERE phone=(SELECT phone FROM yw_circle WHERE id=#{circleid,jdbcType=INTEGER})
     </select>
 
     <select id="queryCircleManageIdToCircle" resultType="java.lang.Integer" parameterType="java.util.Map">
-        SELECT id FROM yw_admin_user WHERE phone in (SELECT phone FROM yw_user WHERE id in (SELECT userid FROM
+        SELECT id FROM fr_admin_user WHERE phone in (SELECT phone FROM yw_user WHERE id in (SELECT userid FROM
         yw_circle_manager WHERE circleid=#{kindid,jdbcType=INTEGER})) AND id=#{userid,jdbcType=INTEGER}
     </select>
 </mapper>

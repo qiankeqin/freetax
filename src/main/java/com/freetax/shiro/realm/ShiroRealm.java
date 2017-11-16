@@ -1,5 +1,6 @@
 package com.freetax.shiro.realm;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.freetax.common.constant.SessionConstant;
 import com.freetax.common.constant.UserConstants;
@@ -21,7 +22,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * App用户安全数据源
@@ -38,14 +42,23 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        log.info("APP登录认证");
+        log.info("PC前台登录认证");
 
         // 获取token中的username。这里不固定，可能是phone,qq,wx,wb
         Gson gson = new Gson();
         String tokenJson = gson.toJson(token);
-        LoginUser loginUser = userFacade.getLoginUserByToken(tokenJson);
 
-        log.debug("当前登录APP的用户信息，LoginUser = " + loginUser.toString());
+        //解析json提取需要验证的信息
+        JSONObject job = JSONObject.parseObject(tokenJson);
+        String phone = job.get("username").toString();
+        String passwd = job.get("password").toString();
+
+        Map<String, Object> parammap = new HashMap<>();
+        parammap.put("phone", phone);
+        parammap.put("passwd", passwd);
+        LoginUser loginUser = userFacade.getLoginUserByToken(parammap);
+
+        log.debug("当前登录PC的用户信息，LoginUser = " + loginUser.toString());
 
         if (loginUser != null) {
             if (1 == loginUser.getStatus()) {
@@ -60,9 +73,8 @@ public class ShiroRealm extends AuthorizingRealm {
         log.debug("登录的pwd，" + loginPwd);
 
         //获取服务端的密码，并MD5二次加密
-        String mytokenStr = loginUser.getToken();
-        UsernamePasswordToken mytoken = gson.fromJson(mytokenStr, UsernamePasswordToken.class);
-        String password = String.valueOf(mytoken.getPassword());
+        String mytokenStr = loginUser.getPasswd();
+        String password = mytokenStr;
         String pwd = new Md5Hash(password, null, 2).toString();
         log.debug("服务端的pwd," + password);
 
@@ -96,11 +108,6 @@ public class ShiroRealm extends AuthorizingRealm {
             if (StringUtils.isEmpty(status) || UserConstants.USER_STATUS.disable.toString().equals(status)) {
                 return null;
             }
-            //获取用户的角色
-            LoginUser loginUser = userFacade.getLoginuserByUserid(member.getId());
-            String role = loginUser.getRole();
-            log.debug("当前登录对象的角色,role=" + role);
-            info.addRole(role);
 
             return info;
         }
@@ -142,219 +149,130 @@ public class ShiroRealm extends AuthorizingRealm {
         private static final long serialVersionUID = -1373760761780840081L;
         private Integer id;
         private String account; //账号(使用手机号)
-        private Integer status; //账号状态：默认 0 正常  1 异常封号
-        private String role;       //角色
-        private Date registerTime;    //注册时间
-        private String photo;    //头像url
-        private String nickname;    //昵称
-        private Integer level;   //用户等级：0 普通用户  1 青铜  2 白银 3 黄金 4 白金 5 钻石 6 金钻石 7皇冠 8金皇冠
+        private String passwd;  //密码
+        private String photo;   //头像url
+        private String name;    //联系人名称
+        private String company; //公司名称
+        private String email;   //邮箱
+        private Date intime;    //注册时间
+        private Date logintime; //最后一次登录时间
+        private Date advicetime;//最后咨询时间
+        private Integer infosource;//信息来源：0 业务咨询 1 招商加盟
+        private Integer status; //账号状态：默认 0 正常 1 封号
+        private Integer mark;   //联系状态：0 未联系 1已联系
         private String phone;   //手机号
-        private String token;
-        private Integer points; //用户积分
-        private Integer sex;    //性别：1男 0女
-        private String accid;   //云信id
-        private String imToken; //云信token
-        private String sign;    //个性签名
-        private String birthday;  //生日
-        private String qq;  //qq
-        private String sina;    //微博
-        private String openid;  //微信
-        private Integer heatValue;  //作者热度
-        private String ipCity; //根据用户登录的ip获取的所在的城市代码,对应yw_city的code
-        private String latitude;    //纬度
-        private String longitude;   //经度
 
-        public void setLatitude(String latitude) {
-            this.latitude = latitude;
-        }
-
-        public void setLongitude(String longitude) {
-            this.longitude = longitude;
-        }
-
-        public String getLatitude() {
-
-            return latitude;
-        }
-
-        public String getLongitude() {
-            return longitude;
-        }
-
-        public void setHeatValue(Integer heatValue) {
-            this.heatValue = heatValue;
-        }
-
-        public void setIpCity(String ipCity) {
-            this.ipCity = ipCity;
-        }
-
-        public Integer getHeatValue() {
-
-            return heatValue;
-        }
-
-        public String getIpCity() {
-            return ipCity;
-        }
-
-        public void setQq(String qq) {
-            this.qq = qq;
-        }
-
-        public void setSina(String sina) {
-            this.sina = sina;
-        }
-
-        public void setOpenid(String openid) {
-            this.openid = openid;
-        }
-
-        public String getQq() {
-            return qq;
-        }
-
-        public String getSina() {
-            return sina;
-        }
-
-        public String getOpenid() {
-            return openid;
-        }
-
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
-
-        public String getBirthday() {
-
-            return birthday;
-        }
-
-        public void setSign(String sign) {
-            this.sign = sign;
-        }
-
-        public String getSign() {
-
-            return sign;
-        }
-
-        public void setAccid(String accid) {
-            this.accid = accid;
-        }
-
-        public void setImToken(String imToken) {
-            this.imToken = imToken;
-        }
-
-        public String getAccid() {
-
-            return accid;
-        }
-
-        public String getImToken() {
-            return imToken;
-        }
-
-        public void setSex(Integer sex) {
-            this.sex = sex;
-        }
-
-        public Integer getSex() {
-
-            return sex;
-        }
-
-        public void setPoints(Integer points) {
-            this.points = points;
-        }
-
-        public Integer getPoints() {
-
-            return points;
+        public Integer getId() {
+            return id;
         }
 
         public void setId(Integer id) {
             this.id = id;
         }
 
-        public void setAccount(String account) {
-            this.account = account;
-        }
-
-        public void setStatus(Integer status) {
-            this.status = status;
-        }
-
-        public void setRole(String role) {
-            this.role = role;
-        }
-
-        public void setRegisterTime(Date registerTime) {
-            this.registerTime = registerTime;
-        }
-
-        public void setPhoto(String photo) {
-            this.photo = photo;
-        }
-
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
-
-        public void setLevel(Integer level) {
-            this.level = level;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
         public String getAccount() {
             return account;
         }
 
-        public Integer getStatus() {
-            return status;
+        public void setAccount(String account) {
+            this.account = account;
         }
 
-        public String getRole() {
-            return role;
+        public String getPasswd() {
+            return passwd;
         }
 
-        public Date getRegisterTime() {
-            return registerTime;
+        public void setPasswd(String passwd) {
+            this.passwd = passwd;
         }
 
         public String getPhoto() {
             return photo;
         }
 
-        public String getNickname() {
-            return nickname;
+        public void setPhoto(String photo) {
+            this.photo = photo;
         }
 
-        public Integer getLevel() {
-            return level;
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getCompany() {
+            return company;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public Date getIntime() {
+            return intime;
+        }
+
+        public void setIntime(Date intime) {
+            this.intime = intime;
+        }
+
+        public Date getLogintime() {
+            return logintime;
+        }
+
+        public void setLogintime(Date logintime) {
+            this.logintime = logintime;
+        }
+
+        public Date getAdvicetime() {
+            return advicetime;
+        }
+
+        public void setAdvicetime(Date advicetime) {
+            this.advicetime = advicetime;
+        }
+
+        public Integer getInfosource() {
+            return infosource;
+        }
+
+        public void setInfosource(Integer infosource) {
+            this.infosource = infosource;
+        }
+
+        public Integer getStatus() {
+            return status;
+        }
+
+        public void setStatus(Integer status) {
+            this.status = status;
+        }
+
+        public Integer getMark() {
+            return mark;
+        }
+
+        public void setMark(Integer mark) {
+            this.mark = mark;
         }
 
         public String getPhone() {
             return phone;
         }
 
-        public String getToken() {
-            return token;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
-
 
         /**
          * 重载equals,只计算id+account;
@@ -376,30 +294,22 @@ public class ShiroRealm extends AuthorizingRealm {
             return false;
         }
 
-        public ShiroUser(Integer id, String account, Integer status, String role, Date registerTime, String photo, String nickname, Integer level, String phone, String token, Integer points, Integer sex, String accid, String imToken, String sign, String birthday, String qq, String sina, String openid, Integer heatValue, String ipCity, String latitude, String longitude) {
+        public ShiroUser(Integer id, String phone, String passwd, String photo, String name, String company, String email, Date intime, Date logintime,
+                         Date advicetime, Integer infosource, Integer status, Integer mark) {
             this.id = id;
-            this.account = account;
-            this.status = status;
-            this.role = role;
-            this.registerTime = registerTime;
-            this.photo = photo;
-            this.nickname = nickname;
-            this.level = level;
-            this.phone = phone;
-            this.token = token;
-            this.points = points;
-            this.sex = sex;
-            this.accid = accid;
-            this.imToken = imToken;
-            this.sign = sign;
-            this.birthday = birthday;
-            this.qq = qq;
-            this.sina = sina;
-            this.openid = openid;
-            this.heatValue = heatValue;
-            this.ipCity = ipCity;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.passwd = passwd;
+
+            this.photo = photo;    //头像url
+            this.name = name;      //联系人名称
+            this.company = company;//公司名称
+            this.email = email;    //邮箱
+            this.intime = intime;  //注册时间
+            this.logintime = logintime;  //最后一次登录时间
+            this.advicetime = advicetime;//最后咨询时间
+            this.infosource = infosource;//信息来源：0 业务咨询 1 招商加盟
+            this.status = status;        //账号状态：默认 0 正常 1 封号
+            this.mark = mark;            //联系状态：0 未联系 1已联系
+            this.phone = phone;          //手机号
         }
 
         @Override
@@ -408,26 +318,18 @@ public class ShiroRealm extends AuthorizingRealm {
                     "id=" + id +
                     ", account='" + account + '\'' +
                     ", status=" + status +
-                    ", role='" + role + '\'' +
-                    ", registerTime=" + registerTime +
+                    ", passwd=" + passwd +
                     ", photo='" + photo + '\'' +
-                    ", nickname='" + nickname + '\'' +
-                    ", level=" + level +
+                    ", name='" + name + '\'' +
+                    ", company=" + company +
+                    ", email='" + email + '\'' +
+                    ", intime='" + intime + '\'' +
+                    ", logintime=" + logintime +
+                    ", advicetime=" + advicetime +
+                    ", infosource='" + infosource + '\'' +
+                    ", status='" + status + '\'' +
+                    ", mark='" + mark + '\'' +
                     ", phone='" + phone + '\'' +
-                    ", token='" + token + '\'' +
-                    ", points=" + points +
-                    ", sex=" + sex +
-                    ", accid='" + accid + '\'' +
-                    ", imToken='" + imToken + '\'' +
-                    ", sign='" + sign + '\'' +
-                    ", birthday='" + birthday + '\'' +
-                    ", qq='" + qq + '\'' +
-                    ", sina='" + sina + '\'' +
-                    ", openid='" + openid + '\'' +
-                    ", heatValue=" + heatValue +
-                    ", ipCity='" + ipCity + '\'' +
-                    ", latitude='" + latitude + '\'' +
-                    ", longitude='" + longitude + '\'' +
                     '}';
         }
     }

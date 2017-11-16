@@ -123,28 +123,6 @@ public class ShiroUtil {
         return createID;
     }
 
-    /**
-     * 获取boss用户对应的角色id
-     * @return
-     */
-    public static Integer getBossUserRoleId() {
-        Integer roleid = null;
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                BossRealm.ShiroBossUser principal = (BossRealm.ShiroBossUser) session.getAttribute(SessionConstant.BOSS_USER);
-                if (principal != null) {
-                    roleid = principal.getRole();
-                }
-            }
-        } catch (Exception e) {
-            log.error("从session中获取boss用户对应的角色id失败!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return roleid;
-    }
-
 
     /**
      * 修改session中的bossuser的pwd
@@ -176,7 +154,7 @@ public class ShiroUtil {
             ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
             if (null != principal) {
                 //此处可以扩展需要的字段
-                principal.setPoints(point);
+//                principal.setPoints(point);
                 session.setAttribute(SessionConstant.APP_USER, principal);
             }
         }
@@ -215,7 +193,7 @@ public class ShiroUtil {
             if (null != principal) {
                 //此处可以扩张需要的字段
                 principal.setPhone(phone);
-                principal.setPoints(point);
+//                principal.setPoints(point);
                 principal.setAccount(phone);
                 session.setAttribute(SessionConstant.APP_USER, principal);
             }
@@ -242,141 +220,10 @@ public class ShiroUtil {
      * @return
      */
     public static ShiroRealm.ShiroUser getShiroUserFromLoginUser(LoginUser loginUser) {
-        return new ShiroRealm.ShiroUser(loginUser.getId(), loginUser.getPhone(), loginUser.getStatus(), loginUser.getRole(),
-                loginUser.getIntime(), loginUser.getPhoto(), loginUser.getNickname(), loginUser.getLevel(), loginUser.getPhone(),
-                loginUser.getToken(), loginUser.getPoints(), loginUser.getSex(), loginUser.getAccid(), loginUser.getImtoken(),
-                loginUser.getSign(), DateUtils.date2Str(loginUser.getBirthday()),
-                loginUser.getQq(), loginUser.getSina(), loginUser.getOpenid(), loginUser.getHeatValue(), loginUser.getIpCity(),
-                loginUser.getLatitude(), loginUser.getLongitude()
+        return new ShiroRealm.ShiroUser(loginUser.getId(), loginUser.getPhone(), loginUser.getPasswd(), loginUser.getPhoto(),
+                loginUser.getName(), loginUser.getCompany(), loginUser.getEmail(), loginUser.getIntime(), loginUser.getLogintime(),
+                loginUser.getAdvicetime(), loginUser.getInfosource(), loginUser.getStatus(), loginUser.getMark()
         );
-    }
-
-
-    /**
-     * 修改session中的app用户的第三方账号（用于绑定第三方账号的场景）
-     *
-     * @param flag
-     * @param account
-     */
-    public static void updateAppuserThirdAccount(Integer flag, String account) {
-        Subject currentUser = SecurityUtils.getSubject();
-        Session session = currentUser.getSession(false);
-        if (session != null) {
-            ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-            if (null != principal) {
-                //此处可以扩张需要的字段
-                if (flag == 1) {
-                    principal.setQq(account); //qq
-                } else if (flag == 2) {
-                    principal.setOpenid(account); //微信
-                } else {
-                    principal.setSina(account);   //微博
-                }
-
-                session.setAttribute(SessionConstant.APP_USER, principal);
-            }
-        }
-    }
-
-
-    /**
-     * 获取云信id
-     *
-     * @return
-     */
-    public static String getAccid() {
-        String accid = null;
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-                if (principal != null) {
-                    accid = principal.getAccid();
-                }
-            }
-        } catch (Exception e) {
-            log.error("get seesion user info error!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return accid;
-    }
-
-    public static String getIpCity() {
-        String ipCity = null;
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-                if (principal != null) {
-                    ipCity = principal.getIpCity();
-                }
-            }
-        } catch (Exception e) {
-            log.error("get seesion user info error!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return ipCity;
-    }
-
-    /**
-     * 获取app用户等级，0-99， 默认是0
-     *
-     * @return
-     */
-    public static Integer getUserLevel() {
-        Integer level = 0;  //默认是0
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-                if (principal != null) {
-                    level = principal.getLevel();
-                }
-            }
-        } catch (Exception e) {
-            log.error("get seesion user info error!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return level;
-    }
-
-    public static String getLongitude() {
-        String longitude = null;
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-                if (principal != null) {
-                    longitude = principal.getLongitude();
-                }
-            }
-        } catch (Exception e) {
-            log.error("get seesion user info error!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return longitude;
-    }
-
-    public static String getLatitude() {
-        String latitude = null;
-        try {
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession(false);
-            if (session != null) {
-                ShiroRealm.ShiroUser principal = (ShiroRealm.ShiroUser) session.getAttribute(SessionConstant.APP_USER);
-                if (principal != null) {
-                    latitude = principal.getLatitude();
-                }
-            }
-        } catch (Exception e) {
-            log.error("get seesion user info error!", e);
-            throw new AuthException(MsgCodeConstant.un_login, MsgPropertiesLoader.getValue(String.valueOf(MsgCodeConstant.un_login)));
-        }
-        return latitude;
     }
 
 }

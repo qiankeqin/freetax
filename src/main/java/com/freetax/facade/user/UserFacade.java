@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * APP用户 facade
  * @Author shuxf
@@ -24,13 +26,12 @@ public class UserFacade {
 
     /**
      * 根据token获取app登录用户信息
-     *
-     * @param token
+     * @param parammap
      * @return
      */
-    public LoginUser getLoginUserByToken(String token) {
+    public LoginUser getLoginUserByToken(Map<String, Object> parammap) {
 
-        LoginUser loginUser = userService.selectLoginUserByToken(token);
+        LoginUser loginUser = userService.selectLoginUserByToken(parammap);
         if (null == loginUser) {
             throw new AuthException(MsgCodeConstant.app_user_not_exist_with_this_token, "该token的app用户不存在");
         }
@@ -40,11 +41,11 @@ public class UserFacade {
     /**
      * 根据用户id获取Loginuser
      *
-     * @param userid
+     * @param mobile
      * @return
      */
-    public LoginUser getLoginuserByUserid(Integer userid) {
-        return userService.selectLoginuserByUserid(userid);
+    public LoginUser getLoginuserByUserid(String mobile) {
+        return userService.selectLoginuserByUserid(mobile);
     }
 
 

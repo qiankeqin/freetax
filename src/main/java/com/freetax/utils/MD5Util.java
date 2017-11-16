@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
 
 /**
  * @Author shuxf
@@ -74,6 +75,40 @@ public class MD5Util {
             log.error("MD5加密失败, origin = " + origin);
         }
         return resultString;
+    }
+
+    /**
+     * 将MD5加密的字符串拼装成jsonString类型：["e","1","0","a","d","c","3","9","4","9","b","a","5","9","a","b","b","e","5","6","e","0","5","7","f","2","0","f","8","8","3","e"]
+     * @param chstr
+     */
+    public static String toJsonString(char[] chstr){
+        StringBuffer strb = new StringBuffer();
+        strb.append("[");
+        for (int i = 0; i < chstr.length; i++){
+            strb.append("\"");
+            strb.append(chstr[i]);
+            strb.append("\"");
+            strb.append(",");
+        }
+        String str = strb.toString().substring(0, strb.toString().length()-1) + "]";
+        return str;
+    }
+
+    /**
+     * ArrayList转化为String
+     * @param lsit
+     */
+    public static String listToString(ArrayList lsit){
+        StringBuffer strb = new StringBuffer();
+        strb.append("[");
+        for (int i=0; i<lsit.size(); i++){
+            strb.append("\"");
+            strb.append(lsit.get(i).toString());
+            strb.append("\"");
+            strb.append(",");
+        }
+        String str = strb.toString().substring(0, strb.toString().length()-1) + "]";
+        return str;
     }
 
 

@@ -1,9 +1,12 @@
 package com.freetax.facade.user;
 
 import com.freetax.common.Response;
+import com.freetax.common.util.ShiroUtil;
+import com.freetax.mybatis.user.entity.LoginUser;
 import com.freetax.mybatis.user.entity.User;
 import com.freetax.mybatis.user.entity.Validateinfo;
 import com.freetax.mybatis.user.service.UserService;
+import com.freetax.shiro.realm.ShiroRealm;
 import com.freetax.utils.DateUtils;
 import com.freetax.utils.MD5Util;
 import com.freetax.utils.UUIDGenerator;
@@ -11,6 +14,10 @@ import com.freetax.utils.propertiesLoader.PropertiesLoader;
 import com.freetax.utils.sms.SDKSendSms;
 import com.google.gson.Gson;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -18,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,6 +42,18 @@ public class PcRegisterFacade {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserFacade userFacade;
+
+    /**
+     * 查询当前手机号是否已注册
+     * @param mobile
+     * @return
+     */
+    public Integer queryIsRegister(String mobile){
+        return userService.queryIsRegister(mobile);
+    }
 
     /**
      * 发送短信
@@ -69,6 +90,13 @@ public class PcRegisterFacade {
         session.setAttribute("phone", mobile); //缓存接收短信验证码的手机号
     }
 
+    /**
+     * 前台PC端用户注册接口
+     * @param mobile
+     * @param phcode
+     * @param passwd
+     * @return
+     */
     public Response pcRegister(String mobile, String phcode, String passwd){
 
         Response response = new Response();
@@ -107,5 +135,102 @@ public class PcRegisterFacade {
         }
 
         return response;
+    }
+
+    /**
+     * PC前端用户登录接口
+     * @param mobile
+     * @param passwd
+     * @return
+     */
+    public Response pcLogin(String mobile, String passwd) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        Response response = new Response();
+
+        Subject currentUser = SecurityUtils.getSubject();
+
+        if (!currentUser.isAuthenticated()) {
+
+            //5 验证通过则在session中缓存登录用户信息
+            Session session = currentUser.getSession();
+            //6 清除session中的boss用户信息
+            session.removeAttribute("bossuser");
+//            ShiroRealm.ShiroUser appuser = (ShiroRealm.ShiroUser) currentUser.getPrincipal();
+//            log.debug("当前登录的LoginUser信息=" + appuser.toString());
+//            session.setAttribute("appuser", appuser);
+            //用户id
+//            int appuserid = appuser.getId();
+            //7 返回用户是否是第一次登录（根据登录时间和注册时间的间隔判断，若间隔小于10秒，则认为是第一次登录，否则不是）
+            Date loginTime = new Date();
+            //8 登录验证成功后，更新用户信息
+            updateLoginUserInfo(mobile, loginTime);
+            //9 返回登录人的信息
+            LoginUser loginuser = userFacade.getLoginuserByUserid(mobile);//根据phone查询当前用户的实体对象
+            ShiroRealm.ShiroUser shiroUser = ShiroUtil.getShiroUserFromLoginUser(loginuser);//将LoginUser实体转化为ShiroUser对象
+            session.setAttribute("appuser", shiroUser);
+
+            System.out.println("测试服务端接收到的密码" + passwd);
+            System.out.println("测试MD5加密后的字符串" + MD5Util.MD5EncodeByUTF8(passwd));
+//            UsernamePasswordToken upToken = new UsernamePasswordToken(mobile, MD5Util.MD5EncodeByUTF8(passwd));
+//            upToken.setRememberMe(true);
+            //查询数据库中的用户实体
+
+            if (null == loginuser){
+                response.setCode(203);
+                response.setMessage("该用户不存在");
+            }else {
+                if (loginuser.getStatus() == 1){
+                    response.setCode(202);
+                    response.setMessage("账户已被冻结！");
+                }else {
+                    if (MD5Util.MD5EncodeByUTF8(passwd) == loginuser.getPasswd()){
+                        response.setCode(201);
+                        response.setMessage("手机号/密码不匹配！");
+                    }else {
+                        response.setCode(200);
+                        response.setMessage("登录成功");
+                        response.setData(shiroUser);
+                    }
+                }
+            }
+
+//            try {
+//                currentUser.login(upToken);
+//                response.setCode(200);
+//                response.setMessage("登录成功");
+//                response.setData(shiroUser);
+//
+//            } catch (IncorrectCredentialsException ice) {
+//                response.setCode(201);
+//                response.setMessage("手机号/密码不匹配！");
+//
+//            } catch (LockedAccountException lae) {
+//
+//                response.setCode(202);
+//                response.setMessage("账户已被冻结！");
+//
+//            } catch (AuthenticationException ae) {
+//                System.out.println(ae.getMessage());
+//                throw ae;
+//            }
+
+        }
+        return response;
+    }
+
+    /**
+     * 登录成功后，更新用户的部分信息：
+     * 登录时间， ip， ip所在城市，经度， 纬度
+     *
+     * @param mobile
+     * @param loginTime
+     */
+    private void updateLoginUserInfo(String mobile, Date loginTime)
+            throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        User u = new User();
+        u.setPhone(mobile);
+        u.setLogintime(loginTime);
+        userService.updateLoginappuserInfo(u);
     }
 }

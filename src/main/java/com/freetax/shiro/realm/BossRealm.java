@@ -71,12 +71,12 @@ public class BossRealm extends AuthorizingRealm {
         if (null != shiroBossUser) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             // 判断账号状态 : 0 正常 1 冻结
-            String status = String.valueOf(shiroBossUser.getStatus());
-            if (StringUtils.isEmpty(status) || UserConstants.USER_STATUS.disable.toString().equals(status)) {
+            String isAdmin = String.valueOf(shiroBossUser.getIsAdmin());
+            if (StringUtils.isEmpty(isAdmin) || UserConstants.USER_STATUS.disable.toString().equals(isAdmin)) {
                 log.error("账号状态异常");
                 return null;
             }
-            int roleid = shiroBossUser.getRole();
+            int roleid = shiroBossUser.getIsAdmin();
             log.debug("当前用户的角色 ：role=" + roleid);
             // 添加用户角色到授权信息
             info.addRole(String.valueOf(roleid));
@@ -108,133 +108,16 @@ public class BossRealm extends AuthorizingRealm {
 
         private static final long serialVersionUID = -1373760761780840081L;
         private Integer id;
-        private String name;
+        private String email;
         private String phone;
-        private String username;
-        private String password;
-        private Integer issuper;
-        private Integer status;
+        private Date intime;
         private Integer isdel;
-        private Date createtime;
-        private Date afterlogintime;
-        private Date beforelogintime;
-        //对应的角色
-        private Integer role;
-        private String accid;
-        private String imtoken;
-        //是否是圈主 0否 1是
-        private Integer iscircle;
-        //是否是圈子管理员 0否 1是
-        private Integer circlemanagement;
-        //是否是特约嘉宾 0否 1是
-        private Integer contributing;
-        //是否是普通管理员 0否 1是
-        private Integer common;
-
-        public void setImtoken(String imtoken) {
-            this.imtoken = imtoken;
-        }
-
-        public void setIscircle(Integer iscircle) {
-            this.iscircle = iscircle;
-        }
-
-        public void setCirclemanagement(Integer circlemanagement) {
-            this.circlemanagement = circlemanagement;
-        }
-
-        public void setContributing(Integer contributing) {
-            this.contributing = contributing;
-        }
-
-        public void setCommon(Integer common) {
-            this.common = common;
-        }
-
-        public Integer getIscircle() {
-
-            return iscircle;
-        }
-
-        public Integer getCirclemanagement() {
-            return circlemanagement;
-        }
-
-        public Integer getContributing() {
-            return contributing;
-        }
-
-        public Integer getCommon() {
-            return common;
-        }
-
-        public void setAccid(String accid) {
-            this.accid = accid;
-        }
-
-        public void setToken(String imtoken) {
-            this.imtoken = imtoken;
-        }
-
-        public String getAccid() {
-
-            return accid;
-        }
-
-        public String getImtoken() {
-            return imtoken;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public void setIssuper(Integer issuper) {
-            this.issuper = issuper;
-        }
-
-        public void setStatus(Integer status) {
-            this.status = status;
-        }
-
-        public void setIsdel(Integer isdel) {
-            this.isdel = isdel;
-        }
-
-        public void setCreatetime(Date createtime) {
-            this.createtime = createtime;
-        }
-
-        public void setAfterlogintime(Date afterlogintime) {
-            this.afterlogintime = afterlogintime;
-        }
-
-        public void setBeforelogintime(Date beforelogintime) {
-            this.beforelogintime = beforelogintime;
-        }
-
-        public void setRole(Integer role) {
-            this.role = role;
-        }
+        private Integer remark;
+        private String nickname;
+        private String password;
+        private Integer isAdmin;
 
         public static long getSerialVersionUID() {
-
             return serialVersionUID;
         }
 
@@ -242,93 +125,98 @@ public class BossRealm extends AuthorizingRealm {
             return id;
         }
 
-        public String getName() {
-            return name;
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
         }
 
         public String getPhone() {
             return phone;
         }
 
-        public String getUsername() {
-            return username;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
-        public String getPassword() {
-            return password;
+        public Date getIntime() {
+            return intime;
         }
 
-        public Integer getIssuper() {
-            return issuper;
-        }
-
-        public Integer getStatus() {
-            return status;
+        public void setIntime(Date intime) {
+            this.intime = intime;
         }
 
         public Integer getIsdel() {
             return isdel;
         }
 
-        public Date getCreatetime() {
-            return createtime;
-        }
-
-        public Date getAfterlogintime() {
-            return afterlogintime;
-        }
-
-        public Date getBeforelogintime() {
-            return beforelogintime;
-        }
-
-        public Integer getRole() {
-            return role;
-        }
-
-
-        public ShiroBossUser(Integer id, String name, String phone, String username, String password, Integer issuper, Integer status, Integer isdel, Date createtime, Date afterlogintime, Date beforelogintime, Integer role, String accid, String imtoken, Integer iscircle, Integer circlemanagement, Integer contributing, Integer common) {
-            this.id = id;
-            this.name = name;
-            this.phone = phone;
-            this.username = username;
-            this.password = password;
-            this.issuper = issuper;
-            this.status = status;
+        public void setIsdel(Integer isdel) {
             this.isdel = isdel;
-            this.createtime = createtime;
-            this.afterlogintime = afterlogintime;
-            this.beforelogintime = beforelogintime;
-            this.role = role;
-            this.accid = accid;
-            this.imtoken = imtoken;
-            this.iscircle = iscircle;
-            this.circlemanagement = circlemanagement;
-            this.contributing = contributing;
-            this.common = common;
+        }
+
+        public Integer getRemark() {
+            return remark;
+        }
+
+        public void setRemark(Integer remark) {
+            this.remark = remark;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Integer getIsAdmin() {
+            return isAdmin;
+        }
+
+        public void setIsAdmin(Integer isAdmin) {
+            this.isAdmin = isAdmin;
+        }
+
+        public ShiroBossUser(Integer id, String email, String phone, Date intime, Integer isdel, Integer remark, String nickname, String password, Integer isAdmin) {
+            this.id = id;
+            this.email = email;
+            this.phone = phone;
+            this.intime = intime;
+            this.isdel = isdel;
+            this.remark = remark;
+            this.nickname = nickname;
+            this.password = password;
+            this.isAdmin = isAdmin;
         }
 
         @Override
         public String toString() {
             return "ShiroBossUser{" +
                     "id=" + id +
-                    ", name='" + name + '\'' +
+                    ", email='" + email + '\'' +
                     ", phone='" + phone + '\'' +
-                    ", username='" + username + '\'' +
-                    ", password='" + password + '\'' +
-                    ", issuper=" + issuper +
-                    ", status=" + status +
-                    ", isdel=" + isdel +
-                    ", createtime=" + createtime +
-                    ", afterlogintime=" + afterlogintime +
-                    ", beforelogintime=" + beforelogintime +
-                    ", role=" + role +
-                    ", accid='" + accid + '\'' +
-                    ", imtoken='" + imtoken + '\'' +
-                    ", iscircle=" + iscircle +
-                    ", circlemanagement=" + circlemanagement +
-                    ", contributing=" + contributing +
-                    ", common=" + common +
+                    ", intime='" + intime + '\'' +
+                    ", isdel='" + isdel + '\'' +
+                    ", remark=" + remark +
+                    ", nickname=" + nickname +
+                    ", password=" + password +
+                    ", isAdmin=" + isAdmin +
                     '}';
         }
 

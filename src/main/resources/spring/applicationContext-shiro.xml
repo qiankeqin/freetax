@@ -83,12 +83,12 @@
     只不过是第一个认证成功的AuthenticationInfo作为最后的结果返回-->
     <bean id="authenticator"
           class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-        <!--<property name="definedRealms">
-            <map>
-                <entry key="userRealm" value-ref="userRealm" />
-                <entry key="omsRealm" value-ref="omsRealm" />
-            </map>
-        </property>-->
+        <!--<property name="definedRealms">-->
+            <!--<map>-->
+                <!--<entry key="userRealm" value-ref="userRealm" />-->
+                <!--<entry key="omsRealm" value-ref="omsRealm" />-->
+            <!--</map>-->
+        <!--</property>-->
         <property name="authenticationStrategy">
             <bean class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy"/>
         </property>
@@ -114,9 +114,6 @@
     </bean>
     <bean id="orRolesAuthorizationFilter"
           class="com.freetax.shiro.filter.OrRolesAuthorizationFilter">
-    </bean>
-    <bean id="orPermissionsAuthorizationFilter"
-          class="com.freetax.shiro.filter.OrPermissionsAuthorizationFilter">
     </bean>
     <!-- web.xml中shiro的filter对应的bean -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -155,11 +152,8 @@
 
                 /app/** = anon
 
-                /boss/login/login = anon
-                /boss/menu/** = authc
-                /boss/user/** = authc
-                /boss/contactUs/** = authc
-                /boss/information/** = authc
+                /boss/login = anon
+                /boss/** = anon
 
                 /swagger/** = anon
                 /static/**=anon
