@@ -8,8 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f4561821-7187-432c-80ae-06b8bb858125" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/UserFacade.java" afterPath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/UserFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/web/config.properties" afterPath="$PROJECT_DIR$/src/main/resources/web/config.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" afterPath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" />
     </list>
     <list id="28eb9f13-6aa0-4122-86f5-98b73cb77d4e" name="nocommit" comment="nocommit">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/spring/application.properties" />
@@ -40,18 +39,18 @@
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="149" column="46" lean-forward="false" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
+            <state relative-caret-position="387">
+              <caret line="140" column="50" lean-forward="false" selection-start-line="140" selection-start-column="50" selection-end-line="140" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PcRegisterFacade.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PcRegisterFacade.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="177" column="19" lean-forward="true" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
+            <state relative-caret-position="230">
+              <caret line="156" column="35" lean-forward="true" selection-start-line="156" selection-start-column="35" selection-end-line="156" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -60,11 +59,9 @@
       <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-              <folding>
-                <marker date="1510824865248" expanded="true" signature="4124:4164" ph="{...}" />
-              </folding>
+            <state relative-caret-position="379">
+              <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,7 +69,7 @@
       <file leaf-file-name="UserMapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
+            <state relative-caret-position="483">
               <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
               <folding />
             </state>
@@ -95,8 +92,8 @@
       <file leaf-file-name="UserFacade.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/UserFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="245" column="48" lean-forward="true" selection-start-line="245" selection-start-column="48" selection-end-line="245" selection-end-column="48" />
+            <state relative-caret-position="442">
+              <caret line="204" column="29" lean-forward="true" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
               <folding>
                 <element signature="e#1768#1769#0" expanded="true" />
                 <element signature="e#1834#1835#0" expanded="true" />
@@ -109,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/web/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="628">
-              <caret line="287" column="40" lean-forward="true" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
+            <state relative-caret-position="649">
+              <caret line="288" column="61" lean-forward="true" selection-start-line="288" selection-start-column="61" selection-end-line="288" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -244,10 +241,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/user/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/UserFacade.java" />
         <option value="$PROJECT_DIR$/src/main/resources/web/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" />
       </list>
     </option>
   </component>
@@ -1097,7 +1094,7 @@
       <workItem from="1509092318121" duration="18373000" />
       <workItem from="1509351636611" duration="20098000" />
       <workItem from="1509502303304" duration="10076000" />
-      <workItem from="1510292209534" duration="87560000" />
+      <workItem from="1510292209534" duration="88435000" />
     </task>
     <task id="LOCAL-00001" summary="创建新项目">
       <created>1509073177415</created>
@@ -1316,11 +1313,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510824945447</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="修改头像图片存放路径">
+      <created>1510825983407</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1510825983407</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154008000" />
+    <option name="totallyTimeSpent" value="154883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1343,7 +1347,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1521739" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18804348" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3478261" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1388,7 +1392,8 @@
     <MESSAGE value="提交用户头像图片上传接口" />
     <MESSAGE value="修改编辑个人资料接口" />
     <MESSAGE value="修改非必填入参" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改非必填入参" />
+    <MESSAGE value="修改头像图片存放路径" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改头像图片存放路径" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1783,24 +1788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-          <folding>
-            <marker date="1510824865248" expanded="true" signature="4124:4164" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/user/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29">
@@ -1812,26 +1799,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="177" column="19" lean-forward="true" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/web/im.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="149" column="46" lean-forward="false" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1847,10 +1818,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/web/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="649">
+          <caret line="288" column="61" lean-forward="true" selection-start-line="288" selection-start-column="61" selection-end-line="288" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="140" column="50" lean-forward="false" selection-start-line="140" selection-start-column="50" selection-end-line="140" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/UserFacade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="245" column="48" lean-forward="true" selection-start-line="245" selection-start-column="48" selection-end-line="245" selection-end-column="48" />
+        <state relative-caret-position="442">
+          <caret line="204" column="29" lean-forward="true" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
           <folding>
             <element signature="e#1768#1769#0" expanded="true" />
             <element signature="e#1834#1835#0" expanded="true" />
@@ -1862,10 +1857,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/web/config.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="287" column="40" lean-forward="true" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
+        <state relative-caret-position="379">
+          <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="156" column="35" lean-forward="true" selection-start-line="156" selection-start-column="35" selection-end-line="156" selection-end-column="35" />
           <folding />
         </state>
       </provider>

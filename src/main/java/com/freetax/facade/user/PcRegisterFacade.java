@@ -161,9 +161,6 @@ public class PcRegisterFacade {
 //            session.setAttribute("appuser", appuser);
             //用户id
 //            int appuserid = appuser.getId();
-
-            System.out.println("测试服务端接收到的密码" + passwd);
-            System.out.println("测试MD5加密后的字符串" + MD5Util.MD5EncodeByUTF8(passwd));
 //            UsernamePasswordToken upToken = new UsernamePasswordToken(mobile, MD5Util.MD5EncodeByUTF8(passwd));
 //            upToken.setRememberMe(true);
             //查询数据库中的用户实体
