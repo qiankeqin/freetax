@@ -131,6 +131,6 @@
   </select>
 
   <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="java.lang.Integer">
-    SELECT * FROM fr_banner_manage WHERE type = #{type,jdbcType=INTEGER}
+    SELECT * FROM fr_banner_manage WHERE location = #{type,jdbcType=INTEGER}
   </select>
 </mapper>
