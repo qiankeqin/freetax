@@ -40,9 +40,9 @@ public class BannerManageFacade {
     @Autowired
     private MovisionOssClient movisionOssClient;
 
-    public IndexInformation queryIndexBannerOrInformation() {
+    public IndexInformation queryIndexBannerOrInformation(){
         IndexInformation indexInformation = new IndexInformation();
-        List<BannerManage> blist = bannerManageService.queryIndexBannerOrInformation();
+        List<BannerManage> blist =  bannerManageService.queryIndexBannerOrInformation();
         List<BannerManage> carouselFigure = new ArrayList();//轮播图
         List toPlan = new ArrayList();//筹划背景
         List information = new ArrayList();//资讯
@@ -54,16 +54,20 @@ public class BannerManageFacade {
                     case 1:
                         indexInformation.setBanner(blist.get(i).getBanner());
                         continue;
-                        //主页滚动banner
+                    //主页滚动banner
                     case 2:
                         carouselFigure.add(blist.get(i));
                         k++;
                         continue;
-                        //税务筹划背景图片
+                    //税务筹划背景图片
                     case 3:
-                        toPlan.add(blist.get(i));
+                        if (blist.get(i).getOrderid() == 1){
+                            toPlan.add(blist.get(i));
+                        }else if (blist.get(i).getOrderid() == 2) {
+                            toPlan.add(blist.get(i));
+                        }
                         continue;
-                        //收入对比图
+                    //收入对比图
                     case 6:
                         indexInformation.setIncomeComparison(blist.get(i).getBanner());
                         continue;
@@ -74,7 +78,7 @@ public class BannerManageFacade {
             //查询精选资讯
             List<Information> informations = informationService.queryInformationIsHot();
             indexInformation.setInformation(informations);
-        } else {
+        }else {
             return null;
         }
         return indexInformation;
@@ -82,16 +86,16 @@ public class BannerManageFacade {
 
     /**
      * 查询pc中banner
-     *
      * @param type
      * @return
      */
-    public List<BannerManage> queryBannerByType(String type) {
+    public List<BannerManage> queryBannerByType(String type){
         return bannerManageService.queryBannerByType(Integer.parseInt(type));
     }
 
 
-    public String bannerImgIncision(MultipartFile file, String x, String y, String w, String h) {
+
+    public String bannerImgIncision(MultipartFile file,String x,String y,String w,String h){
         //1上传到服务器
         Map m = movisionOssClient.uploadMultipartFileObject(file);
         String url = String.valueOf(m.get("url"));//获取上传到服务器上的原图
