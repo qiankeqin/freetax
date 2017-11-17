@@ -25,4 +25,8 @@ public interface AdvisoryMapper {
     List<Advisory> findAllQueryAdvisoryByList(Advisory advisory, RowBounds rowBounds);
 
     void updateAdvisoryVisit(Advisory advisory);
+
+    void updateAdvisoryIntime(Advisory advisory);
+
+    Integer queryAdvisoryIsVisit(String phone);
 }

@@ -80,4 +80,33 @@ public class AdvisoryService {
             throw e;
         }
     }
+
+    /**
+     * 更新咨询时间
+     * @param advisory
+     */
+    public void updateAdvisoryIntime(Advisory advisory){
+        try {
+            log.info("更新咨询时间");
+            advisoryMapper.updateAdvisoryIntime(advisory);
+        } catch (Exception e) {
+            log.error("更新咨询时间异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     *  查询用户是否咨询过
+     * @param phone
+     * @return
+     */
+    public Integer queryAdvisoryIsVisit(String phone){
+        try {
+            log.info("查询用户是否咨询过");
+            return advisoryMapper.queryAdvisoryIsVisit(phone);
+        } catch (Exception e) {
+            log.error("查询用户是否咨询过异常",e);
+            throw e;
+        }
+    }
 }
