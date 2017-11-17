@@ -33,14 +33,15 @@ public class ImcisionImgUtils {
         Map resaults = new HashMap();
         //查询帖子图片存放目录
         UUID uuid = UUID.randomUUID();
-        String incise = PropertiesLoader.getValue("test.img.domain");
+        String incise = PropertiesLoader.getValue("post.tempvideo.domain");
+        String newul = PropertiesLoader.getValue("test.img.domain");
         //String incise = "d:/1/";
         //String incise = uploadFacade.getConfigVar("post.incise.domain");
         String suffix = covimg.substring(covimg.lastIndexOf(".") + 1);
         String filename = uuid + "." + suffix;
         incise += filename;
         //返回的图片路径为
-        String resaulturl = incise;
+        String resaulturl = newul+filename;
         File fromFile = new File(covimg);
         File toFile = new File(incise);
         resaults.put("form", covimg);
