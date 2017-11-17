@@ -117,7 +117,7 @@ public class UserService {
     public User queryUserById(Integer id){
         try {
             log.info("根据id查询用户信息");
-            return userMapper.selectByPrimaryKey(id);
+            return userMapper.queryUserById(id);
         } catch (Exception e) {
             log.error("根据id查询用户信息异常",e);
             throw e;

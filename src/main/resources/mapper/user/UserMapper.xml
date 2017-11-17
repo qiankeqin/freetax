@@ -27,6 +27,10 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="queryUserById" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.user.entity.User">
+        SELECT * FROM fr_user WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+
     <!--查询当前手机号是否已注册-->
     <select id="queryIsRegister" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT count(*) FROM fr_user WHERE phone = #{mobile,jdbcType=VARCHAR}

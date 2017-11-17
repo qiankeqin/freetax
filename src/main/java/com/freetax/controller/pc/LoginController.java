@@ -151,4 +151,19 @@ public class LoginController {
 
         return response;
     }
+
+    /**
+     * 用户信息回显
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询用户详情",notes = "查询用户详情",response = Response.class)
+    @RequestMapping(value = "query_user_details",method = RequestMethod.POST)
+    public Response queryUserById(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        User user = userFacade.queryUserById(id);
+        response.setMessage("查询成功");
+        response.setData(user);
+        return response;
+    }
 }
