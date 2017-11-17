@@ -1,6 +1,7 @@
 package com.freetax.facade;
 
 import com.freetax.mybatis.information.entity.Information;
+import com.freetax.mybatis.information.entity.InformationVo;
 import com.freetax.mybatis.information.service.InformationService;
 import com.freetax.utils.pagination.model.Paging;
 import org.apache.commons.lang.StringUtils;
@@ -120,6 +121,13 @@ public class InformationFacade {
             information.setSource(source);
         }
         return informationService.findAllQueryInformationByList(information,pag);
+    }
+
+    public InformationVo queryInformationToPc(String id){
+        //查询资讯文章详情，并返回总共多少条
+        InformationVo vo = informationService.queryInformationToPc(Integer.parseInt(id));
+
+        return vo;
     }
 
     /**

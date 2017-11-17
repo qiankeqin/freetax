@@ -209,4 +209,16 @@
         SET ishot = #{ishot,jdbcType=INTEGER}
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="queryInformationToPc" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.information.entity.InformationVo">
+        <![CDATA[
+        SELECT i.id,i.title,i.subhead,i.content,i.coverimg,i.type,i.ishot,i.source,i.intime,
+        (SELECT id FROM fr_information WHERE id < i.id AND isdel = 0 ORDER BY id DESC LIMIT 1) AS upid,
+        (SELECT title FROM fr_information WHERE id < i.id AND isdel = 0 ORDER BY id DESC LIMIT 1) AS upTitle,
+        (SELECT id FROM fr_information WHERE id > i.id AND isdel = 0 ORDER BY id ASC LIMIT 1) AS belowid,
+        (SELECT title FROM fr_information WHERE id > i.id AND isdel = 0 ORDER BY id ASC LIMIT 1) AS belowTitle
+        FROM fr_information i
+        WHERE i.id = #{id,jdbcType=INTEGER} AND isdel = 0
+        ]]>
+    </select>
 </mapper>

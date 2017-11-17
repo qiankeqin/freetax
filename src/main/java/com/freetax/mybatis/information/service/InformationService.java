@@ -1,6 +1,7 @@
 package com.freetax.mybatis.information.service;
 
 import com.freetax.mybatis.information.entity.Information;
+import com.freetax.mybatis.information.entity.InformationVo;
 import com.freetax.mybatis.information.mapper.InformationMapper;
 import com.freetax.utils.pagination.model.Paging;
 import org.slf4j.Logger;
@@ -95,6 +96,22 @@ public class InformationService {
             return informationMapper.findAllQueryInformationByList(information, pag.getRowBounds());
         } catch (Exception e) {
             log.error("条件查询资讯文章列表异常", e);
+            throw e;
+        }
+    }
+
+    /**
+     * 查询资讯文章详情，并且返回总共多少条
+     *
+     * @param id
+     * @return
+     */
+    public InformationVo queryInformationToPc(Integer id){
+        try {
+            log.info("查询资讯文章详情，并且返回总共多少条");
+            return informationMapper.queryInformationToPc(id);
+        } catch (Exception e) {
+            log.error("查询资讯文章详情，并返回总共多少条异常",e);
             throw e;
         }
     }
