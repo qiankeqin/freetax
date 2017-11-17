@@ -57,7 +57,7 @@ public class indexController {
      */
     @ApiOperation(value = "查询pc中banner", notes = "用于查询pc中所有banner信息", response = Response.class)
     @RequestMapping(value = "queryBannerByType", method = RequestMethod.POST)
-    public Response queryBannerByType(@ApiParam(value = "类型 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner 6:收入对比图 7：问答banner 8：联系我们banner 9：联系我们banner") @RequestParam String type) {
+    public Response queryBannerByType(@ApiParam(value = "类型 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner 6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner") @RequestParam String type) {
         Response response = new Response();
         List<BannerManage> bannerManages = bannerManageFacade.queryBannerByType(type);
         response.setMessage("查询成功");
