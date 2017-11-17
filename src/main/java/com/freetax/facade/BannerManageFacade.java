@@ -56,15 +56,15 @@ public class BannerManageFacade {
                         continue;
                     //主页滚动banner
                     case 2:
-                        carouselFigure.set(k,blist.get(i));
+                        carouselFigure.add(blist.get(i));
                         k++;
                         continue;
                     //税务筹划背景图片
                     case 3:
                         if (blist.get(i).getOrderid() == 0) {
-                            toPlan.set(0, blist.get(i));
+                            toPlan.add(blist.get(i));
                         }else if (blist.get(i).getOrderid() == 1){
-                            toPlan.set(1,blist.get(i));
+                            toPlan.add(blist.get(i));
                         }
                         continue;
                     //收入对比图

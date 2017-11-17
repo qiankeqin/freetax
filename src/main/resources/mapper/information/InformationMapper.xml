@@ -171,7 +171,7 @@
   </update>
 
     <select id="queryInformationIsHot" resultType="com.freetax.mybatis.information.entity.Information">
-    SELECT * FROM fr_information WHERE ishot = 1 AND isdel = 0
+    SELECT * FROM fr_information WHERE ishot = 1 AND isdel = 0 ORDER BY intime DESC LIMIT 4
   </select>
 
     <update id="deleteInformation" parameterType="java.lang.Integer">

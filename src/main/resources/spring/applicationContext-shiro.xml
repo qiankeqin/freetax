@@ -71,7 +71,7 @@
         <property name="realms">
             <list>
                 <ref bean="omsRealm"/>
-                <ref bean="userRealm"/>
+                <!--<ref bean="userRealm"/>-->
             </list>
         </property>
         <!-- 注入session管理器 -->
@@ -153,8 +153,13 @@
 
                 /app/** = anon-->
 
-                /boss/login = anon
-                /boss/** = anon
+                /boss/login/login = anon
+                /boss/login/logOut = authc
+                /boss/user/** authc
+                /boss/contactUs/** = authc
+                /boss/information/** = authc
+                /boss/menu/** = authc
+                /boss/partner/** = authc
 
                 <!--/swagger/** = anon
                 /static/**=anon
