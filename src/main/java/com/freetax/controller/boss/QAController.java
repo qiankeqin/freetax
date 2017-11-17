@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2017/11/10 16:43
  */
 @RestController
-@RequestMapping("/front/QA")
+@RequestMapping("/boss/QA")
 public class QAController {
 
     @Autowired

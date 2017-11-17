@@ -69,7 +69,7 @@ public class AdvisoryController {
      * @param visit
      * @return
      */
-    @ApiOperation(value = "update_advisory_visit",response = Response.class)
+    @ApiOperation(value = "操作咨询回访",response = Response.class)
     @RequestMapping(value = "uodate_advisory_visit",method = RequestMethod.POST)
     public Response updateAdvisoryByVisit(@ApiParam(value = "id")@RequestParam String id,
                                           @ApiParam(value = "是否回访 0 否 1 是")@RequestParam String visit){

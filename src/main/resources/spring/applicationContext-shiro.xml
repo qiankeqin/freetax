@@ -160,6 +160,7 @@
                 /boss/information/** = authc
                 /boss/menu/** = authc
                 /boss/partner/** = authc
+                /boss/QA/** = authc
 
                 <!--/swagger/** = anon
                 /static/**=anon
