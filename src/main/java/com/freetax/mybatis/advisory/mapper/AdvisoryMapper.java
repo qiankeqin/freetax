@@ -1,7 +1,10 @@
 package com.freetax.mybatis.advisory.mapper;
 
 import com.freetax.mybatis.advisory.entity.Advisory;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AdvisoryMapper {
@@ -16,4 +19,10 @@ public interface AdvisoryMapper {
     int updateByPrimaryKeySelective(Advisory record);
 
     int updateByPrimaryKey(Advisory record);
+
+    Advisory queryAdvisoryById(Integer id);
+
+    List<Advisory> findAllQueryAdvisoryByList(Advisory advisory, RowBounds rowBounds);
+
+    void updateAdvisoryVisit(Advisory advisory);
 }
