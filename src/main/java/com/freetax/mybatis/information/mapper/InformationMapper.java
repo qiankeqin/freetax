@@ -29,6 +29,8 @@ public interface InformationMapper {
 
     List<Information> findAllQueryInformationByList(Information information, RowBounds rowBounds);
 
+    List<Information> findAllQueryInformationByListPC(Information information,RowBounds rowBounds);
+
     InformationVo queryInformationToPc(Integer id);
 
     Information queryInformationById(Integer id);

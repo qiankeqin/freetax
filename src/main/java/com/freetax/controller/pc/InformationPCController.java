@@ -35,7 +35,6 @@ public class InformationPCController {
     /**
      * 条件查询资讯文章列表
      *
-     * @param title
      * @param type
      * @param ishot
      * @param pageNo
@@ -43,16 +42,19 @@ public class InformationPCController {
      * @return
      */
     @ApiOperation(value = "条件查询资讯文章列表(pc)", notes = "用于根据多条件查询资讯文章列表", response = Response.class)
-    @RequestMapping(value = "query_information_list", method = RequestMethod.POST)
-    public Response queryInformationByList(@ApiParam(value = "标题") @RequestParam(required = false) String title,
-                                           @ApiParam(value = "资讯类型") @RequestParam(required = false) String type,
+    @RequestMapping(value = "/query_information_list", method = RequestMethod.POST)
+    public Response queryInformationByList(@ApiParam(value = "资讯类型0:全部 1：行业资讯 2：财税知识 3：政策案例") @RequestParam(required = false) String type,
                                            @ApiParam(value = "是否热门") @RequestParam(required = false) String ishot,
-                                           @ApiParam(value = "资讯来源") @RequestParam(required = false) String source,
                                            @ApiParam(value = "当前页") @RequestParam(defaultValue = "1") String pageNo,
                                            @ApiParam(value = "每页几条") @RequestParam(defaultValue = "10") String pageSize) {
         Response response = new Response();
-        Paging<Information> pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
-        List<Information> list = informationFacade.queryInformationByList(title, type, ishot, source, pag);
+        Paging<Information> pag;
+        if (type.equals(3) || type.equals("3")) {
+            pag = new Paging<Information>(Integer.valueOf(pageNo), 5);
+        }else {
+            pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+        }
+        List<Information> list = informationFacade.queryInformationByListPc(type, ishot, pag);
         pag.result(list);
         response.setMessage("查询成功");
         response.setData(pag);

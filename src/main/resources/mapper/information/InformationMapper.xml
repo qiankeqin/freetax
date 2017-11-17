@@ -221,4 +221,13 @@
         WHERE i.id = #{id,jdbcType=INTEGER} AND isdel = 0
         ]]>
     </select>
+
+    <select id="findAllQueryInformationByListPC" parameterType="com.freetax.mybatis.information.entity.Information"
+            resultType="com.freetax.mybatis.information.entity.Information">
+        SELECT * FROM fr_information WHERE isdel = 0
+        <if test="type != 0">
+          AND type = #{type,jdbcType=INTEGER}
+        </if>
+        ORDER BY intime DESC
+    </select>
 </mapper>

@@ -69,6 +69,22 @@ public class InformationService {
     }
 
     /**
+     * pc查询资讯列表
+     * @param information
+     * @param page
+     * @return
+     */
+    public List<Information> findAllQueryInformationByListPC(Information information ,Paging<Information> page){
+        try {
+            log.info("pc查询资讯列表");
+            return informationMapper.findAllQueryInformationByListPC(information,page.getRowBounds());
+        } catch (Exception e) {
+            log.error("pc查询资讯列表异常",e);
+            throw e;
+        }
+    }
+
+    /**
      * 删除资讯文章
      *
      * @param id

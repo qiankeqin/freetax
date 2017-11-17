@@ -106,6 +106,15 @@ public class InformationFacade {
         informationService.deleteInformation(Integer.parseInt(id));
     }
 
+    /**
+     * boss查询资讯文章列表
+     * @param title
+     * @param type
+     * @param ishot
+     * @param source
+     * @param pag
+     * @return
+     */
     public List<Information> queryInformationByList(String title, String type, String ishot,String source, Paging<Information> pag){
         Information information = new Information();
         if (StringUtils.isNotEmpty(title)){
@@ -123,12 +132,36 @@ public class InformationFacade {
         return informationService.findAllQueryInformationByList(information,pag);
     }
 
+    /**
+     * PC查询资讯文章详情，并返回总共多少条
+     * @param id
+     * @return
+     */
     public InformationVo queryInformationToPc(String id){
         //查询资讯文章详情，并返回总共多少条
         InformationVo vo = informationService.queryInformationToPc(Integer.parseInt(id));
 
         return vo;
     }
+
+    /**
+     * PC查询资讯文章列表
+     * @param type
+     * @param ishot
+     * @param pag
+     * @return
+     */
+    public List<Information> queryInformationByListPc(String type,String ishot, Paging<Information> pag){
+        Information information = new Information();
+        if (StringUtils.isNotEmpty(type)){
+            information.setType(Integer.parseInt(type));
+        }
+        if (StringUtils.isNotEmpty(ishot)){
+            information.setIshot(Integer.parseInt(ishot));
+        }
+        return informationService.findAllQueryInformationByListPC(information,pag);
+    }
+
 
     /**
      * 根据id查询资讯文章详情
