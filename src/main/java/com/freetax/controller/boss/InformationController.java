@@ -159,10 +159,10 @@ public class InformationController {
     @ApiOperation(value = "切割banner图", notes = "用于切割所有banner图片", response = Response.class)
     @RequestMapping(value = "bannerImgIncision", method = RequestMethod.POST)
     public Response bannerImgIncision(@ApiParam(value = "文件") @RequestParam MultipartFile file,
-                                      @ApiParam(value = "x坐标") @RequestParam String x,
-                                      @ApiParam(value = "y坐标") @RequestParam String y,
-                                      @ApiParam(value = "w宽") @RequestParam String w,
-                                      @ApiParam(value = "h高") @RequestParam String h) {
+                                      @ApiParam(value = "x坐标") @RequestParam(required = false) String x,
+                                      @ApiParam(value = "y坐标") @RequestParam(required = false) String y,
+                                      @ApiParam(value = "w宽") @RequestParam(required = false) String w,
+                                      @ApiParam(value = "h高") @RequestParam(required = false) String h) {
         Response response = new Response();
         String url = bannerManageFacade.bannerImgIncision(file, x, y, w, h);
         response.setMessage("操作成功");

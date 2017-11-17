@@ -101,7 +101,7 @@ public class BannerManageFacade {
         String url = String.valueOf(m.get("url"));//获取上传到服务器上的原图
         System.out.println("上传banner的原图url==" + url);
 
-        //切割图片
+        /*//切割图片
         Map whs = new HashMap();
         whs.put("w", w);
         whs.put("h", h);
@@ -111,7 +111,7 @@ public class BannerManageFacade {
 
         //3获取本地服务器中切割完成后的图片
         String tmpurls = String.valueOf(tmpurl.get("new"));
-        System.out.println("切割完成后图片路径===" + tmpurls);
-        return tmpurls;
+        System.out.println("切割完成后图片路径===" + tmpurls);*/
+        return url;
     }
 }

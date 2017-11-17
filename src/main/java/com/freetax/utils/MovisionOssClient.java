@@ -115,9 +115,10 @@ public class MovisionOssClient {
                 if (type == 1) {
                     //查询帖子保存路径
                     String domainurl = PropertiesLoader.getValue("post.tempvideo.domain");
+                    String newul = PropertiesLoader.getValue("test.img.domain");
                     //String domainurl = "d:/1/";
                     path = domainurl + filename;
-                    url = path;
+                    url = newul + filename;
                 }
                 map.put("status", "success");
                 map.put("url", url);
