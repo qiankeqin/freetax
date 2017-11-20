@@ -107,8 +107,8 @@ public class AdminUserController {
      */
     @ApiOperation(value = "查询boss用户列表",notes = "用于查询boss用户列表",response = Response.class)
     @RequestMapping(value = "queryAdminUserByList",method = RequestMethod.POST)
-    public Response queryAdminUserByList(@ApiParam(value = "昵称")@RequestParam String nickname,
-                                         @ApiParam(value = "电话")@RequestParam String phone,
+    public Response queryAdminUserByList(@ApiParam(value = "昵称")@RequestParam(required = false) String nickname,
+                                         @ApiParam(value = "电话")@RequestParam(required = false) String phone,
                                          @ApiParam(value = "当前页")@RequestParam(defaultValue = "1") String pageNo,
                                          @ApiParam(value = "每页几条")@RequestParam(defaultValue = "10") String pageSize){
         Response response = new Response();

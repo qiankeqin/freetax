@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f4561821-7187-432c-80ae-06b8bb858125" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" afterPath="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java" />
     </list>
     <list id="28eb9f13-6aa0-4122-86f5-98b73cb77d4e" name="nocommit" comment="nocommit">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/spring/application.properties" />
@@ -39,18 +39,38 @@
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="143" column="5" lean-forward="false" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
+            <state relative-caret-position="681">
+              <caret line="165" column="31" lean-forward="true" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PcRegisterFacade.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdminUserController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="111" column="113" lean-forward="true" selection-start-line="111" selection-start-column="113" selection-end-line="111" selection-end-column="113" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminUserFacade.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/boss/AdminUserFacade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="113" column="40" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PcRegisterFacade.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="119" column="43" lean-forward="true" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
+            <state relative-caret-position="440">
+              <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -61,14 +81,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="379">
               <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-              <folding>
-                <marker date="1510885824791" expanded="true" signature="3212:3252" ph="/**...*/" />
-                <marker date="1510885824791" expanded="true" signature="3295:3487" ph="{...}" />
-                <marker date="1510885824791" expanded="true" signature="3493:3539" ph="/**...*/" />
-                <marker date="1510885824791" expanded="true" signature="3583:3787" ph="{...}" />
-                <marker date="1510885824791" expanded="true" signature="3793:3854" ph="/**...*/" />
-                <marker date="1510885824791" expanded="true" signature="3925:4159" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,11 +99,25 @@
       <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/user/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="235" column="57" lean-forward="false" selection-start-line="235" selection-start-column="57" selection-end-line="235" selection-end-column="57" />
+            <state relative-caret-position="597">
+              <caret line="197" column="44" lean-forward="true" selection-start-line="197" selection-start-column="44" selection-end-line="197" selection-end-column="44" />
               <folding>
                 <marker date="1510885824794" expanded="true" signature="1501:1614" ph="select from fr_user" />
-                <marker date="1510885824794" expanded="true" signature="11238:11251" ph="..." />
+                <marker date="1510885824794" expanded="true" signature="1754:1809" ph="SELECT * FRO... fr_user" />
+                <marker date="1510885824794" expanded="true" signature="1955:2024" ph="SELECT count... fr_user" />
+                <marker date="1510885824794" expanded="true" signature="2171:2235" ph="SELECT point... fr_user" />
+                <marker date="1510885824794" expanded="true" signature="2330:2391" ph="delete from " />
+                <marker date="1510885824794" expanded="true" signature="2492:3043" ph="insert into fr_user... " />
+                <marker date="1510885824794" expanded="true" signature="5875:7301" ph="update fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="7414:8029" ph="update fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="8167:8226" ph="SELECT u.* F... fr_user" />
+                <marker date="1510885824794" expanded="true" signature="8314:8640" ph="UPDATE yw_au... " />
+                <marker date="1510885824794" expanded="true" signature="8758:8876" ph="UPDATE fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="8961:9071" ph="UPDATE fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="9233:9316" ph="select u.* f... fr_user" />
+                <marker date="1510885824794" expanded="true" signature="9737:9800" ph="UPDATE fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="9912:10011" ph="UPDATE fr_us... " />
+                <marker date="1510885824794" expanded="true" signature="10193:11238" ph="SELECT * FRO... fr_user" />
               </folding>
             </state>
           </provider>
@@ -152,9 +179,9 @@
       <find>handleLoginProcess</find>
       <find>登录的pwd</find>
       <find>updateByPrimaryKeySelective</find>
-      <find>selectLoginUserByToken</find>
       <find>config.properties</find>
       <find>PropertiesLoader</find>
+      <find>selectLoginUserByToken</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,7 +233,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/common/util/ShiroUtil.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/bossUser/BossUserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/shiro/realm/BossRealm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/aop/InitLoginMemberInterceptor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/shiro/realm/ShiroRealm.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/applicationContext-shiro.xml" />
@@ -219,6 +245,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/utils/MD5Util.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java" />
       </list>
     </option>
   </component>
@@ -378,6 +405,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="freetax" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="freetax" type="b2602c69:ProjectViewProjectNode" />
+              <item name="freetax" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="freetax" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="boss" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="freetax" type="b2602c69:ProjectViewProjectNode" />
@@ -1073,7 +1110,7 @@
       <workItem from="1509092318121" duration="18373000" />
       <workItem from="1509351636611" duration="20098000" />
       <workItem from="1509502303304" duration="10076000" />
-      <workItem from="1510292209534" duration="99983000" />
+      <workItem from="1510292209534" duration="105083000" />
     </task>
     <task id="LOCAL-00001" summary="创建新项目">
       <created>1509073177415</created>
@@ -1313,11 +1350,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510886323214</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="修改默认头像">
+      <created>1511150273291</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1511150273291</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166431000" />
+    <option name="totallyTimeSpent" value="171531000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1341,7 +1385,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10217391" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.057608694" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11413044" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17910448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1387,7 +1431,8 @@
     <MESSAGE value="修改非必填入参" />
     <MESSAGE value="修改头像图片存放路径" />
     <MESSAGE value="删除无用方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除无用方法" />
+    <MESSAGE value="修改默认头像" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改默认头像" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1400,14 +1445,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/web/wxpay.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/generatorConfig.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -1599,14 +1636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="43" column="83" lean-forward="false" selection-start-line="43" selection-start-column="83" selection-end-line="43" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/shiro/realm/BossRealm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -1774,52 +1803,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/user/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="235" column="57" lean-forward="false" selection-start-line="235" selection-start-column="57" selection-end-line="235" selection-end-column="57" />
-          <folding>
-            <marker date="1510885824794" expanded="true" signature="1501:1614" ph="select from fr_user" />
-            <marker date="1510885824794" expanded="true" signature="11238:11251" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/web/im.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-          <folding>
-            <marker date="1510885824791" expanded="true" signature="3212:3252" ph="/**...*/" />
-            <marker date="1510885824791" expanded="true" signature="3295:3487" ph="{...}" />
-            <marker date="1510885824791" expanded="true" signature="3493:3539" ph="/**...*/" />
-            <marker date="1510885824791" expanded="true" signature="3583:3787" ph="{...}" />
-            <marker date="1510885824791" expanded="true" signature="3793:3854" ph="/**...*/" />
-            <marker date="1510885824791" expanded="true" signature="3925:4159" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="143" column="5" lean-forward="false" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1837,8 +1824,8 @@
         <state relative-caret-position="252">
           <caret line="15" column="33" lean-forward="true" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
           <folding>
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#552#553#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="false" />
+            <element signature="e#552#553#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1866,10 +1853,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/user/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="197" column="44" lean-forward="true" selection-start-line="197" selection-start-column="44" selection-end-line="197" selection-end-column="44" />
+          <folding>
+            <marker date="1510885824794" expanded="true" signature="1501:1614" ph="select from fr_user" />
+            <marker date="1510885824794" expanded="true" signature="1754:1809" ph="SELECT * FRO... fr_user" />
+            <marker date="1510885824794" expanded="true" signature="1955:2024" ph="SELECT count... fr_user" />
+            <marker date="1510885824794" expanded="true" signature="2171:2235" ph="SELECT point... fr_user" />
+            <marker date="1510885824794" expanded="true" signature="2330:2391" ph="delete from " />
+            <marker date="1510885824794" expanded="true" signature="2492:3043" ph="insert into fr_user... " />
+            <marker date="1510885824794" expanded="true" signature="5875:7301" ph="update fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="7414:8029" ph="update fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="8167:8226" ph="SELECT u.* F... fr_user" />
+            <marker date="1510885824794" expanded="true" signature="8314:8640" ph="UPDATE yw_au... " />
+            <marker date="1510885824794" expanded="true" signature="8758:8876" ph="UPDATE fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="8961:9071" ph="UPDATE fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="9233:9316" ph="select u.* f... fr_user" />
+            <marker date="1510885824794" expanded="true" signature="9737:9800" ph="UPDATE fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="9912:10011" ph="UPDATE fr_us... " />
+            <marker date="1510885824794" expanded="true" signature="10193:11238" ph="SELECT * FRO... fr_user" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/mybatis/user/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/user/PcRegisterFacade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="119" column="43" lean-forward="true" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
+        <state relative-caret-position="440">
+          <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/pc/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="681">
+          <caret line="165" column="31" lean-forward="true" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/facade/boss/AdminUserFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="113" column="40" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/freetax/controller/boss/AdminUserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="111" column="113" lean-forward="true" selection-start-line="111" selection-start-column="113" selection-end-line="111" selection-end-column="113" />
           <folding />
         </state>
       </provider>
