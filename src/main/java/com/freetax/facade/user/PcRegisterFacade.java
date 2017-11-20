@@ -113,7 +113,7 @@ public class PcRegisterFacade {
                 log.info("验证码正确开始注册");
                 user.setPhone(mobile);
                 user.setPasswd(MD5Util.MD5EncodeByUTF8(passwd));
-                user.setPhoto("http://pic.mofo.shop/upload/person/img/logo%403xy.png");
+                user.setPhoto("http://120.77.214.187:8100/ssp/images/grzx/bg-gr.png");
                 user.setName("ft_" + UUIDGenerator.genUUIDRemoveSep());
                 user.setCompany("");
                 user.setEmail("");
