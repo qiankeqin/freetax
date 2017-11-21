@@ -5,6 +5,7 @@ import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 import com.freetax.mybatis.adminMenu.service.AdminMenuService;
 import com.freetax.mybatis.adminUser.entity.AdminUser;
 import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
+import com.freetax.mybatis.userMenuRelation.service.UserMenuRelationService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class MenuFacade {
 
     @Autowired
     private AdminMenuService adminMenuService;
+
+    @Autowired
+    private UserMenuRelationService userMenuRelationService;
 
     /**
      * 查询菜单列表
@@ -76,5 +80,44 @@ public class MenuFacade {
             adminMenus.get(i).setSubmenu(adminMenu);
         }
         return adminMenus;
+    }
+
+    /**
+     * 菜单和用户绑定
+     * @param menuid
+     * @param userid
+     */
+    public void setMenuAndUserBinding(String menuid,String userid){
+        UserMenuRelation relation = new UserMenuRelation();
+        if (StringUtils.isNotEmpty(menuid)){
+            relation.setMenuid(Integer.parseInt(menuid));
+        }
+        if (StringUtils.isNotEmpty(userid)){
+            relation.setUserid(Integer.parseInt(userid));
+        }
+        userMenuRelationService.setMenuAndUserBinding(relation);
+    }
+
+    /**
+     * 修改用户下的菜单列表
+     * @param userid
+     * @param menuid
+     */
+    public void updateUserMenu(String userid,String menuid){
+        UserMenuRelation relation = new UserMenuRelation();
+        if (StringUtils.isNotEmpty(userid)){
+            relation.setUserid(Integer.parseInt(userid));
+        }
+        if (StringUtils.isNotEmpty(menuid)){
+            //删除用户下所有菜单关系
+            userMenuRelationService.deleteUserMenu(relation);
+            //逗号分隔菜单id
+            String[] menus = menuid.split(",");
+            for (int i = 0;i<menus.length;i++) {
+                relation.setMenuid(Integer.parseInt(menuid));
+                //分步插入用户菜单关系
+                userMenuRelationService.insertUserMenu(relation);
+            }
+        }
     }
 }

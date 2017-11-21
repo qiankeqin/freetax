@@ -1,5 +1,10 @@
 package com.freetax.mybatis.userMenuRelation.service;
 
+import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
+import com.freetax.mybatis.userMenuRelation.mapper.UserMenuRelationMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +13,51 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserMenuRelationService {
+
+    private static Logger log = LoggerFactory.getLogger(UserMenuRelationService.class);
+
+    @Autowired
+    private UserMenuRelationMapper userMenuRelationMapper;
+
+    /**
+     * 为用户绑定菜单
+     * @param relation
+     */
+    public void setMenuAndUserBinding(UserMenuRelation relation){
+        try {
+            log.info("为用户绑定菜单");
+            userMenuRelationMapper.setMenuAndUserBinding(relation);
+        } catch (Exception e) {
+            log.error("为用户绑定菜单异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 删除用户下所有菜单关系
+     * @param relation
+     */
+    public void deleteUserMenu(UserMenuRelation relation){
+        try {
+            log.info("删除用户下所有菜单关系");
+            userMenuRelationMapper.deleteUserMenu(relation);
+        } catch (Exception e) {
+            log.error("删除用户下所有菜单关系异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 新增用户菜单异常
+     * @param relation
+     */
+    public void insertUserMenu(UserMenuRelation relation){
+        try {
+            log.info("增加用户和菜单关系");
+            userMenuRelationMapper.insertUserMenu(relation);
+        } catch (Exception e) {
+            log.error("增加用户和菜单关系异常",e);
+            throw e;
+        }
+    }
 }

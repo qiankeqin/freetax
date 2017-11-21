@@ -62,4 +62,61 @@
     set menuid = #{menuid,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
+
+  <insert id="setMenuAndUserBinding" parameterType="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation">
+    insert into fr_user_menu_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="menuid != null" >
+        menuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteUserMenu" parameterType="java.lang.Integer">
+    DELETE FROM fr_user_menu_relation
+    WHERE userid = #{userid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertUserMenu" parameterType="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation">
+    insert into fr_user_menu_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="menuid != null" >
+        menuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>
