@@ -95,8 +95,12 @@ public class AdminUserService {
         }
     }
 
-    public AdminUser queryUserPasswordByName(String phone){
-        return adminUserMapper.queryUserPasswordByName(phone);
+    public AdminUser queryUserPasswordByName(String name){
+        return adminUserMapper.queryUserPasswordByName(name);
+    }
+
+    public AdminUser queryUserPasswordByPhone(String phone){
+        return adminUserMapper.queryUserPasswordByPhone(phone);
     }
 
 }

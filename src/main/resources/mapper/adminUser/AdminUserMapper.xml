@@ -158,6 +158,11 @@
     </update>
 
     <select id="queryUserPasswordByName" parameterType="java.lang.String" resultType="com.freetax.mybatis.adminUser.entity.AdminUser">
+        SELECT * FROM fr_admin_user WHERE isdel = 0 AND nickname = #{nickname,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryUserPasswordByPhone" parameterType="java.lang.String" resultType="com.freetax.mybatis.adminUser.entity.AdminUser">
         SELECT * FROM fr_admin_user WHERE isdel = 0 AND phone = #{phone,jdbcType=VARCHAR}
     </select>
+
 </mapper>

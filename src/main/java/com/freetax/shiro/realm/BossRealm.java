@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 
 /**
@@ -48,7 +49,13 @@ public class BossRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //根据用户名查询用户密码
         String name = token.getUsername();
-        AdminUser logginUser = adminUserService.queryUserPasswordByName(name);
+        Pattern pattern = Pattern.compile("[0-9]*");
+        AdminUser logginUser;
+        if (pattern.matcher(name).matches() && name.length() == 11) {
+            logginUser = adminUserService.queryUserPasswordByPhone(name);
+        } else {
+            logginUser = adminUserService.queryUserPasswordByName(name);
+        }
         if (logginUser == null) {
             throw new UnknownAccountException();
         } else {
