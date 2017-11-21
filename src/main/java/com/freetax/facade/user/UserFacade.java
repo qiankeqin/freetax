@@ -49,7 +49,7 @@ public class UserFacade {
 
         LoginUser loginUser = userService.selectLoginUserByToken(parammap);
         if (null == loginUser) {
-            throw new AuthException(MsgCodeConstant.app_user_not_exist_with_this_token, "该token的app用户不存在");
+            throw new AuthException(MsgCodeConstant.app_user_not_exist_with_this_token, "用户名密码错误或用户不存在");
         }
         return loginUser;
     }
