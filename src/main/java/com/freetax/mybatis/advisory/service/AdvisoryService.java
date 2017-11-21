@@ -97,13 +97,13 @@ public class AdvisoryService {
 
     /**
      *  查询用户是否咨询过
-     * @param phone
+     * @param advisory
      * @return
      */
-    public Integer queryAdvisoryIsVisit(String phone){
+    public Integer queryAdvisoryIsVisit(Advisory advisory){
         try {
             log.info("查询用户是否咨询过");
-            return advisoryMapper.queryAdvisoryIsVisit(phone);
+            return advisoryMapper.queryAdvisoryIsVisit(advisory);
         } catch (Exception e) {
             log.error("查询用户是否咨询过异常",e);
             throw e;

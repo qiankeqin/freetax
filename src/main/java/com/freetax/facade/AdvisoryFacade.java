@@ -25,17 +25,17 @@ public class AdvisoryFacade {
      *
      * @param phone
      */
-    public void insertAdvisory(String phone) {
+    public void insertAdvisory(String phone,String name) {
+        Advisory advisory = new Advisory();
+        advisory.setPhone(phone);
+        advisory.setName(name);
         //查询用户是否资讯过，资讯过并且没有回访的话需要更新时间，并不新增
-        Integer is = advisoryService.queryAdvisoryIsVisit(phone);
+        Integer is = advisoryService.queryAdvisoryIsVisit(advisory);
         if (is != null) {
-            Advisory advisory = new Advisory();
             advisory.setIntime(new Date());
             advisory.setId(is);
             advisoryService.updateAdvisoryIntime(advisory);
         } else {
-            Advisory advisory = new Advisory();
-            advisory.setPhone(phone);
             advisory.setVisit(0);
             advisory.setIntime(new Date());
             advisoryService.insertAdvisory(advisory);

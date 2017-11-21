@@ -88,9 +88,10 @@ public class indexController {
      */
     @ApiOperation(value = "pc咨询",notes = "用于咨询使用",response = Response.class)
     @RequestMapping(value = "/insertAdvisory",method = RequestMethod.POST)
-    public Response insertAdvisory(@ApiParam(value = "手机号")@RequestParam String phone){
+    public Response insertAdvisory(@ApiParam(value = "手机号")@RequestParam String phone,
+                                   @ApiParam(value = "姓名")@RequestParam String name){
         Response response = new Response();
-        advisoryFacade.insertAdvisory(phone);
+        advisoryFacade.insertAdvisory(phone,name);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

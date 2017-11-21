@@ -128,4 +128,10 @@
     FROM fr_admin_menu
     WHERE isdel = 0 AND pid = #{menuid,jdbcType=INTEGER}
   </select>
+
+  <select id="queryMenuList" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenuVo">
+    SELECT *
+    FROM fr_admin_menu
+    WHERE isdel = 0 AND pid IS NULL
+  </select>
 </mapper>

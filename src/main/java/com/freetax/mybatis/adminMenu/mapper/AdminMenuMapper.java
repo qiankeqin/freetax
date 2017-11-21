@@ -24,4 +24,6 @@ public interface AdminMenuMapper {
     List<AdminMenuVo> queryMenuListByVariation(UserMenuRelation relation);
 
     List<AdminMenu> queryMenuListBySon(UserMenuRelation relation);
+
+    List<AdminMenuVo> queryMenuList();
 }

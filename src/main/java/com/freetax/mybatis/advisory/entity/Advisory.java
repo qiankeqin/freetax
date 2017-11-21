@@ -5,11 +5,21 @@ import java.util.Date;
 public class Advisory {
     private Integer id;
 
+    private String name;
+
     private String phone;
 
     private Integer visit;
 
     private Date intime;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

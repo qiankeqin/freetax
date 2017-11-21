@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.freetax.mybatis.userMenuRelation.mapper.UserMenuRelationMapper" >
   <resultMap id="BaseResultMap" type="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation" >
-    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="userid" property="userid" jdbcType="INTEGER" />
     <result column="menuid" property="menuid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    userid, menuid
+    id,userid, menuid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -19,12 +20,15 @@
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation" >
-    insert into fr_user_menu_relation (userid, menuid)
-    values (#{userid,jdbcType=INTEGER}, #{menuid,jdbcType=INTEGER})
+    insert into fr_user_menu_relation (id, userid, menuid)
+    values (#{id,jdbcType=INTEGER}#{userid,jdbcType=INTEGER}, #{menuid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation" >
     insert into fr_user_menu_relation
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
       <if test="userid != null" >
         userid,
       </if>
@@ -33,6 +37,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
