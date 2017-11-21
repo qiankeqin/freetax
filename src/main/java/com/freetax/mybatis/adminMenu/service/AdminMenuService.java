@@ -51,4 +51,18 @@ public class AdminMenuService {
             throw e;
         }
     }
+
+    /**
+     * 查询菜单列表
+     * @return
+     */
+    public List<AdminMenuVo> queryMenuList(){
+        try {
+            log.info("查询菜单列表");
+            return adminMenuMapper.queryMenuList();
+        } catch (Exception e) {
+            log.error("查询菜单列表异常",e);
+            throw e;
+        }
+    }
 }

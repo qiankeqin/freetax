@@ -3,12 +3,13 @@
 <mapper namespace="com.freetax.mybatis.advisory.mapper.AdvisoryMapper">
     <resultMap id="BaseResultMap" type="com.freetax.mybatis.advisory.entity.Advisory">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="visit" property="visit" jdbcType="INTEGER"/>
         <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, phone, visit, intime
+    id, name, phone, visit, intime
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -21,9 +22,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.freetax.mybatis.advisory.entity.Advisory">
-    insert into fr_advisory (id, phone, visit,
+    insert into fr_advisory (id,name, phone, visit,
       intime)
-    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{visit,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{visit,jdbcType=INTEGER},
       #{intime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.freetax.mybatis.advisory.entity.Advisory">
@@ -31,6 +32,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
+            </if>
+            <if test="name != null">
+                name,
             </if>
             <if test="phone != null">
                 phone,
@@ -46,6 +50,9 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
             <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
             </if>
@@ -60,6 +67,9 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.freetax.mybatis.advisory.entity.Advisory">
         update fr_advisory
         <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
             <if test="phone != null">
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
@@ -74,7 +84,8 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.advisory.entity.Advisory">
     update fr_advisory
-    set phone = #{phone,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       visit = #{visit,jdbcType=INTEGER},
       intime = #{intime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -90,6 +101,9 @@
         SELECT *
         FROM fr_advisory
         <where>
+            <if test="name != null">
+                AND name LIKE concat('%',#{name,jdbcType=VARCHAR},'%')
+            </if>
             <if test="phone != null">
                 AND phone = #{phone,jdbcType=VARCHAR}
             </if>
@@ -108,7 +122,7 @@
         UPDATE fr_advisory SET intime = #{intime,jdbcType=TIMESTAMP} WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="queryAdvisoryIsVisit" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT id FROM fr_advisory WHERE phone = #{phone,jdbcType=VARCHAR} AND visit = 0
+    <select id="queryAdvisoryIsVisit" parameterType="com.freetax.mybatis.advisory.entity.Advisory" resultType="java.lang.Integer">
+        SELECT id FROM fr_advisory WHERE phone = #{phone,jdbcType=VARCHAR} AND visit = 0 AND name = #{name,jdbcType=VARCHAR}
     </select>
 </mapper>

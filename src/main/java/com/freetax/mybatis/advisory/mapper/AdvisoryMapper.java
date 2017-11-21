@@ -28,5 +28,5 @@ public interface AdvisoryMapper {
 
     void updateAdvisoryIntime(Advisory advisory);
 
-    Integer queryAdvisoryIsVisit(String phone);
+    Integer queryAdvisoryIsVisit(Advisory advisory);
 }

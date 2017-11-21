@@ -29,7 +29,7 @@ public class MenuFacade {
      * 查询菜单列表
      * @return
      */
-    public List<AdminMenuVo> queryMenuList(){
+    public List<AdminMenuVo> queryDynamicMenuList(){
         //return adminMenuService.queryMenuList();
         AdminMenu menu = new AdminMenu();
         UserMenuRelation relation = new UserMenuRelation();
@@ -59,5 +59,22 @@ public class MenuFacade {
             }
         }
         return menus;
+    }
+
+    /**
+     * 查询菜单列表
+     * @return
+     */
+    public List<AdminMenuVo> queryMenuList(){
+        UserMenuRelation userMenuRelation = new UserMenuRelation();
+        //查询所有父菜单
+        List<AdminMenuVo> adminMenus =  adminMenuService.queryMenuList();
+        for (int i = 0;i<adminMenus.size();i++){
+            userMenuRelation.setMenuid(adminMenus.get(i).getId());
+            //查询所有子菜单，赋值对应父菜单中
+            List<AdminMenu> adminMenu = adminMenuService.queryMenuListBySon(userMenuRelation);
+            adminMenus.get(i).setSubmenu(adminMenu);
+        }
+        return adminMenus;
     }
 }

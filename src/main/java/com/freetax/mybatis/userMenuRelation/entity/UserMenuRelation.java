@@ -1,9 +1,20 @@
 package com.freetax.mybatis.userMenuRelation.entity;
 
 public class UserMenuRelation {
+
+    private Integer id;
+
     private Integer userid;
 
     private Integer menuid;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUserid() {
         return userid;
