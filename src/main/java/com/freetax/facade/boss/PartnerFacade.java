@@ -28,8 +28,11 @@ public class PartnerFacade {
         return partnerService.queryPartnerList();
     }
 
-    public void insertPartner(String banner,String link){
+    public void insertPartner(String name,String banner,String link){
         Partner partner = new Partner();
+        if (StringUtils.isNotEmpty(name)){
+            partner.setName(name);
+        }
         if (StringUtils.isNotEmpty(banner)){
             partner.setBanner(banner);
         }

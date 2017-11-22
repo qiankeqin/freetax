@@ -33,10 +33,11 @@ public class PartnerController {
      */
     @ApiOperation(value = "新增合作伙伴",notes = "用于新增合作伙伴",response = Response.class)
     @RequestMapping(value = "insertPartner",method = RequestMethod.POST)
-    public Response insertPartner(@ApiParam(value = "banner")@RequestParam String banner,
+    public Response insertPartner(@ApiParam(value = "名称")@RequestParam String name,
+                                  @ApiParam(value = "banner")@RequestParam String banner,
                                   @ApiParam(value = "链接")@RequestParam String link){
         Response response = new Response();
-        partnerFacade.insertPartner(banner,link);
+        partnerFacade.insertPartner(name,banner,link);
         response.setMessage("操作成功");
         response.setData(1);
         return response;
