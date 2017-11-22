@@ -121,12 +121,14 @@
     WHERE isdel = 0 AND pid IS NULL
     AND id IN
     (SELECT menuid FROM fr_user_menu_relation WHERE userid = #{userid,jdbcType=INTEGER})
+    ORDER BY orderid ASC
   </select>
 
   <select id="queryMenuListBySon" parameterType="com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
     SELECT *
     FROM fr_admin_menu
     WHERE isdel = 0 AND pid = #{menuid,jdbcType=INTEGER}
+    ORDER BY orderid ASC
   </select>
 
   <select id="queryMenuList" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenuVo">
