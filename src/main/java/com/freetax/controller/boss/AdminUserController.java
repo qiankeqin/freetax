@@ -39,7 +39,7 @@ public class AdminUserController {
     @ApiOperation(value = "新增后台用户",notes = "用于新增管理员用户",response = Response.class)
     @RequestMapping(value = "insertAdminUser",method = RequestMethod.POST)
     public Response insertAdminUser(@ApiParam(value = "邮箱")@RequestParam(required = false) String email,
-                                    @ApiParam(value = "电话")@RequestParam(required = false) String phone,
+                                    @ApiParam(value = "电话")@RequestParam String phone,
                                     @ApiParam(value = "备注")@RequestParam(required = false) String remark,
                                     @ApiParam(value = "昵称")@RequestParam(required = false) String nickname,
                                     @ApiParam(value = "密码")@RequestParam String password,
