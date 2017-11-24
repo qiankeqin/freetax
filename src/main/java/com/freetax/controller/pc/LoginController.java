@@ -1,5 +1,6 @@
 package com.freetax.controller.pc;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.freetax.common.Response;
 import com.freetax.facade.user.PcRegisterFacade;
 import com.freetax.facade.user.UserFacade;
@@ -55,7 +56,7 @@ public class LoginController {
     @ApiOperation(value = "手机注册账号时发送的验证码", notes = "手机注册账号时发送的验证码", response = Response.class)
     @RequestMapping(value = {"/get_mobile_code"}, method = RequestMethod.GET)
     public Response getMobileCode(@ApiParam(value = "验证的手机号") @RequestParam String mobile,
-                                  HttpServletRequest request) throws IOException, ApiException {
+                                  HttpServletRequest request) throws IOException, ApiException, ClientException {
         log.info("获得手机验证码,  手机号mobile==" + mobile);
         log.info("获取到的request method>>>>" + request.getMethod());
         Response response = new Response();

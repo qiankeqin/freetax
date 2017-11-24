@@ -158,6 +158,7 @@
     <orderEntry type="library" name="Maven: aliyun.java.vod.upload:upload:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-vod:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-core:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-dysmsapi:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: aliyun.sdk.oss:aliyun-sdk-oss:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: rt:rt:1.7" level="project" />
     <orderEntry type="library" name="Maven: jce:jce:1.7" level="project" />
