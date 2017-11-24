@@ -67,7 +67,7 @@ public class PartnerController {
      */
     @ApiOperation(value = "查询合作伙伴列表",notes = "用于条件查询合作伙伴列表",response = Response.class)
     @RequestMapping(value = "queryPartnerByList",method = RequestMethod.POST)
-    public Response queryPartnerByList(@ApiParam(value = "名称")@RequestParam String name,
+    public Response queryPartnerByList(@ApiParam(value = "名称")@RequestParam(required = false) String name,
                                        @ApiParam(value = "当前页")@RequestParam(defaultValue = "1") String pageNo,
                                        @ApiParam(value = "每页几条")@RequestParam(defaultValue = "10") String pageSize){
         Response response = new Response();
