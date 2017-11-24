@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -95,6 +96,19 @@ public class PartnerController {
                                       @ApiParam(value = "链接")@RequestParam(required = false) String link){
         Response response = new Response();
         partnerFacade.updatePartnerById(id,name,banner,link);
+        response.setMessage("操作成功");
+        response.setData(1);
+        return response;
+    }
+
+    @ApiOperation(value = "修改合作伙伴",notes = "修改合作伙伴",response = Response.class)
+    @RequestMapping(value = "updatePartnerByIdtest",method = RequestMethod.POST)
+    public Response updatePartnerByIdtest(@ApiParam(value = "id")@RequestParam String id,
+                                      @ApiParam(value = "名称")@RequestParam(required = false) String name,
+                                      @ApiParam(value = "banner")@RequestParam(required = false) MultipartFile banner,
+                                      @ApiParam(value = "链接")@RequestParam(required = false) String link){
+        Response response = new Response();
+        partnerFacade.updatePartnerByIdtest(id,name,banner,link);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

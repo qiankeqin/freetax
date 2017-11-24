@@ -1,11 +1,13 @@
 package com.freetax.facade.boss;
 
+import com.freetax.facade.BannerManageFacade;
 import com.freetax.mybatis.partner.entity.Partner;
 import com.freetax.mybatis.partner.service.PartnerService;
 import com.freetax.utils.pagination.model.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,9 @@ public class PartnerFacade {
 
     @Autowired
     private PartnerService partnerService;
+
+    @Autowired
+    private BannerManageFacade bannerManageFacade;
 
     /**
      * PC首页查询合作伙伴列表
@@ -85,6 +90,22 @@ public class PartnerFacade {
         if (StringUtils.isNotEmpty(banner)){
             partner.setBanner(banner);
         }
+        if (StringUtils.isNotEmpty(link)){
+            partner.setLink(link);
+        }
+        partnerService.updatePartnerById(partner);
+    }
+
+    public void updatePartnerByIdtest(String id, String name, MultipartFile banner, String link){
+        Partner partner = new Partner();
+        if (StringUtils.isNotEmpty(id)){
+            partner.setId(Integer.parseInt(id));
+        }
+        if (StringUtils.isNotEmpty(name)){
+            partner.setName(name);
+        }
+        String url = bannerManageFacade.bannerImgIncision(banner, "", "", "", "");
+        partner.setBanner(url);
         if (StringUtils.isNotEmpty(link)){
             partner.setLink(link);
         }
