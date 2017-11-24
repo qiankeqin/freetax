@@ -124,6 +124,7 @@
           <element id="library" level="project" name="Maven: aliyun.java.vod.upload:upload:1.0.2" />
           <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-vod:2.1.0" />
           <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-core:3.2.2" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-dysmsapi:1.0.0" />
           <element id="library" level="project" name="Maven: aliyun.sdk.oss:aliyun-sdk-oss:2.6.0" />
           <element id="library" level="project" name="Maven: rt:rt:1.7" />
           <element id="library" level="project" name="Maven: jce:jce:1.7" />

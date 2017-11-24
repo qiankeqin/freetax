@@ -1,5 +1,6 @@
 package com.freetax.facade.user;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.freetax.common.Response;
 import com.freetax.common.util.ShiroUtil;
 import com.freetax.mybatis.user.entity.LoginUser;
@@ -62,15 +63,9 @@ public class PcRegisterFacade {
      * @param mobile
      * @param verifyCode
      */
-    public void sendSms(String mobile, String verifyCode) {
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("code", verifyCode);
-        map.put("min", "10");//短信验证时间10分钟
-        Gson gson = new Gson();
-        String json = gson.toJson(map);
-
+    public void sendSms(String mobile, String verifyCode) throws ClientException {
         //发送短信服务
-        SDKSendSms.sendSMS(mobile, json, PropertiesLoader.getValue("login_app_sms_template_code"));
+        SDKSendSms.sendSMS(mobile, verifyCode, PropertiesLoader.getValue("login_app_sms_template_code"));
     }
 
     /**
