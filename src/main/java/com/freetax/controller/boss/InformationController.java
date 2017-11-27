@@ -171,10 +171,10 @@ public class InformationController {
         Map map = new HashMap();
         map.put("src",url);
         //截取url中的文件名
-        String title = url.substring(url.lastIndexOf("/"),url.length());
-        map.put("title","顶顶顶顶");
+        String title = url.substring(url.lastIndexOf("/")+1,url.length());
+        map.put("title",title);
         response.setMsg("操作成功");
-        response.setData(title);
+        response.setData(map);
         return response;
     }
 
