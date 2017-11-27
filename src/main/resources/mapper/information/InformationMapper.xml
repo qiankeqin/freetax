@@ -197,6 +197,7 @@
         <if test="title != null">
             AND title LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
         </if>
+        ORDER BY intime DESC
     </select>
 
     <select id="queryInformationById" resultType="com.freetax.mybatis.information.entity.Information"
