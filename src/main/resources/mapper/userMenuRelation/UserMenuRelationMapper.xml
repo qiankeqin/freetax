@@ -119,4 +119,8 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryUserByMenuToList" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
+    SELECT am.* FROM fr_user_menu_relation mr LEFT JOIN fr_admin_menu am ON am.id = mr.menuid WHERE mr.userid = #{userid,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.freetax.mybatis.adminUser.service;
 
 import com.freetax.mybatis.adminUser.entity.AdminUser;
+import com.freetax.mybatis.adminUser.entity.AdminUserVo;
 import com.freetax.mybatis.adminUser.mapper.AdminUserMapper;
 import com.freetax.utils.pagination.model.Paging;
 import org.slf4j.Logger;
@@ -55,7 +56,7 @@ public class AdminUserService {
      * @param id
      * @return
      */
-    public AdminUser queryAdminUserById(Integer id){
+    public AdminUserVo queryAdminUserById(Integer id){
         try {
             log.info("查询用户详情");
             return adminUserMapper.selectByPrimaryKey(id);

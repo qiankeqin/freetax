@@ -1,6 +1,7 @@
 package com.freetax.mybatis.adminUser.mapper;
 
 import com.freetax.mybatis.adminUser.entity.AdminUser;
+import com.freetax.mybatis.adminUser.entity.AdminUserVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ public interface AdminUserMapper {
 
     int insertSelective(AdminUser record);
 
-    AdminUser selectByPrimaryKey(Integer id);
+    AdminUserVo selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(AdminUser record);
 

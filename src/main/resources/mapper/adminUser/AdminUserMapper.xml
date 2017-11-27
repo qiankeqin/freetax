@@ -15,9 +15,9 @@
     <sql id="Base_Column_List">
     id, email, phone, intime, isdel, remark, nickname, password, isAdmin
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultType="com.freetax.mybatis.adminUser.entity.AdminUserVo" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List"/>
+        *
         from fr_admin_user
         where id = #{id,jdbcType=INTEGER}
     </select>

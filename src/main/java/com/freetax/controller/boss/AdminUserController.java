@@ -3,6 +3,7 @@ package com.freetax.controller.boss;
 import com.freetax.common.Response;
 import com.freetax.facade.boss.AdminUserFacade;
 import com.freetax.mybatis.adminUser.entity.AdminUser;
+import com.freetax.mybatis.adminUser.entity.AdminUserVo;
 import com.freetax.utils.pagination.model.Paging;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -91,7 +92,7 @@ public class AdminUserController {
     @RequestMapping(value = "query_AdminUserById",method = RequestMethod.POST)
     public Response queryAdminUserById(@ApiParam(value = "id")@RequestParam String id){
         Response response = new Response();
-        AdminUser adminUser = adminUserFacade.queryAdminUserById(id);
+        AdminUserVo adminUser = adminUserFacade.queryAdminUserById(id);
         response.setMessage("查询成功");
         response.setData(adminUser);
         return response;
