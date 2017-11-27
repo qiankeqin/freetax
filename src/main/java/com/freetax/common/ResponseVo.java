@@ -31,14 +31,6 @@ public class ResponseVo implements Serializable {
     @ApiModelProperty(value = "返回数据", required = true)
     private Object data;
 
-    /**
-     * 平台返回的消息码
-     *
-     * @return
-     */
-    @ApiModelProperty(value = "平台返回的消息码")
-    private int msgCode;
-
     public ResponseVo() {
 
     }
@@ -62,17 +54,9 @@ public class ResponseVo implements Serializable {
     public ResponseVo(int code, String message, String msg, Object data, int msgCode) {
         this.code = code;
         this.data = data;
-        this.msgCode = msgCode;
         this.msg = msg;
     }
 
-    public int getMsgCode() {
-        return msgCode;
-    }
-
-    public void setMsgCode(int msgCode) {
-        this.msgCode = msgCode;
-    }
 
     public int getCode() {
         return code;

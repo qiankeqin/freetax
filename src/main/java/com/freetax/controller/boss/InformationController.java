@@ -174,6 +174,7 @@ public class InformationController {
         String title = url.substring(url.lastIndexOf("/")+1,url.length());
         map.put("title",title);
         response.setMsg("操作成功");
+        response.setCode(0);
         response.setData(map);
         return response;
     }
