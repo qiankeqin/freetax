@@ -192,4 +192,21 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryAdvertisementById" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage">
+    SELECT * FROM fr_banner_manage WHERE id = #{id,jdbcType=INTEGER} WHERE isdel = 0
+  </select>
+
+  <select id="queryAdvertisementByList" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage">
+    SELECT *
+    FROM fr_banner_manage
+    WHERE isdel = 0
+    <if test="location != null">
+      AND location = #{location,jdbcType=INTEGER}
+    </if>
+    <if test="title != null">
+      AND title LIKE CONCAT('%','','%')
+    </if>
+    ORDER BY location,orderid ASC
+  </select>
 </mapper>

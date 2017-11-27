@@ -24,4 +24,10 @@ public interface BannerManageMapper {
     List<BannerManage> queryBannerByType(Integer type);
 
     void insertAdvertisement(BannerManage bannerManage);
+
+    void updateAdvertisement(BannerManage bannerManage);
+
+    BannerManage queryAdvertisementById(Integer id);
+
+    List<BannerManage> queryAdvertisementByList(BannerManage bannerManage);
 }

@@ -145,4 +145,60 @@ public class BannerManageFacade {
         bannerManage.setIntime(new Date());
         bannerManageService.insertAdvertisement(bannerManage);
     }
+
+    /**
+     * 编辑广告
+     * @param banner
+     * @param describe
+     * @param orderid
+     * @param title
+     * @param location
+     */
+    public void updateAdvertisement(String banner,String describe,String orderid,String title,String location){
+        BannerManage bannerManage = new BannerManage();
+        if (StringUtils.isNotEmpty(banner)){
+            bannerManage.setBanner(banner);
+        }
+        if (StringUtils.isNotEmpty(describe)){
+            bannerManage.setDescribe(describe);
+        }
+        if (StringUtils.isNotEmpty(orderid)){
+            bannerManage.setOrderid(Integer.parseInt(orderid));
+        }
+        if (StringUtils.isNotEmpty(title)){
+            bannerManage.setTitle(title);
+        }
+        if (StringUtils.isNotEmpty(location)){
+            bannerManage.setLocation(Integer.parseInt(location));
+        }
+        bannerManageService.updateAdvertisement(bannerManage);
+    }
+
+    /**
+     * 根据id查询广告
+     * @param id
+     * @return
+     */
+    public BannerManage queryAdvertisementById(String id){
+        return bannerManageService.queryAdvertisementById(Integer.parseInt(id));
+    }
+
+
+    /**
+     * 条件查询广告列表
+     * @param title
+     * @param location
+     * @return
+     */
+    public List<BannerManage> queryAdvertisementByList(String title,String location){
+        BannerManage bannerManage = new BannerManage();
+        if (StringUtils.isNotEmpty(title)){
+            bannerManage.setTitle(title);
+        }
+        if (StringUtils.isNotEmpty(location)){
+            bannerManage.setLocation(Integer.parseInt(location));
+        }
+        return bannerManageService.queryAdvertisementByList(bannerManage);
+    }
+
 }

@@ -63,6 +63,53 @@ public class BannerManageService {
             log.error("新增广告banner异常",e);
             throw e;
         }
-
     }
+
+
+    /**
+     * 修改广告
+     * @param bannerManage
+     */
+    public void updateAdvertisement(BannerManage bannerManage){
+        try {
+            log.info("修改广告");
+            bannerManageMapper.updateAdvertisement(bannerManage);
+        } catch (Exception e){
+            log.error("广告修改失败",e);
+            throw e;
+        }
+    }
+
+
+    /**
+     * 根据id查询广告
+     * @param id
+     * @return
+     */
+    public BannerManage queryAdvertisementById(Integer id){
+        try {
+            log.info("根据id查询广告");
+            return bannerManageMapper.queryAdvertisementById(id);
+        } catch (Exception e){
+            log.error("根据id查询广告异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 条件查询广告列表
+     * @param bannerManage
+     * @return
+     */
+    public List<BannerManage> queryAdvertisementByList(BannerManage bannerManage){
+        try {
+            log.info("条件查询广告列表");
+            return bannerManageMapper.queryAdvertisementByList(bannerManage);
+        } catch (Exception e){
+            log.error("条件查询广告列表异常",e);
+            throw e;
+        }
+    }
+
+
 }
