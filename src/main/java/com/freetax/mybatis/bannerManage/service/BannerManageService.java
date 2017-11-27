@@ -50,4 +50,19 @@ public class BannerManageService {
             throw e;
         }
     }
+
+    /**
+     * 新增广告
+     * @param bannerManage
+     */
+    public void insertAdvertisement(BannerManage bannerManage){
+        try {
+            log.info("新增广告banner");
+            bannerManageMapper.insertAdvertisement(bannerManage);
+        } catch (Exception e){
+            log.error("新增广告banner异常",e);
+            throw e;
+        }
+
+    }
 }

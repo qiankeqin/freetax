@@ -114,4 +114,35 @@ public class BannerManageFacade {
         System.out.println("切割完成后图片路径===" + tmpurls);*/
         return url;
     }
+
+
+    /**
+     * 新增广告管理
+     * @param banner
+     * @param describe
+     * @param orderid
+     * @param title
+     * @param location
+     */
+    public void insertAdvertisement(String banner,String describe,String orderid,String title,String location){
+        BannerManage bannerManage = new BannerManage();
+        if (StringUtils.isNotEmpty(banner)){
+            bannerManage.setBanner(banner);
+        }
+        if (StringUtils.isNotEmpty(describe)){
+            bannerManage.setDescribe(describe);
+        }
+        if (StringUtils.isNotEmpty(orderid)){
+            bannerManage.setOrderid(Integer.parseInt(orderid));
+        }
+        if (StringUtils.isNotEmpty(title)){
+            bannerManage.setTitle(title);
+        }
+        if (StringUtils.isNotEmpty(location)){
+            bannerManage.setLocation(Integer.parseInt(location));
+        }
+        bannerManage.setIsdel(0);
+        bannerManage.setIntime(new Date());
+        bannerManageService.insertAdvertisement(bannerManage);
+    }
 }

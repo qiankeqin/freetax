@@ -22,4 +22,6 @@ public interface BannerManageMapper {
     List<BannerManage> queryIndexBannerOrInformation();
 
     List<BannerManage> queryBannerByType(Integer type);
+
+    void insertAdvertisement(BannerManage bannerManage);
 }

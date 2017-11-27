@@ -133,4 +133,63 @@
   <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="java.lang.Integer">
     SELECT * FROM fr_banner_manage WHERE location = #{type,jdbcType=INTEGER}
   </select>
+
+  <insert id="insertAdvertisement" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+      select LAST_INSERT_ID()
+    </selectKey>
+    insert into fr_banner_manage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="intime != null" >
+        intime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
 </mapper>
