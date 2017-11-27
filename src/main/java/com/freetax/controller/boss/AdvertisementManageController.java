@@ -59,14 +59,14 @@ public class AdvertisementManageController {
      */
     @ApiOperation(value = "编辑广告",notes = "编辑广告",response = Response.class)
     @RequestMapping(value = "updateAdvertisement",method = RequestMethod.POST)
-    public Response updateAdvertisement(@ApiParam(value = "banner图片url")@RequestParam(required = false) String banner,
+    public Response updateAdvertisement(@ApiParam(value = "id")@RequestParam(required = false) String id,@ApiParam(value = "banner图片url")@RequestParam(required = false) String banner,
                                         @ApiParam(value = "对于banner的描述")@RequestParam(required = false) String des,
                                         @ApiParam(value = "排序")@RequestParam(required = false) String orderid,
                                         @ApiParam(value = "标题")@RequestParam(required = false) String title,
                                         @ApiParam(value = "banner位置 1:主页顶部banner 2:主页滚动banner 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner " +
                                                 "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam(required = false) String location){
         Response response = new Response();
-        bannerManageFacade.updateAdvertisement(banner,des,orderid,title,location);
+        bannerManageFacade.updateAdvertisement(id,banner,des,orderid,title,location);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

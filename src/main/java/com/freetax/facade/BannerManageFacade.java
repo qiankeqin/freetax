@@ -154,8 +154,11 @@ public class BannerManageFacade {
      * @param title
      * @param location
      */
-    public void updateAdvertisement(String banner,String describe,String orderid,String title,String location){
+    public void updateAdvertisement(String id,String banner,String describe,String orderid,String title,String location){
         BannerManage bannerManage = new BannerManage();
+        if (StringUtils.isNotEmpty(id)){
+            bannerManage.setId(Integer.parseInt(id));
+        }
         if (StringUtils.isNotEmpty(banner)){
             bannerManage.setBanner(banner);
         }
