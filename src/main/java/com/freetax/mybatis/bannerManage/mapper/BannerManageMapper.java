@@ -30,4 +30,6 @@ public interface BannerManageMapper {
     BannerManage queryAdvertisementById(Integer id);
 
     List<BannerManage> queryAdvertisementByList(BannerManage bannerManage);
+
+    void deleteAdvertisement(BannerManage bannerManage);
 }

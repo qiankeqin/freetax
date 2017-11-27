@@ -111,5 +111,18 @@ public class BannerManageService {
         }
     }
 
+    /**
+     * 删除广告
+     * @param bannerManage
+     */
+    public void deleteAdvertisement(BannerManage bannerManage){
+        try {
+            log.info("删除广告");
+            bannerManageMapper.deleteAdvertisement(bannerManage);
+        } catch (Exception e){
+            log.error("删除广告异常",e);
+            throw e;
+        }
+    }
 
 }

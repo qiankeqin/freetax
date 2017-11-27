@@ -110,17 +110,18 @@ public class AdvertisementManageController {
     }
 
 
-
-    @RequestMapping(value = "test",method = RequestMethod.POST)
-    @ApiOperation(value = "test",notes = "test",response = Response.class)
-    public ResponseVo test(){
-        ResponseVo response = new ResponseVo();
-        Map map = new HashMap();
-        map.put("src","123123");
-        map.put("title","顶顶顶顶");
-        response.setMsg("查询成功");
-        response.setCode(0);
-        response.setData(map);
+    /**
+     * 删除广告
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delete_advertisement",method = RequestMethod.POST)
+    @ApiOperation(value = "删除广告",notes = "删除广告",response = Response.class)
+    public Response deleteAdvertisement(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        bannerManageFacade.deleteAdvertisement(id);
+        response.setMessage("操作成功");
+        response.setData(1);
         return response;
     }
 

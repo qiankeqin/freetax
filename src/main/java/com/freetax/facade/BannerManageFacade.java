@@ -201,4 +201,15 @@ public class BannerManageFacade {
         return bannerManageService.queryAdvertisementByList(bannerManage);
     }
 
+    /**
+     * 删除广告
+     * @param id
+     */
+    public void deleteAdvertisement(String id){
+        BannerManage bannerManage = new BannerManage();
+        bannerManage.setId(Integer.parseInt(id));
+        bannerManage.setIsdel(1);
+        bannerManageService.deleteAdvertisement(bannerManage);
+    }
+
 }
