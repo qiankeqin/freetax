@@ -1,6 +1,7 @@
 package com.freetax.controller.boss;
 
 import com.freetax.common.Response;
+import com.freetax.common.ResponseVo;
 import com.freetax.facade.BannerManageFacade;
 import com.freetax.facade.InformationFacade;
 import com.freetax.mybatis.information.entity.Information;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author zhurui
@@ -158,15 +161,20 @@ public class InformationController {
      */
     @ApiOperation(value = "切割banner图", notes = "用于切割所有banner图片", response = Response.class)
     @RequestMapping(value = "bannerImgIncision", method = RequestMethod.POST)
-    public Response bannerImgIncision(@ApiParam(value = "文件") @RequestParam MultipartFile file,
-                                      @ApiParam(value = "x坐标") @RequestParam(required = false) String x,
-                                      @ApiParam(value = "y坐标") @RequestParam(required = false) String y,
-                                      @ApiParam(value = "w宽") @RequestParam(required = false) String w,
-                                      @ApiParam(value = "h高") @RequestParam(required = false) String h) {
-        Response response = new Response();
+    public ResponseVo bannerImgIncision(@ApiParam(value = "文件") @RequestParam MultipartFile file,
+                                        @ApiParam(value = "x坐标") @RequestParam(required = false) String x,
+                                        @ApiParam(value = "y坐标") @RequestParam(required = false) String y,
+                                        @ApiParam(value = "w宽") @RequestParam(required = false) String w,
+                                        @ApiParam(value = "h高") @RequestParam(required = false) String h) {
+        ResponseVo response = new ResponseVo();
         String url = bannerManageFacade.bannerImgIncision(file, x, y, w, h);
-        response.setMessage("操作成功");
-        response.setData(url);
+        Map map = new HashMap();
+        map.put("src",url);
+        //截取url中的文件名
+        String title = url.substring(url.lastIndexOf("/"),url.length());
+        map.put("title","顶顶顶顶");
+        response.setMsg("操作成功");
+        response.setData(title);
         return response;
     }
 

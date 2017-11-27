@@ -1,6 +1,7 @@
 package com.freetax.controller.boss;
 
 import com.freetax.common.Response;
+import com.freetax.common.ResponseVo;
 import com.freetax.facade.BannerManageFacade;
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author zhurui
@@ -105,4 +108,20 @@ public class AdvertisementManageController {
         response.setData(list);
         return response;
     }
+
+
+
+    @RequestMapping(value = "test",method = RequestMethod.POST)
+    @ApiOperation(value = "test",notes = "test",response = Response.class)
+    public ResponseVo test(){
+        ResponseVo response = new ResponseVo();
+        Map map = new HashMap();
+        map.put("src","123123");
+        map.put("title","顶顶顶顶");
+        response.setMsg("查询成功");
+        response.setCode(0);
+        response.setData(map);
+        return response;
+    }
+
 }
