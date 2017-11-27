@@ -48,7 +48,7 @@ public class UserMenuRelationService {
     }
 
     /**
-     * 新增用户菜单异常
+     * 新增用户菜单
      * @param relation
      */
     public void insertUserMenu(UserMenuRelation relation){

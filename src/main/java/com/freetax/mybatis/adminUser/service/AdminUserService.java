@@ -29,7 +29,7 @@ public class AdminUserService {
     public void insertAdminUser(AdminUser adminUser){
         try {
             log.info("新增boss后台用户");
-            adminUserMapper.insertSelective(adminUser);
+            adminUserMapper.insertUserByMenu(adminUser);
         } catch (Exception e) {
             log.error("新增boss后台用户异常",e);
             throw e;

@@ -2,6 +2,8 @@ package com.freetax.facade.boss;
 
 import com.freetax.mybatis.adminUser.entity.AdminUser;
 import com.freetax.mybatis.adminUser.service.AdminUserService;
+import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
+import com.freetax.mybatis.userMenuRelation.service.UserMenuRelationService;
 import com.freetax.utils.MD5Util;
 import com.freetax.utils.pagination.model.Paging;
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +25,20 @@ public class AdminUserFacade {
     @Autowired
     private AdminUserService adminUserService;
 
-    public Map insertAdminUser(String email, String phone, String remark, String nickname, String password, String isAdmin){
+    @Autowired
+    private UserMenuRelationService userMenuRelationService;
+
+    /**
+     * 新增boss用户
+     * @param email
+     * @param phone
+     * @param remark
+     * @param nickname
+     * @param password
+     * @param menus
+     * @return
+     */
+    public Map insertAdminUser(String email, String phone, String remark, String nickname, String password, String menus){
         Map resault = new HashMap();
         try {
             AdminUser adminUser = new AdminUser();
@@ -42,12 +57,13 @@ public class AdminUserFacade {
             if (StringUtils.isNotEmpty(password)){
                 adminUser.setPassword(MD5Util.MD5Encode(password, "UTF-8"));
             }
-            if (StringUtils.isNotEmpty(isAdmin)){
-                adminUser.setIsadmin(Integer.parseInt(isAdmin));
-            }
             adminUser.setIsdel(0);
             adminUser.setIntime(new Date());
             adminUserService.insertAdminUser(adminUser);
+            //设置用户和菜单关系
+            if (StringUtils.isNotEmpty(menus)) {
+                setUserByMenu(adminUser.getId().toString(), menus);
+            }
             resault.put("code",200);
         } catch (NumberFormatException e) {
             resault.put("code",300);
@@ -60,20 +76,16 @@ public class AdminUserFacade {
      * 修改用户信息
      * @param id
      * @param email
-     * @param phone
      * @param remark
      * @param nickname
      * @param password
-     * @param isAdmin
+     * @param menus
      */
-    public void updateAdminUserById(String id,String email, String phone, String remark, String nickname, String password, String isAdmin){
+    public void updateAdminUserById(String id,String email, String remark, String nickname, String password, String menus){
         AdminUser adminUser = new AdminUser();
         adminUser.setId(Integer.parseInt(id));
         if (StringUtils.isNotEmpty(email)){
             adminUser.setEmail(email);
-        }
-        if (StringUtils.isNotEmpty(phone)){
-            adminUser.setPhone(phone);
         }
         if (StringUtils.isNotEmpty(remark)){
             adminUser.setRemark(remark);
@@ -84,10 +96,27 @@ public class AdminUserFacade {
         if (StringUtils.isNotEmpty(password)){
             adminUser.setPassword(MD5Util.MD5Encode(password, "UTF-8"));
         }
-        if (StringUtils.isNotEmpty(isAdmin)){
-            adminUser.setIsadmin(Integer.parseInt(isAdmin));
+        if (StringUtils.isNotEmpty(menus)){
+            setUserByMenu(id, menus);
         }
         adminUserService.updateAdminUserById(adminUser);
+    }
+
+    /**
+     * 维护用户和菜单关系
+     * @param id
+     * @param menus
+     */
+    private void setUserByMenu(String id, String menus) {
+        UserMenuRelation menuRelation = new UserMenuRelation();
+        menuRelation.setUserid(Integer.parseInt(id));
+        //清除该用户的菜单绑定
+        userMenuRelationService.deleteUserMenu(menuRelation);
+        String[] menuList = menus.split(",");
+        for (int i = 0 ;i<menuList.length;i++){
+            menuRelation.setMenuid(Integer.parseInt(menuList[i]));
+            userMenuRelationService.insertUserMenu(menuRelation);
+        }
     }
 
     /**

@@ -33,7 +33,7 @@ public class AdminUserController {
      * @param remark
      * @param nickname
      * @param password
-     * @param isAdmin
+     * @param menus
      * @return
      */
     @ApiOperation(value = "新增后台用户",notes = "用于新增管理员用户",response = Response.class)
@@ -43,9 +43,9 @@ public class AdminUserController {
                                     @ApiParam(value = "备注")@RequestParam(required = false) String remark,
                                     @ApiParam(value = "昵称")@RequestParam(required = false) String nickname,
                                     @ApiParam(value = "密码")@RequestParam String password,
-                                    @ApiParam(value = "是否是超级管理员")@RequestParam String isAdmin){
+                                    @ApiParam(value = "菜单关系列表")@RequestParam(required = false) String menus){
         Response response = new Response();
-        Map resault = adminUserFacade.insertAdminUser(email,phone,remark,nickname,password,isAdmin);
+        Map resault = adminUserFacade.insertAdminUser(email,phone,remark,nickname,password,menus);
         if ((Integer)resault.get("code") == 200) {
             response.setMessage("操作成功");
             response.setData(1);
@@ -61,24 +61,22 @@ public class AdminUserController {
      * 修改用户信息
      * @param id
      * @param email
-     * @param phone
      * @param remark
      * @param nickname
      * @param password
-     * @param isAdmin
+     * @param menus
      * @return
      */
     @ApiOperation(value = "修改boss用户信息",notes = "用于修改用户资料",response = Response.class)
     @RequestMapping(value = "updateAdminUserById",method = RequestMethod.POST)
     public Response updateAdminUser(@ApiParam(value = "id")@RequestParam String id,
                                     @ApiParam(value = "邮箱")@RequestParam(required = false) String email,
-                                    @ApiParam(value = "电话")@RequestParam(required = false) String phone,
                                     @ApiParam(value = "备注")@RequestParam(required = false) String remark,
                                     @ApiParam(value = "昵称")@RequestParam(required = false) String nickname,
                                     @ApiParam(value = "密码")@RequestParam(required = false) String password,
-                                    @ApiParam(value = "是否是超级管理员")@RequestParam(required = false) String isAdmin){
+                                    @ApiParam(value = "菜单关系列表")@RequestParam(required = false) String menus){
         Response response = new Response();
-        adminUserFacade.updateAdminUserById(id,email,phone,remark,nickname,password,isAdmin);
+        adminUserFacade.updateAdminUserById(id,email,remark,nickname,password,menus);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

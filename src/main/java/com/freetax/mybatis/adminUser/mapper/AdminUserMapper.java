@@ -24,6 +24,8 @@ public interface AdminUserMapper {
 
     void deleteAdminUserById(Integer id);
 
+    int insertUserByMenu(AdminUser adminUser);
+
     AdminUser queryUserPasswordByName(String name);
 
     AdminUser queryUserPasswordByPhone(String phone);
