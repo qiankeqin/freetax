@@ -1,7 +1,6 @@
 package com.freetax.controller.boss;
 
 import com.freetax.common.Response;
-import com.freetax.common.ResponseVo;
 import com.freetax.facade.BannerManageFacade;
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author zhurui

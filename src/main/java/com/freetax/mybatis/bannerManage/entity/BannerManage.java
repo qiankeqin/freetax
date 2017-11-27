@@ -7,7 +7,7 @@ public class BannerManage {
 
     private String banner;
 
-    private String describe;
+    private String des;
 
     private Integer orderid;
 
@@ -35,12 +35,12 @@ public class BannerManage {
         this.banner = banner == null ? null : banner.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDes() {
+        return des;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDes(String des) {
+        this.des = des;
     }
 
     public Integer getOrderid() {

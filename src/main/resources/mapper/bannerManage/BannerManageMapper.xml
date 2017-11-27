@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.freetax.mybatis.bannerManage.entity.BannerManage" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="banner" property="banner" jdbcType="VARCHAR" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="des" property="des" jdbcType="VARCHAR" />
     <result column="orderid" property="orderid" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="location" property="location" jdbcType="INTEGER" />
@@ -12,7 +12,7 @@
     <result column="intime" property="intime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, banner, describe, orderid, title, location, isdel, intime
+    id, banner, des, orderid, title, location, isdel, intime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,10 +25,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
-    insert into fr_banner_manage (id, banner, describe, 
+    insert into fr_banner_manage (id, banner, des,
       orderid, title, location, 
       isdel, intime)
-    values (#{id,jdbcType=INTEGER}, #{banner,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{banner,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR},
       #{orderid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{location,jdbcType=INTEGER}, 
       #{isdel,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP})
   </insert>
@@ -41,8 +41,8 @@
       <if test="banner != null" >
         banner,
       </if>
-      <if test="describe != null" >
-        describe,
+      <if test="des != null" >
+        des,
       </if>
       <if test="orderid != null" >
         orderid,
@@ -67,8 +67,8 @@
       <if test="banner != null" >
         #{banner,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null" >
-        #{describe,jdbcType=VARCHAR},
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
       </if>
       <if test="orderid != null" >
         #{orderid,jdbcType=INTEGER},
@@ -93,8 +93,8 @@
       <if test="banner != null" >
         banner = #{banner,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null" >
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="des != null" >
+        des = #{des,jdbcType=VARCHAR},
       </if>
       <if test="orderid != null" >
         orderid = #{orderid,jdbcType=INTEGER},
@@ -117,7 +117,7 @@
   <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
     update fr_banner_manage
     set banner = #{banner,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR},
       orderid = #{orderid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       location = #{location,jdbcType=INTEGER},
@@ -146,8 +146,8 @@
       <if test="banner != null" >
         banner,
       </if>
-      <if test="describe != null" >
-        describe,
+      <if test="des != null" >
+        des,
       </if>
       <if test="orderid != null" >
         orderid,
@@ -172,8 +172,8 @@
       <if test="banner != null" >
         #{banner,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null" >
-        #{describe,jdbcType=VARCHAR},
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
       </if>
       <if test="orderid != null" >
         #{orderid,jdbcType=INTEGER},

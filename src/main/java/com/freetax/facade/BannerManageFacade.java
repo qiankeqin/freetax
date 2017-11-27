@@ -130,7 +130,7 @@ public class BannerManageFacade {
             bannerManage.setBanner(banner);
         }
         if (StringUtils.isNotEmpty(describe)){
-            bannerManage.setDescribe(describe);
+            bannerManage.setDes(describe);
         }
         if (StringUtils.isNotEmpty(orderid)){
             bannerManage.setOrderid(Integer.parseInt(orderid));
@@ -160,7 +160,7 @@ public class BannerManageFacade {
             bannerManage.setBanner(banner);
         }
         if (StringUtils.isNotEmpty(describe)){
-            bannerManage.setDescribe(describe);
+            bannerManage.setDes(describe);
         }
         if (StringUtils.isNotEmpty(orderid)){
             bannerManage.setOrderid(Integer.parseInt(orderid));
