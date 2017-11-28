@@ -110,7 +110,7 @@ public class MenuFacade {
      * @param orderid
      * @param pid
      */
-    public void insertMenu(String name, String url, String orderid, String pid) {
+    public void insertMenu(String name, String url, String orderid, String pid, String ico) {
         AdminMenu adminMenus = new AdminMenu();
         if (StringUtils.isNotEmpty(name)){
             adminMenus.setName(name);
@@ -123,6 +123,9 @@ public class MenuFacade {
         }
         if (StringUtils.isNotEmpty(pid)){
             adminMenus.setPid(Integer.parseInt(pid));
+        }
+        if (StringUtils.isNotEmpty(ico)){
+            adminMenus.setIco(ico);
         }
         adminMenus.setIntime(new Date());
         adminMenus.setIsdel(0);
@@ -146,7 +149,7 @@ public class MenuFacade {
      * @param orderid
      * @param pid
      */
-    public void updateMenuById(String id, String name, String url, String orderid, String pid) {
+    public void updateMenuById(String id, String name, String url, String orderid, String pid, String ico) {
         AdminMenu admiMenu = new AdminMenu();
         if (StringUtils.isNotEmpty(id)) {
             admiMenu.setId(Integer.parseInt(id));
@@ -162,6 +165,9 @@ public class MenuFacade {
         }
         if (StringUtils.isNotEmpty(pid)){
             admiMenu.setPid(Integer.parseInt(pid));
+        }
+        if (StringUtils.isNotEmpty(ico)){
+            admiMenu.setIco(ico);
         }
         adminMenuService.updateMenuById(admiMenu);
     }

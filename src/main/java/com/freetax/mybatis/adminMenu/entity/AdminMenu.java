@@ -17,6 +17,16 @@ public class AdminMenu {
 
     private Integer isdel;
 
+    private String ico;
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
     public Integer getId() {
         return id;
     }

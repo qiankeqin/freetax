@@ -22,6 +22,16 @@ public class AdminMenuVo {
 
     private Boolean isUse;
 
+    private String ico;
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
     public Boolean getUse() {
         return isUse;
     }

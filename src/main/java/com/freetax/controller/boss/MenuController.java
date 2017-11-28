@@ -85,9 +85,10 @@ public class MenuController {
     public Response insertMenu(@ApiParam(value = "名称")@RequestParam String name,
                                @ApiParam(value = "路径url")@RequestParam String url,
                                @ApiParam(value = "排序号")@RequestParam String orderid,
+                               @ApiParam(value = "图标")@RequestParam String ico,
                                @ApiParam(value = "父菜单id")@RequestParam(required = false) String pid){
         Response response = new Response();
-        menuFacade.insertMenu(name,url,orderid,pid);
+        menuFacade.insertMenu(name,url,orderid,pid,ico);
         response.setMessage("操作成功");
         response.setData(1);
         return response;
@@ -123,9 +124,10 @@ public class MenuController {
                                    @ApiParam(value = "名称")@RequestParam(required = false) String name,
                                    @ApiParam(value = "路径url")@RequestParam(required = false) String url,
                                    @ApiParam(value = "排序号")@RequestParam(required = false) String orderid,
+                                   @ApiParam(value = "图标")@RequestParam(required = false) String ico,
                                    @ApiParam(value = "父菜单id")@RequestParam(required = false) String pid){
         Response response = new Response();
-        menuFacade.updateMenuById(id,name,url,orderid,pid);
+        menuFacade.updateMenuById(id,name,url,orderid,pid,ico);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

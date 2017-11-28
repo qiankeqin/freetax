@@ -129,23 +129,22 @@ public class AdminUserFacade {
      * @return
      */
     public AdminUserVo queryAdminUserById(String id){
-        AdminUserVo adminUserVo = null;
+        AdminUserVo adminUserVo = new AdminUserVo();
         //查询用户的菜单
         List<AdminMenuVo> menus = userMenuRelationService.queryUserByMenuToList(Integer.parseInt(id));
         //查询所有菜单
         List<AdminMenuVo> adminMenus = adminMenuService.queryMenuList();
         //循环标记哪些菜单是已有，哪些是没有绑定的，以true和false代表
         for (int k = 0 ;k<adminMenus.size();k++){
-            if (menus != null) {
-                for (int i = 0; i < menus.size(); i++) {
-                    if (menus.get(i).getId() == adminMenus.get(k).getId()) {
-                        adminMenus.get(k).setUse(true);
-                        break;
-                    } else {
-                        adminMenus.get(k).setUse(false);
-                    }
+            for (int i = 0;i<menus.size();i++){
+                if (menus.get(i).getId() == adminMenus.get(k).getId()){
+                    adminMenus.get(k).setUse(true);
+                    break;
+                }else {
+                    adminMenus.get(k).setUse(false);
                 }
-            }else {
+            }
+            if (adminMenus.get(k).getUse() == null){
                 adminMenus.get(k).setUse(false);
             }
         }
