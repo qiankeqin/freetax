@@ -26,4 +26,8 @@ public interface AdminMenuMapper {
     List<AdminMenu> queryMenuListBySon(UserMenuRelation relation);
 
     List<AdminMenuVo> queryMenuList();
+
+    void insertMenu(AdminMenu adminMenus);
+
+    AdminMenu queryMenuById(Integer id);
 }

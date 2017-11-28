@@ -20,6 +20,16 @@ public class AdminMenuVo {
 
     private List<AdminMenu> submenu;
 
+    private Boolean isUse;
+
+    public Boolean getUse() {
+        return isUse;
+    }
+
+    public void setUse(Boolean use) {
+        isUse = use;
+    }
+
     public List<AdminMenu> getSubmenu() {
         return submenu;
     }

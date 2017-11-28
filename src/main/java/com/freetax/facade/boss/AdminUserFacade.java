@@ -1,6 +1,7 @@
 package com.freetax.facade.boss;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
+import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 import com.freetax.mybatis.adminUser.entity.AdminUser;
 import com.freetax.mybatis.adminUser.entity.AdminUserVo;
 import com.freetax.mybatis.adminUser.service.AdminUserService;
@@ -126,7 +127,7 @@ public class AdminUserFacade {
     public AdminUserVo queryAdminUserById(String id){
         AdminUserVo adminUserVo = new AdminUserVo();
         //查询用户的菜单
-        List<AdminMenu> menus = userMenuRelationService.queryUserByMenuToList(Integer.parseInt(id));
+        List<AdminMenuVo> menus = userMenuRelationService.queryUserByMenuToList(Integer.parseInt(id));
         adminUserVo = adminUserService.queryAdminUserById(Integer.parseInt(id));
         adminUserVo.setMenus(menus);
         return adminUserVo;
@@ -150,7 +151,7 @@ public class AdminUserFacade {
         }
         list =  adminUserService.queryAdminUserByList(adminUser,pag);
         for (int i = 0;i<list.size();i++){
-            List<AdminMenu> menus = userMenuRelationService.queryUserByMenuToList(list.get(i).getId());
+            List<AdminMenuVo> menus = userMenuRelationService.queryUserByMenuToList(list.get(i).getId());
             list.get(i).setMenus(menus);
         }
         return list;

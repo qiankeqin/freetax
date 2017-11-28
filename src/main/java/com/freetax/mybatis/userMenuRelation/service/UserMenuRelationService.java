@@ -1,6 +1,7 @@
 package com.freetax.mybatis.userMenuRelation.service;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
+import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
 import com.freetax.mybatis.userMenuRelation.mapper.UserMenuRelationMapper;
 import org.slf4j.Logger;
@@ -21,20 +22,6 @@ public class UserMenuRelationService {
 
     @Autowired
     private UserMenuRelationMapper userMenuRelationMapper;
-
-    /**
-     * 为用户绑定菜单
-     * @param relation
-     */
-    public void setMenuAndUserBinding(UserMenuRelation relation){
-        try {
-            log.info("为用户绑定菜单");
-            userMenuRelationMapper.setMenuAndUserBinding(relation);
-        } catch (Exception e) {
-            log.error("为用户绑定菜单异常",e);
-            throw e;
-        }
-    }
 
     /**
      * 删除用户下所有菜单关系
@@ -69,7 +56,7 @@ public class UserMenuRelationService {
      * @param id
      * @return
      */
-    public List<AdminMenu> queryUserByMenuToList(Integer id){
+    public List<AdminMenuVo> queryUserByMenuToList(Integer id){
         try {
             log.info("查询用户菜单");
             return userMenuRelationMapper.queryUserByMenuToList(id);

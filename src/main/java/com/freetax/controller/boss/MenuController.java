@@ -55,22 +55,6 @@ public class MenuController {
         return response;
     }
 
-    /**
-     * 菜单和用户绑定
-     *
-     * @return
-     */
-    @ApiOperation(value = "菜单和用户绑定",notes = "用于菜单和用户绑定",response = Response.class)
-    @RequestMapping(value = "setMenuAndUserBinding",method = RequestMethod.POST)
-    public Response insertMenuAndUserBinding(@ApiParam(value = "菜单id")@RequestParam String menuid,
-                                          @ApiParam(value = "用户id")@RequestParam String userid){
-        Response response = new Response();
-        menuFacade.setMenuAndUserBinding(menuid,userid);
-        response.setMessage("操作成功");
-        response.setData(1);
-        return response;
-    }
-
 
     /**
      * 修改用户菜单列表
@@ -87,4 +71,42 @@ public class MenuController {
         response.setData(1);
         return response;
     }
+
+    /**
+     * 新增菜单
+     * @param name
+     * @param url
+     * @param orderid
+     * @param pid
+     * @return
+     */
+    @RequestMapping(value = "insert_menu",method = RequestMethod.POST)
+    @ApiOperation(value = "新增菜单",notes = "新增菜单",response = Response.class)
+    public Response insertMenu(@ApiParam(value = "名称")@RequestParam String name,
+                               @ApiParam(value = "路径url")@RequestParam String url,
+                               @ApiParam(value = "排序号")@RequestParam String orderid,
+                               @ApiParam(value = "父菜单id")@RequestParam(required = false) String pid){
+        Response response = new Response();
+        menuFacade.insertMenu(name,url,orderid,pid);
+        response.setMessage("操作成功");
+        response.setData(1);
+        return response;
+    }
+
+    /**
+     * 根据id查询菜单
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "query_menu_id",method = RequestMethod.POST)
+    @ApiOperation(value = "根据id查询菜单",notes = "根据id查询菜单",response = Response.class)
+    public Response queryMenuById(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        AdminMenu menu = menuFacade.queryMenuById(id);
+        response.setMessage("查询成功");
+        response.setData(menu);
+        return response;
+    }
+
+
 }

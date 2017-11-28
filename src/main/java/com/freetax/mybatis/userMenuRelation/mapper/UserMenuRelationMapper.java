@@ -1,6 +1,7 @@
 package com.freetax.mybatis.userMenuRelation.mapper;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
+import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 import com.freetax.mybatis.userMenuRelation.entity.UserMenuRelation;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +21,9 @@ public interface UserMenuRelationMapper {
 
     int updateByPrimaryKey(UserMenuRelation record);
 
-    void setMenuAndUserBinding(UserMenuRelation relation);
-
     void deleteUserMenu(UserMenuRelation relation);
 
     void insertUserMenu(UserMenuRelation relation);
 
-    List<AdminMenu> queryUserByMenuToList(Integer id);
+    List<AdminMenuVo> queryUserByMenuToList(Integer id);
 }

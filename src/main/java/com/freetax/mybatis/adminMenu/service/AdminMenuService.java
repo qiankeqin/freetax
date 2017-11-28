@@ -65,4 +65,33 @@ public class AdminMenuService {
             throw e;
         }
     }
+
+    /**
+     * 新增菜单
+     * @param adminMenus
+     */
+    public void insertMenu(AdminMenu adminMenus) {
+        try {
+            log.info("新增菜单");
+            adminMenuMapper.insertMenu(adminMenus);
+        } catch (Exception e){
+            log.error("新增菜单异常",e);
+            throw e;
+        }
+    }
+
+    /**
+     * 根据id查询菜单
+     * @param id
+     * @return
+     */
+    public AdminMenu queryMenuById(Integer id){
+        try {
+            log.info("根据id查询菜单");
+            return adminMenuMapper.queryMenuById(id);
+        } catch (Exception e){
+            log.error("根据id查询菜单异常",e);
+            throw e;
+        }
+    }
 }

@@ -138,4 +138,58 @@
     FROM fr_admin_menu
     WHERE isdel = 0 AND pid IS NULL
   </select>
+
+  <insert id="insertMenu" parameterType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
+    insert into fr_admin_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="intime != null" >
+        intime,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="queryMenuById" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
+    SELECT * FROM fr_admin_menu WHERE id = #{id,jdbcType=INTEGER} AND isdel = 0
+  </select>
 </mapper>

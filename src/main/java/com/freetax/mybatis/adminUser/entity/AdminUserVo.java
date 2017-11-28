@@ -1,6 +1,7 @@
 package com.freetax.mybatis.adminUser.entity;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
+import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,13 +26,13 @@ public class AdminUserVo implements Serializable{
 
     private Integer isadmin;
 
-    private List<AdminMenu> menus;
+    private List<AdminMenuVo> menus;
 
-    public List<AdminMenu> getMenus() {
+    public List<AdminMenuVo> getMenus() {
         return menus;
     }
 
-    public void setMenus(List<AdminMenu> menus) {
+    public void setMenus(List<AdminMenuVo> menus) {
         this.menus = menus;
     }
 

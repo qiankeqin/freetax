@@ -11,10 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author zhurui
@@ -83,22 +80,6 @@ public class MenuFacade {
     }
 
     /**
-     * 菜单和用户绑定
-     * @param menuid
-     * @param userid
-     */
-    public void setMenuAndUserBinding(String menuid,String userid){
-        UserMenuRelation relation = new UserMenuRelation();
-        if (StringUtils.isNotEmpty(menuid)){
-            relation.setMenuid(Integer.parseInt(menuid));
-        }
-        if (StringUtils.isNotEmpty(userid)){
-            relation.setUserid(Integer.parseInt(userid));
-        }
-        userMenuRelationService.setMenuAndUserBinding(relation);
-    }
-
-    /**
      * 修改用户下的菜单列表
      * @param userid
      * @param menuid
@@ -119,5 +100,41 @@ public class MenuFacade {
                 userMenuRelationService.insertUserMenu(relation);
             }
         }
+    }
+
+
+    /**
+     * 新增菜单
+     * @param name
+     * @param url
+     * @param orderid
+     * @param pid
+     */
+    public void insertMenu(String name, String url, String orderid, String pid) {
+        AdminMenu adminMenus = new AdminMenu();
+        if (StringUtils.isNotEmpty(name)){
+            adminMenus.setName(name);
+        }
+        if (StringUtils.isNotEmpty(url)){
+            adminMenus.setUrl(url);
+        }
+        if (StringUtils.isNotEmpty(orderid)){
+            adminMenus.setOrderid(Integer.parseInt(orderid));
+        }
+        if (StringUtils.isNotEmpty(pid)){
+            adminMenus.setPid(Integer.parseInt(pid));
+        }
+        adminMenus.setIntime(new Date());
+        adminMenus.setIsdel(0);
+        adminMenuService.insertMenu(adminMenus);
+    }
+
+    /**
+     * 根据id查询菜单
+     * @param id
+     * @return
+     */
+    public AdminMenu queryMenuById(String id){
+        return adminMenuService.queryMenuById(Integer.parseInt(id));
     }
 }

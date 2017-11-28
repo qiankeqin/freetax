@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/boss/user")
-public class memberManageController {
+public class MemberManageController {
 
     @Autowired
     private UserFacade userFacade;
