@@ -130,7 +130,7 @@
     SELECT *
     FROM fr_admin_menu
     WHERE isdel = 0 AND pid IS NULL
-     <if test="id != null">
+     <if test="userid != null">
        AND id IN
        (SELECT menuid FROM fr_user_menu_relation WHERE userid = #{userid,jdbcType=INTEGER})
      </if>

@@ -40,6 +40,7 @@ public class MenuFacade {
         System.out.println("登录用户id:----------------------"+adminUser.getId());
         if (adminUser != null){
             if (adminUser.getIsadmin() == 1) {//超级管理员
+                System.out.println("超级管理员。。。。。。。。。。。");
                 //查询所有父菜单
                 menus = adminMenuService.queryMenuListByVariation(relation);
                 for (int i = 0; i < menus.size(); i++) {
@@ -49,6 +50,7 @@ public class MenuFacade {
                     menus.get(i).setSubmenu(child_menu);
                 }
             } else {//普通用户
+                System.out.println("普通用户。。。。。。。。。。。");
                 relation.setUserid(adminUser.getId());
                 //查询所有父菜单
                 menus = adminMenuService.queryMenuListByVariation(relation);
