@@ -136,13 +136,17 @@ public class AdminUserFacade {
         List<AdminMenuVo> adminMenus = adminMenuService.queryMenuList();
         //循环标记哪些菜单是已有，哪些是没有绑定的，以true和false代表
         for (int k = 0 ;k<adminMenus.size();k++){
-            for (int i = 0;i<menus.size();i++){
-                if (menus.get(i).getId() == adminMenus.get(k).getId()){
-                    adminMenus.get(k).setUse(true);
-                    break;
-                }else {
-                    adminMenus.get(k).setUse(false);
+            if (menus != null) {
+                for (int i = 0; i < menus.size(); i++) {
+                    if (menus.get(i).getId() == adminMenus.get(k).getId()) {
+                        adminMenus.get(k).setUse(true);
+                        break;
+                    } else {
+                        adminMenus.get(k).setUse(false);
+                    }
                 }
+            }else {
+                adminMenus.get(k).setUse(false);
             }
         }
         adminUserVo = adminUserService.queryAdminUserById(Integer.parseInt(id));
