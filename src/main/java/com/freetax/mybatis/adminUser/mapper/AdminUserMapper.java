@@ -21,7 +21,7 @@ public interface AdminUserMapper {
 
     int updateByPrimaryKey(AdminUser record);
 
-    List<AdminUser> findAllQueryAdminUserByList(AdminUser adminUser , RowBounds rowBounds);
+    List<AdminUserVo> findAllQueryAdminUserByList(AdminUser adminUser , RowBounds rowBounds);
 
     void deleteAdminUserById(Integer id);
 

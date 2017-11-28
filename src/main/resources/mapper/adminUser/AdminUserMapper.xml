@@ -139,7 +139,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <select id="findAllQueryAdminUserByList" resultType="com.freetax.mybatis.adminUser.entity.AdminUser"
+    <select id="findAllQueryAdminUserByList" resultType="com.freetax.mybatis.adminUser.entity.AdminUserVo"
             parameterType="com.freetax.mybatis.adminUser.entity.AdminUser">
         SELECT * FROM fr_admin_user WHERE isdel = 0
         <if test="phone != null">

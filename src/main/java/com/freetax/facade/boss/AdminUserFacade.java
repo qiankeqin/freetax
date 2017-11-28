@@ -12,10 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author zhurui
@@ -142,15 +139,21 @@ public class AdminUserFacade {
      * @param pag
      * @return
      */
-    public List<AdminUser> queryAdminUserByList(String nickname,String phone,Paging<AdminUser> pag){
+    public List<AdminUserVo> queryAdminUserByList(String nickname,String phone,Paging<AdminUserVo> pag){
         AdminUser adminUser = new AdminUser();
+        List<AdminUserVo> list = new ArrayList<>();
         if (StringUtils.isNotEmpty(nickname)){
             adminUser.setNickname(nickname);
         }
         if (StringUtils.isNotEmpty(phone)){
             adminUser.setPhone(phone);
         }
-        return adminUserService.queryAdminUserByList(adminUser,pag);
+        list =  adminUserService.queryAdminUserByList(adminUser,pag);
+        for (int i = 0;i<list.size();i++){
+            List<AdminMenu> menus = userMenuRelationService.queryUserByMenuToList(list.get(i).getId());
+            list.get(i).setMenus(menus);
+        }
+        return list;
     }
 
     /**

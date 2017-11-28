@@ -72,7 +72,7 @@ public class AdminUserService {
      * @param pag
      * @return
      */
-    public List<AdminUser> queryAdminUserByList(AdminUser adminUser, Paging<AdminUser> pag){
+    public List<AdminUserVo> queryAdminUserByList(AdminUser adminUser, Paging<AdminUserVo> pag){
         try {
             log.info("查询用户列表");
             return adminUserMapper.findAllQueryAdminUserByList(adminUser,pag.getRowBounds());

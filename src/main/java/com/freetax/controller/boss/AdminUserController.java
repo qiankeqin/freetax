@@ -111,8 +111,8 @@ public class AdminUserController {
                                          @ApiParam(value = "当前页")@RequestParam(defaultValue = "1") String pageNo,
                                          @ApiParam(value = "每页几条")@RequestParam(defaultValue = "10") String pageSize){
         Response response = new Response();
-        Paging<AdminUser> pag = new Paging<AdminUser>(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
-        List<AdminUser> adminUsers = adminUserFacade.queryAdminUserByList(nickname,phone,pag);
+        Paging<AdminUserVo> pag = new Paging<AdminUserVo>(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+        List<AdminUserVo> adminUsers = adminUserFacade.queryAdminUserByList(nickname,phone,pag);
         pag.result(adminUsers);
         response.setMessage("查询成功");
         response.setData(pag);
