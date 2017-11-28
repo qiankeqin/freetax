@@ -251,7 +251,7 @@
     </update>
 
     <update id="updateUserByMark" parameterType="com.freetax.mybatis.user.entity.User">
-        UPDATE fr_user SET mark = #{mark,jdbcType=INTEGER} WHERE  id = #{id,jdbcType=INTEGER} AND isdel = 0
+        UPDATE fr_user SET mark = #{mark,jdbcType=INTEGER} WHERE  id = #{id,jdbcType=INTEGER} AND status = 0
     </update>
 
     <select id="findAllQueryUserByList" parameterType="com.freetax.mybatis.user.entity.UserVo"
