@@ -2,6 +2,7 @@ package com.freetax.facade.boss;
 
 import com.freetax.mybatis.adminMenu.entity.AdminMenu;
 import com.freetax.mybatis.adminMenu.entity.AdminMenuVo;
+import com.freetax.mybatis.adminMenu.service.AdminMenuService;
 import com.freetax.mybatis.adminUser.entity.AdminUser;
 import com.freetax.mybatis.adminUser.entity.AdminUserVo;
 import com.freetax.mybatis.adminUser.service.AdminUserService;
@@ -27,6 +28,9 @@ public class AdminUserFacade {
 
     @Autowired
     private UserMenuRelationService userMenuRelationService;
+
+    @Autowired
+    private AdminMenuService adminMenuService;
 
     /**
      * 新增boss用户
@@ -128,8 +132,21 @@ public class AdminUserFacade {
         AdminUserVo adminUserVo = new AdminUserVo();
         //查询用户的菜单
         List<AdminMenuVo> menus = userMenuRelationService.queryUserByMenuToList(Integer.parseInt(id));
+        //查询所有菜单
+        List<AdminMenuVo> adminMenus = adminMenuService.queryMenuList();
+        //循环标记哪些菜单是已有，哪些是没有绑定的，以true和false代表
+        for (int k = 0 ;k<adminMenus.size();k++){
+            for (int i = 0;i<menus.size();i++){
+                if (menus.get(i).getId() == adminMenus.get(k).getId()){
+                    adminMenus.get(k).setUse(true);
+                    break;
+                }else {
+                    adminMenus.get(k).setUse(false);
+                }
+            }
+        }
         adminUserVo = adminUserService.queryAdminUserById(Integer.parseInt(id));
-        adminUserVo.setMenus(menus);
+        adminUserVo.setMenus(adminMenus);
         return adminUserVo;
     }
 
