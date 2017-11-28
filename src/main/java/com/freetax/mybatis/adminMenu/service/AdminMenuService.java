@@ -94,4 +94,18 @@ public class AdminMenuService {
             throw e;
         }
     }
+
+    /**
+     * 修改菜单
+     * @param adminMenu
+     */
+    public void updateMenuById(AdminMenu adminMenu){
+        try {
+            log.info("修改菜单");
+            adminMenuMapper.updateMenuById(adminMenu);
+        } catch (Exception e){
+            log.error("修改菜单异常",e);
+            throw e;
+        }
+    }
 }

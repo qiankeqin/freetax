@@ -137,4 +137,32 @@ public class MenuFacade {
     public AdminMenu queryMenuById(String id){
         return adminMenuService.queryMenuById(Integer.parseInt(id));
     }
+
+    /**
+     * 修改菜单
+     * @param id
+     * @param name
+     * @param url
+     * @param orderid
+     * @param pid
+     */
+    public void updateMenuById(String id, String name, String url, String orderid, String pid) {
+        AdminMenu admiMenu = new AdminMenu();
+        if (StringUtils.isNotEmpty(id)) {
+            admiMenu.setId(Integer.parseInt(id));
+        }
+        if (StringUtils.isNotEmpty(name)){
+            admiMenu.setName(name);
+        }
+        if (StringUtils.isNotEmpty(url)){
+            admiMenu.setUrl(url);
+        }
+        if (StringUtils.isNotEmpty(orderid)){
+            admiMenu.setOrderid(Integer.parseInt(orderid));
+        }
+        if (StringUtils.isNotEmpty(pid)){
+            admiMenu.setPid(Integer.parseInt(pid));
+        }
+        adminMenuService.updateMenuById(admiMenu);
+    }
 }

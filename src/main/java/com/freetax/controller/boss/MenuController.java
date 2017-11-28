@@ -108,5 +108,28 @@ public class MenuController {
         return response;
     }
 
+    /**
+     * 编辑菜单
+     * @param id
+     * @param name
+     * @param url
+     * @param orderid
+     * @param pid
+     * @return
+     */
+    @RequestMapping(value = "update_menu_id",method = RequestMethod.POST)
+    @ApiOperation(value = "修改菜单",notes = "修改菜单",response = Response.class)
+    public Response updateMenuById(@ApiParam(value = "id")@RequestParam String id,
+                                   @ApiParam(value = "名称")@RequestParam String name,
+                                   @ApiParam(value = "路径url")@RequestParam String url,
+                                   @ApiParam(value = "排序号")@RequestParam String orderid,
+                                   @ApiParam(value = "父菜单id")@RequestParam(required = false) String pid){
+        Response response = new Response();
+        menuFacade.updateMenuById(id,name,url,orderid,pid);
+        response.setMessage("操作成功");
+        response.setData(1);
+        return response;
+    }
+
 
 }

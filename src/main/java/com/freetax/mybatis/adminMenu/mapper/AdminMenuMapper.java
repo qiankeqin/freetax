@@ -30,4 +30,6 @@ public interface AdminMenuMapper {
     void insertMenu(AdminMenu adminMenus);
 
     AdminMenu queryMenuById(Integer id);
+
+    void updateMenuById(AdminMenu adminMenu);
 }

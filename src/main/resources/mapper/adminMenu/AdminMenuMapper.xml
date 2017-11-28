@@ -192,4 +192,29 @@
   <select id="queryMenuById" parameterType="java.lang.Integer" resultType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
     SELECT * FROM fr_admin_menu WHERE id = #{id,jdbcType=INTEGER} AND isdel = 0
   </select>
+
+  <update id="updateMenuById" parameterType="com.freetax.mybatis.adminMenu.entity.AdminMenu">
+    update fr_admin_menu
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        intime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
