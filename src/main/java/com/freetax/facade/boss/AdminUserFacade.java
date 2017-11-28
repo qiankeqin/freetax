@@ -129,7 +129,7 @@ public class AdminUserFacade {
      * @return
      */
     public AdminUserVo queryAdminUserById(String id){
-        AdminUserVo adminUserVo = new AdminUserVo();
+        AdminUserVo adminUserVo = null;
         //查询用户的菜单
         List<AdminMenuVo> menus = userMenuRelationService.queryUserByMenuToList(Integer.parseInt(id));
         //查询所有菜单
