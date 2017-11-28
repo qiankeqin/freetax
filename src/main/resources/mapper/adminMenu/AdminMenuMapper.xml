@@ -217,4 +217,14 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="deleteMenuById" parameterType="java.lang.Integer">
+    update fr_admin_menu
+    <set >
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -120,12 +120,28 @@ public class MenuController {
     @RequestMapping(value = "update_menu_id",method = RequestMethod.POST)
     @ApiOperation(value = "修改菜单",notes = "修改菜单",response = Response.class)
     public Response updateMenuById(@ApiParam(value = "id")@RequestParam String id,
-                                   @ApiParam(value = "名称")@RequestParam String name,
-                                   @ApiParam(value = "路径url")@RequestParam String url,
-                                   @ApiParam(value = "排序号")@RequestParam String orderid,
+                                   @ApiParam(value = "名称")@RequestParam(required = false) String name,
+                                   @ApiParam(value = "路径url")@RequestParam(required = false) String url,
+                                   @ApiParam(value = "排序号")@RequestParam(required = false) String orderid,
                                    @ApiParam(value = "父菜单id")@RequestParam(required = false) String pid){
         Response response = new Response();
         menuFacade.updateMenuById(id,name,url,orderid,pid);
+        response.setMessage("操作成功");
+        response.setData(1);
+        return response;
+    }
+
+
+    /**
+     * 删除菜单
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delete_menu_id",method = RequestMethod.POST)
+    @ApiOperation(value = "删除菜单",notes = "删除菜单",response = Response.class)
+    public Response deleteMenuById(@ApiParam(value = "id")@RequestParam String id){
+        Response response = new Response();
+        menuFacade.deleteMenuById(id);
         response.setMessage("操作成功");
         response.setData(1);
         return response;

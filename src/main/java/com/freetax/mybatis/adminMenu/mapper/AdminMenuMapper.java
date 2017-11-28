@@ -32,4 +32,6 @@ public interface AdminMenuMapper {
     AdminMenu queryMenuById(Integer id);
 
     void updateMenuById(AdminMenu adminMenu);
+
+    void deleteMenuById(Integer id);
 }

@@ -108,4 +108,18 @@ public class AdminMenuService {
             throw e;
         }
     }
+
+    /**
+     * 删除菜单
+     * @param id
+     */
+    public void deleteMenuById(Integer id) {
+        try {
+            log.info("删除菜单");
+            adminMenuMapper.deleteMenuById(id);
+        } catch (Exception e){
+            log.error("删除菜单异常",e);
+            throw e;
+        }
+    }
 }

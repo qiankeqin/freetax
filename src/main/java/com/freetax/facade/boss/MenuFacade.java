@@ -165,4 +165,12 @@ public class MenuFacade {
         }
         adminMenuService.updateMenuById(admiMenu);
     }
+
+    /**
+     * 删除菜单
+     * @param id
+     */
+    public void deleteMenuById(String id){
+        adminMenuService.deleteMenuById(Integer.parseInt(id));
+    }
 }
