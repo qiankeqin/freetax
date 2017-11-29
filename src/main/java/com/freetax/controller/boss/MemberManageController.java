@@ -125,13 +125,12 @@ public class MemberManageController {
                                     @ApiParam(value = "最后登录结束时间")@RequestParam(required = false) String logend,
                                     @ApiParam(value = "最后开始询问时间")@RequestParam(required = false) String advicebiegin,
                                     @ApiParam(value = "最后结束询问时间")@RequestParam(required = false) String adviceend,
-                                    @ApiParam(value = "注册开始时间")@RequestParam(required = false) String registerin,
-                                    @ApiParam(value = "注册结束时间")@RequestParam(required = false) String registerend,
+                                    @ApiParam(value = "注册开始时间")@RequestParam(required = false) String intime,
                                     @ApiParam(value = "当前页") @RequestParam(defaultValue = "1") String pageNo,
                                     @ApiParam(value = "每页几条") @RequestParam(defaultValue = "10") String pageSize) {
         Response response = new Response();
         Paging<User> pag = new Paging<User>(Integer.valueOf(pageNo), Integer.parseInt(pageSize));
-        List<User> users = userFacade.queryUserByList(phone, name, company, infosource, mark,logbegin,logend, advicebiegin,adviceend, pag,registerend,registerin);
+        List<User> users = userFacade.queryUserByList(phone, name, company, infosource, mark,logbegin,logend, advicebiegin,adviceend, pag,intime);
         pag.result(users);
         response.setMessage("查询成功");
         response.setData(pag);

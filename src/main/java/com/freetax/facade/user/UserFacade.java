@@ -135,7 +135,7 @@ public class UserFacade {
 
     public List<User> queryUserByList(String phone, String name, String company, String infosource, String mark,
                                       String logbegin, String logend, String advicebiegin, String adviceend, Paging<User> pag,
-                                      String registerend,String registerin) {
+                                      String intime) {
         UserVo user = new UserVo();
         if (StringUtils.isNotEmpty(phone)){
             user.setPhone(phone);
@@ -167,6 +167,18 @@ public class UserFacade {
             user.setAdviceEnd(advmap.get("end"));
             user.setAdviceBegin(advmap.get("begin"));
         }
+        //分解注册时间
+        String registerin = "";
+        String registerend = "";
+        String[] times = intime.split(",");
+        for (int j = 0; j<times.length; j++){
+            if (j == 0) {
+                registerin = times[j];
+            }else if (j == 1) {
+                registerend = times[j];
+            }
+        }
+
         //注册时间的时间操作
         Map<String,Date> regmap = getTime(registerin, registerend, format);
         if (regmap != null){
