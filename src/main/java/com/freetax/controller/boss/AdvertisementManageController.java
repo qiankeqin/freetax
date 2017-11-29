@@ -98,9 +98,10 @@ public class AdvertisementManageController {
     @ApiOperation(value = "查询广告列表",notes = "查询广告列表",response = Response.class)
     public Response queryAdvertisementByList(@ApiParam(value = "标题")@RequestParam(required = false) String title,
                                              @ApiParam(value = "banner位置 1:主页顶部banner 2:主页滚动banner 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner " +
-                                                     "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam(required = false) String location){
+                                                     "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam(required = false) String location,
+                                             @ApiParam(value = "时间")@RequestParam(required = false) String intime){
         Response response = new Response();
-        List<BannerManage> list = bannerManageFacade.queryAdvertisementByList(title,location);
+        List<BannerManage> list = bannerManageFacade.queryAdvertisementByList(title,location,intime);
         response.setMessage("查询成功");
         response.setData(list);
         return response;

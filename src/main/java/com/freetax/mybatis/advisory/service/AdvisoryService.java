@@ -1,6 +1,7 @@
 package com.freetax.mybatis.advisory.service;
 
 import com.freetax.mybatis.advisory.entity.Advisory;
+import com.freetax.mybatis.advisory.entity.AdvisoryVo;
 import com.freetax.mybatis.advisory.mapper.AdvisoryMapper;
 import com.freetax.utils.pagination.model.Paging;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class AdvisoryService {
      * @param pag
      * @return
      */
-    public List<Advisory> queryAdvisoryByList(Advisory advisory, Paging<Advisory> pag){
+    public List<Advisory> queryAdvisoryByList(AdvisoryVo advisory, Paging<Advisory> pag){
         try {
             log.info("查询咨询列表");
             return advisoryMapper.findAllQueryAdvisoryByList(advisory,pag.getRowBounds());

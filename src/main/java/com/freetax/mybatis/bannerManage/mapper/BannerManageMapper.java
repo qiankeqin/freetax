@@ -1,6 +1,7 @@
 package com.freetax.mybatis.bannerManage.mapper;
 
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
+import com.freetax.mybatis.bannerManage.entity.BannerManageVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface BannerManageMapper {
 
     BannerManage queryAdvertisementById(Integer id);
 
-    List<BannerManage> queryAdvertisementByList(BannerManage bannerManage);
+    List<BannerManage> queryAdvertisementByList(BannerManageVo bannerManage);
 
     void deleteAdvertisement(BannerManage bannerManage);
 }

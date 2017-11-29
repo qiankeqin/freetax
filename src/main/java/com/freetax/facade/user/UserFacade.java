@@ -167,6 +167,18 @@ public class UserFacade {
             user.setAdviceEnd(advmap.get("end"));
             user.setAdviceBegin(advmap.get("begin"));
         }
+        Map<String, Date> regmap = getDateTimeMap(intime, format);
+
+        if (regmap != null){
+            user.setRegisterend(regmap.get("end"));
+            user.setRegisterin(regmap.get("begin"));
+        }
+
+        return userService.queryUserByList(user,pag);
+
+    }
+
+    public Map<String, Date> getDateTimeMap(String intime, SimpleDateFormat format) {
         //分解注册时间
         String registerin = "";
         String registerend = "";
@@ -183,14 +195,7 @@ public class UserFacade {
 
         }
         //注册时间的时间操作
-        Map<String,Date> regmap = getTime(registerin, registerend, format);
-        if (regmap != null){
-            user.setRegisterend(regmap.get("end"));
-            user.setRegisterin(regmap.get("begin"));
-        }
-
-        return userService.queryUserByList(user,pag);
-
+        return getTime(registerin, registerend, format);
     }
 
     /**

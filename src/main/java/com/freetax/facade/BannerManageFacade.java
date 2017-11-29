@@ -1,6 +1,8 @@
 package com.freetax.facade;
 
+import com.freetax.facade.user.UserFacade;
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
+import com.freetax.mybatis.bannerManage.entity.BannerManageVo;
 import com.freetax.mybatis.bannerManage.entity.IndexInformation;
 import com.freetax.mybatis.bannerManage.service.BannerManageService;
 import com.freetax.mybatis.information.entity.Information;
@@ -19,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -35,7 +38,7 @@ public class BannerManageFacade {
     private InformationService informationService;
 
     @Autowired
-    private ImcisionImgUtils imcisionImgUtils;
+    private UserFacade userFacade;
 
     @Autowired
     private MovisionOssClient movisionOssClient;
@@ -193,13 +196,21 @@ public class BannerManageFacade {
      * @param location
      * @return
      */
-    public List<BannerManage> queryAdvertisementByList(String title,String location){
-        BannerManage bannerManage = new BannerManage();
+    public List<BannerManage> queryAdvertisementByList(String title,String location,String intime){
+        BannerManageVo bannerManage = new BannerManageVo();
         if (StringUtils.isNotEmpty(title)){
             bannerManage.setTitle(title);
         }
         if (StringUtils.isNotEmpty(location)){
             bannerManage.setLocation(Integer.parseInt(location));
+        }
+        if (StringUtils.isNotEmpty(intime)){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Map<String,Date> map = userFacade.getDateTimeMap(intime,format);
+            if (map != null){
+                bannerManage.setIntimeend(map.get("end"));
+                bannerManage.setIntimein(map.get("begin"));
+            }
         }
         return bannerManageService.queryAdvertisementByList(bannerManage);
     }

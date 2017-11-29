@@ -106,7 +106,7 @@ public class InformationService {
      * @param pag
      * @return
      */
-    public List<Information> findAllQueryInformationByList(Information information, Paging<Information> pag) {
+    public List<Information> findAllQueryInformationByList(InformationVo information, Paging<Information> pag) {
         try {
             log.info("条件查询资讯文章列表");
             return informationMapper.findAllQueryInformationByList(information, pag.getRowBounds());

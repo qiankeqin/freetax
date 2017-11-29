@@ -51,11 +51,12 @@ public class AdvisoryController {
     @RequestMapping(value = "query_advisory_list",method = RequestMethod.POST)
     public Response queryAdvisoryByList(@ApiParam(value = "电话号")@RequestParam(required = false) String phone,
                                         @ApiParam(value = "visit")@RequestParam(required = false) String visit,
+                                        @ApiParam(value = "咨询时间查询")@RequestParam(required = false) String intime,
                                         @ApiParam(value = "当前页")@RequestParam String pageNo,
                                         @ApiParam(value = "每页几条")@RequestParam String pageSize){
         Response response = new Response();
         Paging<Advisory> pag =  new Paging<Advisory>(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
-        List<Advisory> advisories = advisoryFacade.queryAdvisoryByList(phone,visit,pag);
+        List<Advisory> advisories = advisoryFacade.queryAdvisoryByList(phone,visit,intime,pag);
         pag.result(advisories);
         response.setMessage("查询成功");
         response.setData(pag);

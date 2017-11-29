@@ -31,6 +31,26 @@ public class InformationVo {
 
     private String belowTitle;//下一条标题
 
+    private Date intimein;
+
+    private Date intimeend;
+
+    public Date getIntimein() {
+        return intimein;
+    }
+
+    public void setIntimein(Date intimein) {
+        this.intimein = intimein;
+    }
+
+    public Date getIntimeend() {
+        return intimeend;
+    }
+
+    public void setIntimeend(Date intimeend) {
+        this.intimeend = intimeend;
+    }
+
     public Integer getUpid() {
         return upid;
     }

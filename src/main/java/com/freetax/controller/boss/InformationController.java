@@ -122,11 +122,12 @@ public class InformationController {
                                            @ApiParam(value = "资讯类型") @RequestParam(required = false) String type,
                                            @ApiParam(value = "是否热门") @RequestParam(required = false) String ishot,
                                            @ApiParam(value = "资讯来源") @RequestParam(required = false) String source,
+                                           @ApiParam(value = "时间")@RequestParam(required = false) String intime,
                                            @ApiParam(value = "当前页") @RequestParam(defaultValue = "1") String pageNo,
                                            @ApiParam(value = "每页几条") @RequestParam(defaultValue = "10") String pageSize) {
         Response response = new Response();
         Paging<Information> pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
-        List<Information> list = informationFacade.queryInformationByList(title, type, ishot, source, pag);
+        List<Information> list = informationFacade.queryInformationByList(title, type, ishot, source, intime, pag);
         pag.result(list);
         response.setMessage("查询成功");
         response.setData(pag);

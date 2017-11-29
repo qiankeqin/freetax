@@ -1,14 +1,18 @@
 package com.freetax.facade;
 
+import com.freetax.facade.user.UserFacade;
 import com.freetax.mybatis.advisory.entity.Advisory;
+import com.freetax.mybatis.advisory.entity.AdvisoryVo;
 import com.freetax.mybatis.advisory.service.AdvisoryService;
 import com.freetax.utils.pagination.model.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author zhurui
@@ -19,6 +23,9 @@ public class AdvisoryFacade {
 
     @Autowired
     private AdvisoryService advisoryService;
+
+    @Autowired
+    private UserFacade userFacade;
 
     /**
      * 咨询
@@ -63,13 +70,22 @@ public class AdvisoryFacade {
      * @param pag
      * @return
      */
-    public List<Advisory> queryAdvisoryByList(String phone, String visit, Paging<Advisory> pag) {
-        Advisory advisory = new Advisory();
+    public List<Advisory> queryAdvisoryByList(String phone, String visit, String intime, Paging<Advisory> pag) {
+        AdvisoryVo advisory = new AdvisoryVo();
         if (StringUtils.isNotEmpty(phone)) {
             advisory.setPhone(phone);
         }
         if (StringUtils.isNotEmpty(visit)) {
             advisory.setVisit(Integer.parseInt(visit));
+        }
+        if (StringUtils.isNotEmpty(intime)){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Map<String,Date> map = userFacade.getDateTimeMap(intime,format);
+            if (map != null) {
+                advisory.setIntimeend(map.get("end"));
+                advisory.setIntimein(map.get("begin"));
+            }
+
         }
         return advisoryService.queryAdvisoryByList(advisory, pag);
     }

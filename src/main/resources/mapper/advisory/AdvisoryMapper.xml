@@ -110,6 +110,10 @@
             <if test="visit != null">
                 AND visit = #{visit,jdbcType=INTEGER}
             </if>
+            <if test="intimein != null and intimeend != null">
+                <![CDATA[ AND intime >=#{intimein,jdbcType=DATE}]]>
+                <![CDATA[ AND intime <=#{intimeend,jdbcType=DATE}]]>
+            </if>
         </where>
         ORDER BY intime DESC
     </select>

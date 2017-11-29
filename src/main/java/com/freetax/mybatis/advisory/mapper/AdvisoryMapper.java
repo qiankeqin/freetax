@@ -1,6 +1,7 @@
 package com.freetax.mybatis.advisory.mapper;
 
 import com.freetax.mybatis.advisory.entity.Advisory;
+import com.freetax.mybatis.advisory.entity.AdvisoryVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public interface AdvisoryMapper {
 
     Advisory queryAdvisoryById(Integer id);
 
-    List<Advisory> findAllQueryAdvisoryByList(Advisory advisory, RowBounds rowBounds);
+    List<Advisory> findAllQueryAdvisoryByList(AdvisoryVo advisory, RowBounds rowBounds);
 
     void updateAdvisoryVisit(Advisory advisory);
 

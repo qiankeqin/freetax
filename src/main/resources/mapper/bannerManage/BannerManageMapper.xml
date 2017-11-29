@@ -207,6 +207,10 @@
     <if test="title != null">
       AND title LIKE CONCAT('%',#{title,jdbcType=VARCHAR},'%')
     </if>
+    <if test="intimein != null and intimeend != null">
+      <![CDATA[ AND intime >=#{intimein,jdbcType=DATE}]]>
+      <![CDATA[ AND intime <=#{intimeend,jdbcType=DATE}]]>
+    </if>
     ORDER BY location,orderid ASC
   </select>
 

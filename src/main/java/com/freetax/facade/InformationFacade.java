@@ -1,5 +1,6 @@
 package com.freetax.facade;
 
+import com.freetax.facade.user.UserFacade;
 import com.freetax.mybatis.information.entity.Information;
 import com.freetax.mybatis.information.entity.InformationVo;
 import com.freetax.mybatis.information.service.InformationService;
@@ -8,8 +9,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author zhurui
@@ -20,6 +23,9 @@ public class InformationFacade {
 
     @Autowired
     private InformationService informationService;
+
+    @Autowired
+    private UserFacade userFacade;
 
     /**
      * 新增资讯文章
@@ -115,8 +121,8 @@ public class InformationFacade {
      * @param pag
      * @return
      */
-    public List<Information> queryInformationByList(String title, String type, String ishot,String source, Paging<Information> pag){
-        Information information = new Information();
+    public List<Information> queryInformationByList(String title, String type, String ishot,String source, String intime, Paging<Information> pag){
+        InformationVo information = new InformationVo();
         if (StringUtils.isNotEmpty(title)){
             information.setTitle(title);
         }
@@ -128,6 +134,14 @@ public class InformationFacade {
         }
         if (StringUtils.isNotEmpty(source)){
             information.setSource(source);
+        }
+        if (StringUtils.isNotEmpty(intime)){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Map<String,Date> map = userFacade.getDateTimeMap(intime,format);
+            if (map != null){
+                information.setIntimein(map.get("begin"));
+                information.setIntimeend(map.get("end"));
+            }
         }
         return informationService.findAllQueryInformationByList(information,pag);
     }

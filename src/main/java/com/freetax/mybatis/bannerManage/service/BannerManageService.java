@@ -1,6 +1,7 @@
 package com.freetax.mybatis.bannerManage.service;
 
 import com.freetax.mybatis.bannerManage.entity.BannerManage;
+import com.freetax.mybatis.bannerManage.entity.BannerManageVo;
 import com.freetax.mybatis.bannerManage.entity.IndexInformation;
 import com.freetax.mybatis.bannerManage.mapper.BannerManageMapper;
 import org.slf4j.Logger;
@@ -101,7 +102,7 @@ public class BannerManageService {
      * @param bannerManage
      * @return
      */
-    public List<BannerManage> queryAdvertisementByList(BannerManage bannerManage){
+    public List<BannerManage> queryAdvertisementByList(BannerManageVo bannerManage){
         try {
             log.info("条件查询广告列表");
             return bannerManageMapper.queryAdvertisementByList(bannerManage);
