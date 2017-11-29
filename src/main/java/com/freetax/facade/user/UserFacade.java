@@ -170,15 +170,17 @@ public class UserFacade {
         //分解注册时间
         String registerin = "";
         String registerend = "";
-        String[] times = intime.split(",");
-        for (int j = 0; j<times.length; j++){
-            if (j == 0) {
-                registerin = times[j];
-            }else if (j == 1) {
-                registerend = times[j];
+        if (StringUtils.isNotEmpty(intime)) {
+            String[] times = intime.split(",");
+            for (int j = 0; j < times.length; j++) {
+                if (j == 0) {
+                    registerin = times[j];
+                } else if (j == 1) {
+                    registerend = times[j];
+                }
             }
-        }
 
+        }
         //注册时间的时间操作
         Map<String,Date> regmap = getTime(registerin, registerend, format);
         if (regmap != null){
