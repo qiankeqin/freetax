@@ -66,7 +66,7 @@
     <!-- 安全管理器 配置权限管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--<property name="realm" ref="userRealm"/>-->
-        <property name="authenticator" ref="authenticator"/>
+        <!--<property name="authenticator" ref="authenticator"/>-->
         <!--<property name="realm" ref="bosrealm"/>-->
         <property name="realms">
             <list>
@@ -113,9 +113,9 @@
         <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/auth/login"/>
     </bean>
-    <bean id="orRolesAuthorizationFilter"
+    <!--<bean id="orRolesAuthorizationFilter"
           class="com.freetax.shiro.filter.OrRolesAuthorizationFilter">
-    </bean>
+    </bean>-->
     <!-- web.xml中shiro的filter对应的bean -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- 管理器，必须设置 -->
@@ -125,14 +125,14 @@
         <!-- 认证成功统一跳转到/admin/index.do，建议不配置，shiro认证成功自动到上一个请求路径 -->
         <property name="successUrl" value="/index.html"/>
         <!-- 自定义filter，可用来更改默认的表单名称配置 -->
-        <property name="filters">
+        <!--<property name="filters">
             <util:map>
-                <!--需要登录-->
+                &lt;!&ndash;需要登录&ndash;&gt;
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <!--<entry key="orroles" value-ref="orRolesAuthorizationFilter"/>-->
-                <!--<entry key="orperms" value-ref="orPermissionsAuthorizationFilter"/>-->
+                &lt;!&ndash;<entry key="orroles" value-ref="orRolesAuthorizationFilter"/>&ndash;&gt;
+                &lt;!&ndash;<entry key="orperms" value-ref="orPermissionsAuthorizationFilter"/>&ndash;&gt;
             </util:map>
-        </property>
+        </property>-->
         <property name="filterChainDefinitions">
             <value>
                 <!--需要登录的接口-->
