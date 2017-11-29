@@ -282,6 +282,10 @@
             <![CDATA[ AND advicetime>=#{adviceBegin,jdbcType=DATE}]]>
             <![CDATA[ AND advicetime <=#{adviceEnd,jdbcType=DATE}]]>
         </if>
+        <if test="registerin != null and registerend != null">
+            <![CDATA[ AND intime >=#{registerin,jdbcType=DATE}]]>
+            <![CDATA[ AND intime <=#{registerend,jdbcType=DATE}]]>
+        </if>
         ORDER BY intime DESC
     </select>
 </mapper>

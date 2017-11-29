@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,7 +134,8 @@ public class UserFacade {
     }
 
     public List<User> queryUserByList(String phone, String name, String company, String infosource, String mark,
-                                      String logbegin, String logend, String advicebiegin, String adviceend, Paging<User> pag) {
+                                      String logbegin, String logend, String advicebiegin, String adviceend, Paging<User> pag,
+                                      String registerend,String registerin) {
         UserVo user = new UserVo();
         if (StringUtils.isNotEmpty(phone)){
             user.setPhone(phone);
@@ -152,9 +154,25 @@ public class UserFacade {
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //时间操作
-        getTime(logbegin, logend, logbegin, logend, user, format);
+        /*map.put("end",endTime);
+        map.put("begin",beginTime);*/
+        Map<String,Date> logmap = getTime(logbegin, logend,format);
+        if (logmap != null){
+            user.setLogEnd(logmap.get("end"));
+            user.setLogBegin(logmap.get("begin"));
+        }
         //时间操作
-        getTime(logbegin, logend, advicebiegin, adviceend, user, format);
+        Map<String,Date> advmap = getTime(advicebiegin, adviceend,format);
+        if (advmap != null){
+            user.setAdviceEnd(advmap.get("end"));
+            user.setAdviceBegin(advmap.get("begin"));
+        }
+        //注册时间的时间操作
+        Map<String,Date> regmap = getTime(registerin, registerend, format);
+        if (regmap != null){
+            user.setRegisterend(regmap.get("end"));
+            user.setRegisterin(regmap.get("begin"));
+        }
 
         return userService.queryUserByList(user,pag);
 
@@ -162,26 +180,22 @@ public class UserFacade {
 
     /**
      * 获取时间
-     * @param logbegin 登录开始
-     * @param logend 登录结束
-     * @param advicebiegin 咨询开始
-     * @param adviceend 咨询结束
-     * @param user 用户对象
-     * @param logformat format对象
      */
-    private void getTime(String logbegin, String logend, String advicebiegin, String adviceend, UserVo user, SimpleDateFormat logformat) {
-        Date advicebeginTime;
-        Date adviceendTime;
-        if (StringUtils.isNotEmpty(advicebiegin) && StringUtils.isNotEmpty(adviceend)){
+    private Map<String,Date> getTime(String begin, String end, SimpleDateFormat logformat) {
+        Date beginTime;
+        Date endTime;
+        Map map = new HashMap();
+        if (StringUtils.isNotEmpty(begin) && StringUtils.isNotEmpty(end)){
             try {
-                advicebeginTime = logformat.parse(logbegin);
-                adviceendTime = logformat.parse(logend);
-                user.setAdviceBegin(advicebeginTime);
-                user.setAdviceEnd(adviceendTime);
+                beginTime = logformat.parse(begin);
+                endTime = logformat.parse(end);
+                map.put("end",endTime);
+                map.put("begin",beginTime);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
+        return map;
     }
     /**
      * 修改用户个人资料

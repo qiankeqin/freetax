@@ -34,6 +34,10 @@ public class UserVo implements Serializable {
 
     private Date adviceEnd;//咨询结束时间
 
+    private Date registerin;//注册开始时间
+
+    private Date registerend;//注册结束时间
+
     private Integer infosource;//信息来源：0 业务咨询 1 招商加盟
 
     private String passwd;//用户密码
@@ -144,6 +148,22 @@ public class UserVo implements Serializable {
 
     public void setAdviceEnd(Date adviceEnd) {
         this.adviceEnd = adviceEnd;
+    }
+
+    public Date getRegisterin() {
+        return registerin;
+    }
+
+    public void setRegisterin(Date registerin) {
+        this.registerin = registerin;
+    }
+
+    public Date getRegisterend() {
+        return registerend;
+    }
+
+    public void setRegisterend(Date registerend) {
+        this.registerend = registerend;
     }
 
     public Integer getInfosource() {
