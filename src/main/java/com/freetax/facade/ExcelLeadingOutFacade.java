@@ -69,7 +69,7 @@ public class ExcelLeadingOutFacade {
             //用于返回文件路径
             String reurl = PropertiesLoader.getValue("excel.file.url");
             //String reurl = "d:/1/";
-            reurl += "/excel/" + urlname;
+            reurl += "excel" + urlname;
             resault.put("code", 200);
             resault.put("date", reurl);
             resault.put("massger", "成功");
