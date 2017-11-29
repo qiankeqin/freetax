@@ -67,9 +67,9 @@ public class ExcelLeadingOutFacade {
                 book.close();
             }
             //用于返回文件路径
-            String reurl = PropertiesLoader.getValue("excel.domain");
+            String reurl = PropertiesLoader.getValue("excel.file.url");
             //String reurl = "d:/1/";
-            reurl += "/download/post" + urlname;
+            reurl += "/excel/" + urlname;
             resault.put("code", 200);
             resault.put("date", reurl);
             resault.put("massger", "成功");
