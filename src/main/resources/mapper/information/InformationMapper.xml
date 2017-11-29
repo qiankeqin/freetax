@@ -197,6 +197,10 @@
         <if test="title != null">
             AND title LIKE concat('%',#{title,jdbcType=VARCHAR},'%')
         </if>
+        <if test="intimein != null and intimeend != null">
+            <![CDATA[ AND intime >=#{intimein,jdbcType=DATE}]]>
+            <![CDATA[ AND intime <=#{intimeend,jdbcType=DATE}]]>
+        </if>
         ORDER BY intime DESC
     </select>
 
@@ -234,10 +238,6 @@
         </if>
         <if test="ishot != null">
             AND ishot = #{ishot,jdbcType=INTEGER}
-        </if>
-        <if test="intimein != null and intimeend != null">
-            <![CDATA[ AND intime >=#{intimein,jdbcType=DATE}]]>
-            <![CDATA[ AND intime <=#{intimeend,jdbcType=DATE}]]>
         </if>
         ORDER BY intime DESC
     </select>
