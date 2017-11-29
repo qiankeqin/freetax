@@ -36,9 +36,9 @@ public class InformationLeadingOutFacade {
         Map resault = new HashMap();
         try {
             //t.xls为要新建的文件名
-            String path = "d:/1/";
+            //String path = "d:/1/";
             //查询帖子保存路径
-            //String path = PropertiesLoader.getValue("excel.domain");
+            String path = PropertiesLoader.getValue("excel.domain");
             UUID uuid = UUID.randomUUID();
             //查询出所有xml导入的帖子
             List<Information> informations = informationService.queryUserByAll();
@@ -68,8 +68,8 @@ public class InformationLeadingOutFacade {
                 book.close();
             }
             //用于返回文件路径
-            //String reurl = PropertiesLoader.getValue("excel.file.url");
-            String reurl = "d:/1/";
+            String reurl = PropertiesLoader.getValue("excel.file.url");
+            //String reurl = "d:/1/";
             reurl += "excel" + urlname;
             resault.put("code", 200);
             resault.put("date", reurl);
