@@ -152,7 +152,7 @@ public class UserFacade {
         if (StringUtils.isNotEmpty(mark)){
             user.setMark(Integer.parseInt(mark));
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         //时间操作
         /*map.put("end",endTime);
         map.put("begin",beginTime);*/
