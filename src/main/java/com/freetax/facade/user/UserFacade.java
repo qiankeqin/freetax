@@ -171,7 +171,7 @@ public class UserFacade {
         String registerin = "";
         String registerend = "";
         if (StringUtils.isNotEmpty(intime)) {
-            intime = intime.replace(" ","");
+            intime = intime.replaceAll(" ","");
             String[] times = intime.split(",");
             for (int j = 0; j < times.length; j++) {
                 if (j == 0) {
