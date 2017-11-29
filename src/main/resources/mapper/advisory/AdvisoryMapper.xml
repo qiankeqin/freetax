@@ -129,4 +129,8 @@
     <select id="queryAdvisoryIsVisit" parameterType="com.freetax.mybatis.advisory.entity.Advisory" resultType="java.lang.Integer">
         SELECT id FROM fr_advisory WHERE phone = #{phone,jdbcType=VARCHAR} AND visit = 0 AND name = #{name,jdbcType=VARCHAR}
     </select>
+
+    <select id="queryUserByAll" resultType="com.freetax.mybatis.advisory.entity.Advisory">
+        SELECT * FROM fr_advisory
+    </select>
 </mapper>

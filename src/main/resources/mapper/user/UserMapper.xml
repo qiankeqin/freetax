@@ -288,4 +288,9 @@
         </if>
         ORDER BY intime DESC
     </select>
+
+    <!-- {"id", "邮箱", "手机", "头像", "注册时间", "信息来源", "姓名", "公司名称"} -->
+    <select id="queryUserByAll" resultType="com.freetax.mybatis.user.entity.UserExcel">
+        SELECT id,email,phone,photo,intime,COALESCE(infosource,'2') AS infosource,name,COALESCE(company,'-') AS company FROM fr_user WHERE status = 0
+    </select>
 </mapper>

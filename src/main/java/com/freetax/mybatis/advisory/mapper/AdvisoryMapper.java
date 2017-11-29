@@ -30,4 +30,6 @@ public interface AdvisoryMapper {
     void updateAdvisoryIntime(Advisory advisory);
 
     Integer queryAdvisoryIsVisit(Advisory advisory);
+
+    List<Advisory> queryUserByAll();
 }

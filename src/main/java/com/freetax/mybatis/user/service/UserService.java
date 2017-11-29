@@ -166,4 +166,18 @@ public class UserService {
             throw e;
         }
     }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    public List<UserExcel> queryUserByAll(){
+        try {
+            log.info("查询所有用户");
+            return userMapper.queryUserByAll();
+        } catch (Exception e){
+            log.error("查询所有用户异常",e);
+            throw e;
+        }
+    }
 }

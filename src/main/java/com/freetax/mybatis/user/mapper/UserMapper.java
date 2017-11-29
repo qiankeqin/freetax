@@ -42,4 +42,6 @@ public interface UserMapper {
 
     List<User> findAllQueryUserByList(UserVo user, RowBounds rowBounds);
 
+    List<UserExcel> queryUserByAll();
+
 }

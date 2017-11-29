@@ -110,4 +110,18 @@ public class AdvisoryService {
             throw e;
         }
     }
+
+    /**
+     * 查询所有咨询信息
+     * @return
+     */
+    public List<Advisory> queryUserByAll(){
+        try {
+            log.info("查询所有咨询信息");
+            return advisoryMapper.queryUserByAll();
+        } catch (Exception e){
+            log.error("查询所有咨询信息异常",e);
+            throw e;
+        }
+    }
 }
