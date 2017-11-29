@@ -162,4 +162,18 @@ public class InformationService {
             throw e;
         }
     }
+
+    /**
+     * 查询所有资讯
+     * @return
+     */
+    public List<Information> queryUserByAll(){
+        try {
+            log.info("查询所有资讯");
+            return informationMapper.queryUserByAll();
+        } catch (Exception e){
+            log.error("查询所有资讯异常",e);
+            throw e;
+        }
+    }
 }

@@ -99,25 +99,11 @@ public class ExcelLeadingOutFacade {
      * @throws IllegalAccessException
      * @throws WriteException
      */
-    private void addExcelFileElement(WritableSheet sheet, List<UserExcel> users) throws IllegalAccessException, WriteException {
+    private void addExcelFileElement(WritableSheet sheet, List<UserExcel> users) throws Exception {
         for (int i = 0; i < users.size(); i++) {
             UserExcel userExcel = users.get(i);
-            Integer id = userExcel.getId();
-            String company = userExcel.getCompany();
-            String email = userExcel.getEmail();
-            String name = userExcel.getName();
-            String phone = userExcel.getPhone();
-            String photo = userExcel.getPhoto();
-            Integer infosource = userExcel.getInfosource();
-            Date intime = userExcel.getIntime();
-            String infos = "";
-            if (infosource == 1){
-                infos = "招商加盟";
-            } else {
-                infos = "业务咨询";
-            }
             //写到表格中
-            setExcelCell(sheet, i, userExcel, id, company, email, name, photo, infos,phone,intime);
+            setExcelCell(sheet, i, userExcel);
         }
     }
 
@@ -126,55 +112,49 @@ public class ExcelLeadingOutFacade {
      * @param sheet
      * @param i
      * @param user
-     * @param id
-     * @param company
-     * @param email
-     * @param name
-     * @param photo
-     * @param infos
-     * @param phone
-     * @param intime
      * @throws WriteException
      */
     //{"id", "邮箱", "手机", "头像", "注册时间", "信息来源", "姓名", "公司名称"}
-    private void setExcelCell(WritableSheet sheet, int i, UserExcel user, Integer id,String company,
-                              String email,String name,String photo,String infos,String phone,Date intime) throws WriteException {
+    private void setExcelCell(WritableSheet sheet, int i, UserExcel user) throws Exception {
         //获取对象长度
         Field[] p = user.getClass().getDeclaredFields();
         int k = 0;
         while (k < p.length) {
             if (k == 0) {
-                sheet.addCell(new Label(k, i + 1, id.toString()));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getId().toString()));
             }
             if (k == 1) {
-                sheet.addCell(new Label(k, i + 1, email));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getEmail()));
             }
             if (k == 2) {
-                sheet.addCell(new Label(k, i + 1, phone));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getPhone()));
             }
             if (k == 3) {
-                sheet.addCell(new Label(k, i + 1, photo));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getPhoto()));
             }
             if (k == 4) {
-                sheet.addCell(new Label(k, i + 1, intime+""));
-                k++;
+                SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
+                SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                sheet.addCell(new Label(k, i + 1, sdf2.format(sdf1.parse(user.getIntime().toString())) + ""));
             }
             if (k == 5) {
-                sheet.addCell(new Label(k, i + 1, infos));
-                k++;
+                if (user.getInfosource() == 1){
+                    sheet.addCell(new Label(k, i + 1, "招商加盟"));
+                } else {
+                    sheet.addCell(new Label(k, i + 1, "业务咨询"));
+                }
+
             }
             if (k == 6) {
-                sheet.addCell(new Label(k, i + 1, name));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getName()));
             }
             if (k == 7) {
-                sheet.addCell(new Label(k, i + 1, company));
-                k++;
+                sheet.addCell(new Label(k, i + 1, user.getCompany()));
             }
+            k++;
         }
     }
+
+
 }

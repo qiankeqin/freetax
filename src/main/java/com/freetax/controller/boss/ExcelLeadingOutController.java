@@ -3,6 +3,7 @@ package com.freetax.controller.boss;
 import com.freetax.common.Response;
 import com.freetax.facade.ConsultlLeadingOutFacade;
 import com.freetax.facade.ExcelLeadingOutFacade;
+import com.freetax.facade.InformationLeadingOutFacade;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class ExcelLeadingOutController {
 
     @Autowired
     private ConsultlLeadingOutFacade consultlLeadingOutFacade;
+
+    @Autowired
+    private InformationLeadingOutFacade informationLeadingOutFacade;
 
     /**
      * 会员用户导出
@@ -50,6 +54,21 @@ public class ExcelLeadingOutController {
     public Response excelLeadingOutByConsultl() {
         Response response = new Response();
         Map map = consultlLeadingOutFacade.excelLeadingOutByConsultl();
+        response.setMessage("操作成功");
+        response.setData(map);
+        return response;
+    }
+
+    /**
+     * 咨询用户导出
+     *
+     * @return
+     */
+    @ApiOperation(value = "用户导出Excel", notes = "用于帖子导出", response = Response.class)
+    @RequestMapping(value = "/excelLeadingOutByInformation", method = RequestMethod.POST)
+    public Response excelLeadingOutByInformation() {
+        Response response = new Response();
+        Map map = informationLeadingOutFacade.excelLeadingOutByInformation();
         response.setMessage("操作成功");
         response.setData(map);
         return response;

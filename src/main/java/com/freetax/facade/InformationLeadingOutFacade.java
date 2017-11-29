@@ -2,9 +2,8 @@ package com.freetax.facade;
 
 import com.freetax.mybatis.advisory.entity.Advisory;
 import com.freetax.mybatis.advisory.service.AdvisoryService;
-import com.freetax.mybatis.user.entity.User;
-import com.freetax.mybatis.user.entity.UserExcel;
-import com.freetax.mybatis.user.service.UserService;
+import com.freetax.mybatis.information.entity.Information;
+import com.freetax.mybatis.information.service.InformationService;
 import com.freetax.utils.PropertiesLoader;
 import jxl.Workbook;
 import jxl.write.Label;
@@ -26,23 +25,23 @@ import java.util.*;
  * @Date 2017/11/29 11:54
  */
 @Service
-public class ConsultlLeadingOutFacade {
+public class InformationLeadingOutFacade {
 
     @Autowired
-    private AdvisoryService advisoryService;
+    private InformationService informationService;
 
-    private static Logger log = LoggerFactory.getLogger(ConsultlLeadingOutFacade.class);
+    private static Logger log = LoggerFactory.getLogger(InformationLeadingOutFacade.class);
 
-    public Map excelLeadingOutByConsultl() {
+    public Map excelLeadingOutByInformation() {
         Map resault = new HashMap();
         try {
             //t.xls为要新建的文件名
-            //String path = "d:/1";
+            String path = "d:/1/";
             //查询帖子保存路径
-            String path = PropertiesLoader.getValue("excel.domain");
+            //String path = PropertiesLoader.getValue("excel.domain");
             UUID uuid = UUID.randomUUID();
             //查询出所有xml导入的帖子
-            List<Advisory> advisories = advisoryService.queryUserByAll();
+            List<Information> informations = informationService.queryUserByAll();
             String urlname = "/" + getDateString() + uuid + ".xls";
             log.info("...................." + path + urlname);
             WritableWorkbook book = Workbook.createWorkbook(new File(path + urlname));
@@ -51,7 +50,7 @@ public class ConsultlLeadingOutFacade {
 
             /*PostXml postXml = new PostXml();
             Field[] fields = postXml.getClass().getDeclaredFields();*/
-            String title[] = {"id", "姓名", "手机", "是否回访", "咨询时间"};
+            String title[] = {"id", "标题", "副标题", "封面", "类型", "咨询来源", "时间", "内容"};
             //设计表头
             for (int i = 0; i < title.length; i++) {
                 sheet.addCell(new Label(i, 0, title[i]));
@@ -60,7 +59,7 @@ public class ConsultlLeadingOutFacade {
             //获取对象长度
             Field[] p = post.getClass().getDeclaredFields();*/
             //遍历循环出集合中每一个元素，写到表中
-            addExcelFileElement(sheet, advisories);
+            addExcelFileElement(sheet, informations);
             //
             //写入数据
             book.write();
@@ -69,8 +68,8 @@ public class ConsultlLeadingOutFacade {
                 book.close();
             }
             //用于返回文件路径
-            String reurl = PropertiesLoader.getValue("excel.file.url");
-            //String reurl = "d:/1/";
+            //String reurl = PropertiesLoader.getValue("excel.file.url");
+            String reurl = "d:/1/";
             reurl += "excel" + urlname;
             resault.put("code", 200);
             resault.put("date", reurl);
@@ -97,20 +96,20 @@ public class ConsultlLeadingOutFacade {
      * 为excel文件添加元素
      *
      * @param sheet
-     * @param advisories
+     * @param informations
      * @throws IllegalAccessException
      * @throws WriteException
      */
-    private void addExcelFileElement(WritableSheet sheet, List<Advisory> advisories) throws Exception {
-        for (int i = 0; i < advisories.size(); i++) {
-            Advisory advisory = advisories.get(i);
+    private void addExcelFileElement(WritableSheet sheet, List<Information> informations) throws Exception {
+        for (int i = 0; i < informations.size(); i++) {
+            Information information = informations.get(i);
             /*Integer id = advisory.getId();
             Integer visit = advisory.getVisit();
             String name = advisory.getName();
             String phone = advisory.getPhone();
             Date intime = advisory.getIntime();*/
             //写到表格中
-            setExcelCell(sheet, i, advisory);
+            setExcelCell(sheet, i, information);
         }
     }
 
@@ -120,38 +119,55 @@ public class ConsultlLeadingOutFacade {
      * @param sheet
      * @throws WriteException
      */
-    private void setExcelCell(WritableSheet sheet, int i, Advisory advisories) throws Exception {
+    private void setExcelCell(WritableSheet sheet, int i, Information information) throws Exception {
         //获取对象长度
-        Field[] p = advisories.getClass().getDeclaredFields();
+        Field[] p = information.getClass().getDeclaredFields();
         int k = 0;
         while (k < p.length) {
             if (k == 0) {
-                sheet.addCell(new Label(k, i + 1, advisories.getId().toString()));
+                sheet.addCell(new Label(k, i + 1, information.getId().toString()));
 
             }
             if (k == 1) {
-                sheet.addCell(new Label(k, i + 1, advisories.getName()));
+                sheet.addCell(new Label(k, i + 1, information.getTitle()));
 
             }
             if (k == 2) {
-                sheet.addCell(new Label(k, i + 1, advisories.getPhone()));
+                sheet.addCell(new Label(k, i + 1, information.getSubhead()));
 
             }
             if (k == 3) {
-                if (advisories.getVisit() == 1) {
-                    sheet.addCell(new Label(k, i + 1, "已回访"));
-                } else {
-                    sheet.addCell(new Label(k, i + 1, "未回访"));
-                }
+                sheet.addCell(new Label(k, i + 1, information.getCoverimg()));
 
             }
             if (k == 4) {
-                SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+                if (information.getType() == 1) {
+                    sheet.addCell(new Label(k, i + 1, "行业资讯"));
+                } else if (information.getType() == 2) {
+                    sheet.addCell(new Label(k, i + 1, "财税知识"));
+                } else if (information.getType() == 3) {
+                    sheet.addCell(new Label(k, i + 1, "政策案例"));
+                }
 
-                SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                sheet.addCell(new Label(k, i + 1, sdf2.format(sdf1.parse(advisories.getIntime().toString())) + ""));
+            }
+            if (k == 5) {
+                sheet.addCell(new Label(k, i + 1, information.getSource()));
+
+            }
+            if (k == 6) {
+                SimpleDateFormat sdf1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                sheet.addCell(new Label(k, i + 1, sdf2.format(sdf1.parse(information.getIntime().toString())) + ""));
+
+            }
+            if (k == 7) {
+                sheet.addCell(new Label(k, i + 1, information.getContent()));
+
             }
             k++;
         }
     }
+
+
 }

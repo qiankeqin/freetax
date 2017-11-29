@@ -241,4 +241,8 @@
         </if>
         ORDER BY intime DESC
     </select>
+
+    <select id="queryUserByAll" resultType="com.freetax.mybatis.information.entity.Information">
+        SELECT * FROM fr_information WHERE isdel = 0
+    </select>
 </mapper>

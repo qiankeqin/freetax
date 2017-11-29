@@ -36,4 +36,6 @@ public interface InformationMapper {
     Information queryInformationById(Integer id);
 
     void insertInformationByIsHot(Information information);
+
+    List<Information> queryUserByAll();
 }
