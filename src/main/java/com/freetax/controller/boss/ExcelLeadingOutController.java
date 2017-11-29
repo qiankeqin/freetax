@@ -34,7 +34,7 @@ public class ExcelLeadingOutController {
      *
      * @return
      */
-    @ApiOperation(value = "用户导出Excel", notes = "用于帖子导出", response = Response.class)
+    @ApiOperation(value = "会员用户导出Excel", notes = "用于帖子导出", response = Response.class)
     @RequestMapping(value = "/excelLeadingOutByUser", method = RequestMethod.POST)
     public Response excelLeadingOutByUser() {
         Response response = new Response();
@@ -49,7 +49,7 @@ public class ExcelLeadingOutController {
      *
      * @return
      */
-    @ApiOperation(value = "用户导出Excel", notes = "用于帖子导出", response = Response.class)
+    @ApiOperation(value = "用户咨询记录导出Excel", notes = "用于帖子导出", response = Response.class)
     @RequestMapping(value = "/excelLeadingOutByConsultl", method = RequestMethod.POST)
     public Response excelLeadingOutByConsultl() {
         Response response = new Response();
@@ -64,7 +64,7 @@ public class ExcelLeadingOutController {
      *
      * @return
      */
-    @ApiOperation(value = "用户导出Excel", notes = "用于帖子导出", response = Response.class)
+    @ApiOperation(value = "资讯文章导出Excel", notes = "用于帖子导出", response = Response.class)
     @RequestMapping(value = "/excelLeadingOutByInformation", method = RequestMethod.POST)
     public Response excelLeadingOutByInformation() {
         Response response = new Response();
