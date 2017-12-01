@@ -127,10 +127,13 @@ public class BannerManageFacade {
      * @param title
      * @param location
      */
-    public void insertAdvertisement(String banner,String describe,String orderid,String title,String location){
+    public void insertAdvertisement(String banner,String describe,String orderid, String url,String title,String location){
         BannerManage bannerManage = new BannerManage();
         if (StringUtils.isNotEmpty(banner)){
             bannerManage.setBanner(banner);
+        }
+        if (StringUtils.isNotEmpty(url)){
+            bannerManage.setUrl(url);
         }
         if (StringUtils.isNotEmpty(describe)){
             bannerManage.setDes(describe);
@@ -157,13 +160,16 @@ public class BannerManageFacade {
      * @param title
      * @param location
      */
-    public void updateAdvertisement(String id,String banner,String describe,String orderid,String title,String location){
+    public void updateAdvertisement(String id,String banner,String describe,String orderid,String title,String url,String location){
         BannerManage bannerManage = new BannerManage();
         if (StringUtils.isNotEmpty(id)){
             bannerManage.setId(Integer.parseInt(id));
         }
         if (StringUtils.isNotEmpty(banner)){
             bannerManage.setBanner(banner);
+        }
+        if (StringUtils.isNotEmpty(url)){
+            bannerManage.setUrl(url);
         }
         if (StringUtils.isNotEmpty(describe)){
             bannerManage.setDes(describe);

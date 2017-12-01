@@ -7,6 +7,8 @@ public class BannerManage {
 
     private String banner;
 
+    private String url;
+
     private String des;
 
     private Integer orderid;
@@ -18,6 +20,14 @@ public class BannerManage {
     private Integer isdel;
 
     private Date intime;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Integer getId() {
         return id;

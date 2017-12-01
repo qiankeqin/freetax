@@ -39,10 +39,11 @@ public class AdvertisementManageController {
                                         @ApiParam(value = "对于banner的描述")@RequestParam String des,
                                         @ApiParam(value = "排序")@RequestParam String orderid,
                                         @ApiParam(value = "标题")@RequestParam String title,
+                                        @ApiParam(value = "跳转链接url")@RequestParam String url,
                                         @ApiParam(value = "banner位置 1:主页顶部banner 2:主页滚动banner 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner " +
                                                 "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam String location){
         Response response = new Response();
-        bannerManageFacade.insertAdvertisement(banner,des,orderid,title,location);
+        bannerManageFacade.insertAdvertisement(banner,des,orderid,url,title,location);
         response.setMessage("操作成功");
         response.setData(1);
         return response;
@@ -63,10 +64,11 @@ public class AdvertisementManageController {
                                         @ApiParam(value = "对于banner的描述")@RequestParam(required = false) String des,
                                         @ApiParam(value = "排序")@RequestParam(required = false) String orderid,
                                         @ApiParam(value = "标题")@RequestParam(required = false) String title,
+                                        @ApiParam(value = "跳转链接url")@RequestParam(required = false) String url,
                                         @ApiParam(value = "banner位置 1:主页顶部banner 2:主页滚动banner 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner " +
                                                 "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam(required = false) String location){
         Response response = new Response();
-        bannerManageFacade.updateAdvertisement(id,banner,des,orderid,title,location);
+        bannerManageFacade.updateAdvertisement(id,banner,des,orderid,title,url,location);
         response.setMessage("操作成功");
         response.setData(1);
         return response;
