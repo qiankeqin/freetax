@@ -74,7 +74,7 @@ public class BannerManageService {
     public void updateAdvertisement(BannerManage bannerManage){
         try {
             log.info("修改广告");
-            bannerManageMapper.updateAdvertisement(bannerManage);
+            bannerManageMapper.updateByPrimaryKey(bannerManage);
         } catch (Exception e){
             log.error("广告修改失败",e);
             throw e;
