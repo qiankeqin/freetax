@@ -248,7 +248,7 @@
         banner = #{banner,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
-        banner = #{url,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="des != null" >
         des = #{des,jdbcType=VARCHAR},
