@@ -20,6 +20,8 @@ public interface BannerManageMapper {
 
     int updateByPrimaryKey(BannerManage record);
 
+    int updateBannerByKey(BannerManage bannerManage);
+
     List<BannerManage> queryIndexBannerOrInformation();
 
     List<BannerManage> queryBannerByType(Integer type);

@@ -271,4 +271,15 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateBannerByKey" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage" >
+    update fr_banner_manage
+    set banner = #{banner,jdbcType=VARCHAR},
+    url = #{url,jdbcType=VARCHAR},
+    des = #{des,jdbcType=VARCHAR},
+    orderid = #{orderid,jdbcType=INTEGER},
+    title = #{title,jdbcType=VARCHAR},
+    location = #{location,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
