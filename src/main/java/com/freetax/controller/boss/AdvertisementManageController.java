@@ -39,7 +39,7 @@ public class AdvertisementManageController {
                                         @ApiParam(value = "对于banner的描述")@RequestParam String des,
                                         @ApiParam(value = "排序")@RequestParam String orderid,
                                         @ApiParam(value = "标题")@RequestParam String title,
-                                        @ApiParam(value = "跳转链接url")@RequestParam String url,
+                                        @ApiParam(value = "跳转链接url")@RequestParam(required = false) String url,
                                         @ApiParam(value = "banner位置 1:主页顶部banner 2:主页滚动banner 3:税务筹划背景图片 4:税务筹划顶部banner 5:资讯顶部banner " +
                                                 "6:收入对比图 7：问答banner 8：招商banner 9：联系我们banner")@RequestParam String location){
         Response response = new Response();
