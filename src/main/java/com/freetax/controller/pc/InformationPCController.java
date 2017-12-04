@@ -51,6 +51,8 @@ public class InformationPCController {
         Paging<Information> pag;
         if (type.equals(3) || type.equals("3")) {
             pag = new Paging<Information>(Integer.valueOf(pageNo), 5);
+        } if (ishot.equals("1") || ishot.equals(1)){
+            pag = new Paging<Information>(Integer.valueOf(pageNo), 4);
         }else {
             pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
         }
