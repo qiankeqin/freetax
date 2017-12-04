@@ -62,17 +62,17 @@ public class BannerManageFacade {
                         carouselFigure.add(blist.get(i));
                         k++;
                         continue;
-                    //税务筹划背景图片
-                    case 3:
-                        if (blist.get(i).getOrderid() == 1){
-                            toPlan.add(blist.get(i));
-                        }else if (blist.get(i).getOrderid() == 2) {
-                            toPlan.add(blist.get(i));
-                        }
-                        continue;
                     //收入对比图
                     case 6:
                         indexInformation.setIncomeComparison(blist.get(i).getBanner());
+                        continue;
+                        //个人
+                    case 10:
+                        toPlan.add(blist.get(i));
+                        continue;
+                        //企业
+                    case 11:
+                        toPlan.add(blist.get(i));
                         continue;
                 }
             }

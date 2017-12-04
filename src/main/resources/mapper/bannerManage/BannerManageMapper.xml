@@ -138,7 +138,7 @@
   </update>
   
   <select id="queryIndexBannerOrInformation" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage">
-    SELECT * FROM fr_banner_manage WHERE location IN (1,2,3,6) AND isdel = 0
+    SELECT * FROM fr_banner_manage WHERE location IN (1,2,6,10,11) AND isdel = 0
   </select>
 
   <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="java.lang.Integer">
