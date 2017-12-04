@@ -107,8 +107,8 @@ public class MovisionOssClient {
      */
     public Map uploadMultipartFile(MultipartFile file, Integer type) {
         //获取文件名
-        //String filename = file.getOriginalFilename();
-        String filename = UUID.randomUUID()+""+file.getContentType();
+        String f = file.getOriginalFilename();
+        String filename = UUID.randomUUID()+""+f.substring(f.lastIndexOf("."));
         Map map = new HashMap();
         if (file.getSize() > 0) {
             try {
