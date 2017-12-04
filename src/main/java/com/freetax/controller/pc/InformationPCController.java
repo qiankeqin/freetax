@@ -51,10 +51,15 @@ public class InformationPCController {
         Paging<Information> pag;
         if (type.equals(3) || type.equals("3")) {
             pag = new Paging<Information>(Integer.valueOf(pageNo), 5);
-        } else if (ishot.equals("1") || ishot.equals(1)){
-            pag = new Paging<Information>(Integer.valueOf(pageNo), 4);
-        }else {
+        } else {
             pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+        }
+        if (ishot != null) {
+            if (ishot.equals("1") || ishot.equals(1)) {
+                pag = new Paging<Information>(Integer.valueOf(pageNo), 4);
+            } else {
+                pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+            }
         }
         List<Information> list = informationFacade.queryInformationByListPc(type, ishot, pag);
         pag.result(list);
