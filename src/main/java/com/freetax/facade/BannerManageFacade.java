@@ -93,7 +93,11 @@ public class BannerManageFacade {
      * @return
      */
     public List<BannerManage> queryBannerByType(String type){
-        return bannerManageService.queryBannerByType(Integer.parseInt(type));
+        BannerManage bannerManage = new BannerManage();
+        if (StringUtils.isNotEmpty(type)){
+            bannerManage.setLocation(Integer.parseInt(type));
+        }
+        return bannerManageService.queryBannerByType(bannerManage);
     }
 
 

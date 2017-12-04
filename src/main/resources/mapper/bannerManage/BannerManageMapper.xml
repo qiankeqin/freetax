@@ -141,8 +141,13 @@
     SELECT * FROM fr_banner_manage WHERE location IN (1,2,6,10,11) AND isdel = 0
   </select>
 
-  <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="java.lang.Integer">
-    SELECT * FROM fr_banner_manage WHERE location = #{type,jdbcType=INTEGER}
+  <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage">
+    SELECT * FROM fr_banner_manage
+    <where>
+      <if test="location != null">
+        location = #{location,jdbcType=INTEGER}
+      </if>
+    </where>
   </select>
 
   <insert id="insertAdvertisement" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage">

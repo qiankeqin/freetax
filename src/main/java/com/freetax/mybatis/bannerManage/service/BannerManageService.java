@@ -42,7 +42,7 @@ public class BannerManageService {
      * @param type
      * @return
      */
-    public List<BannerManage> queryBannerByType(Integer type){
+    public List<BannerManage> queryBannerByType(BannerManage type){
         try {
             log.info("pc中根据类型查询banner");
             return bannerManageMapper.queryBannerByType(type);
