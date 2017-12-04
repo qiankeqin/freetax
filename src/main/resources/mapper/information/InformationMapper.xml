@@ -211,7 +211,8 @@
 
     <update id="insertInformationByIsHot" parameterType="com.freetax.mybatis.information.entity.Information">
         UPDATE fr_information
-        SET ishot = #{ishot,jdbcType=INTEGER}
+        SET ishot = #{ishot,jdbcType=INTEGER},
+        intime = #{intime,jdbcType=TIMESTAMP},
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
