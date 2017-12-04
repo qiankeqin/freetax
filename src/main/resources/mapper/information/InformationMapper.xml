@@ -223,8 +223,14 @@
 
     <update id="insertInformationByIsHot" parameterType="com.freetax.mybatis.information.entity.Information">
         UPDATE fr_information
-        SET ishot = #{ishot,jdbcType=INTEGER},
-        hottime = #{hottime,jdbcType=TIMESTAMP}
+        <set>
+            <if test="ishot != null">
+            ishot = #{ishot,jdbcType=INTEGER},
+            </if>
+            <if test="hottime != null">
+                hottime = #{hottime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
