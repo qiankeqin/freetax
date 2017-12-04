@@ -115,14 +115,13 @@
             resultType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
       SELECT *
       FROM fr_questions_and_answers
-      <where>
+      where isdel = 0
           <if test="ask != null">
               AND ask LIKE concat('%',#{ask,jdbcType=VARCHAR},'%')
           </if>
           <if test="answer != null">
               AND answer LIKE concat('%',#{answer,jdbcType=VARCHAR},'%')
           </if>
-      </where>
       ORDER BY number DESC
     </select>
 
