@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author zhurui
@@ -106,7 +107,8 @@ public class MovisionOssClient {
      */
     public Map uploadMultipartFile(MultipartFile file, Integer type) {
         //获取文件名
-        String filename = file.getOriginalFilename();
+        //String filename = file.getOriginalFilename();
+        String filename = UUID.randomUUID()+""+file.getContentType();
         Map map = new HashMap();
         if (file.getSize() > 0) {
             try {
