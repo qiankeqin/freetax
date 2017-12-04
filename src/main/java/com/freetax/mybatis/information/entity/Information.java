@@ -23,6 +23,16 @@ public class Information {
 
     private String content;
 
+    private Date hottime;
+
+    public Date getHottime() {
+        return hottime;
+    }
+
+    public void setHottime(Date hottime) {
+        this.hottime = hottime;
+    }
+
     public Integer getId() {
         return id;
     }

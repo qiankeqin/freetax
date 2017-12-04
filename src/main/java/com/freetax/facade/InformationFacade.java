@@ -199,6 +199,7 @@ public class InformationFacade {
         if (StringUtils.isNotEmpty(ishot)){
             information.setIshot(Integer.parseInt(ishot));
         }
+        information.setHottime(new Date());
         informationService.insertInformationByIsHot(information);
     }
 }

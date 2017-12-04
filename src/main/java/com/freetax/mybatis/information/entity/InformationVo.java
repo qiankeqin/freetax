@@ -35,6 +35,16 @@ public class InformationVo {
 
     private Date intimeend;
 
+    private Date hottime;
+
+    public Date getHottime() {
+        return hottime;
+    }
+
+    public void setHottime(Date hottime) {
+        this.hottime = hottime;
+    }
+
     public Date getIntimein() {
         return intimein;
     }
