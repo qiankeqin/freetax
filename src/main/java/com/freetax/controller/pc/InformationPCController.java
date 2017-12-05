@@ -8,6 +8,7 @@ import com.freetax.mybatis.information.entity.InformationVo;
 import com.freetax.utils.pagination.model.Paging;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,7 +55,7 @@ public class InformationPCController {
         } else {
             pag = new Paging<Information>(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
         }
-        if (ishot != null) {
+        if (StringUtils.isNotEmpty(ishot)) {
             if (ishot.equals("1") || ishot.equals(1)) {
                 pag = new Paging<Information>(Integer.valueOf(pageNo), 4);
             } else {
