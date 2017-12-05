@@ -148,6 +148,7 @@
         location = #{location,jdbcType=INTEGER}
       </if>
     </where>
+    ORDER BY orderid ASC
   </select>
 
   <insert id="insertAdvertisement" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage">
