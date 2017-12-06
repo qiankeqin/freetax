@@ -89,7 +89,7 @@ public class PartnerService {
     public void updatePartnerById(Partner partner){
         try {
             log.info("修改合作伙伴");
-            partnerMapper.updateByPrimaryKey(partner);
+            partnerMapper.updateByid(partner);
         } catch (Exception e) {
             log.error("溪丢该合作伙伴异常",e);
             throw e;

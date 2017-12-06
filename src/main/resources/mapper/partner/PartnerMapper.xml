@@ -102,6 +102,15 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+    <update id="updateByid" parameterType="com.freetax.mybatis.partner.entity.Partner">
+        update fr_partner
+        set banner = #{banner,jdbcType=VARCHAR},
+        link = #{link,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
     <select id="queryPartnerList" resultType="com.freetax.mybatis.partner.entity.Partner">
     SELECT * FROM fr_partner WHERE isdel = 0
   </select>

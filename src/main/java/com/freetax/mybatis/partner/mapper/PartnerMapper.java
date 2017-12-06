@@ -25,4 +25,6 @@ public interface PartnerMapper {
     List<Partner> findAllQueryPartnerByList(Partner partner, RowBounds rowBounds);
 
     void deletePartner(Partner partner);
+
+    void updateByid(Partner partner);
 }
