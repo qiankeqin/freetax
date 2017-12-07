@@ -143,11 +143,10 @@
 
   <select id="queryBannerByType" resultType="com.freetax.mybatis.bannerManage.entity.BannerManage" parameterType="com.freetax.mybatis.bannerManage.entity.BannerManage">
     SELECT * FROM fr_banner_manage
-    <where>
+    WHERE isdel = 0
       <if test="location != 0">
-        location = #{location,jdbcType=INTEGER}
+        AND location = #{location,jdbcType=INTEGER}
       </if>
-    </where>
     ORDER BY orderid ASC
   </select>
 
