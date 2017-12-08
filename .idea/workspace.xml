@@ -67,8 +67,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/swagger-ui/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="30" column="70" lean-forward="true" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+            <state relative-caret-position="336">
+              <caret line="40" column="67" lean-forward="true" selection-start-line="40" selection-start-column="67" selection-end-line="40" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -1070,7 +1070,7 @@
       <workItem from="1511313390467" duration="644000" />
       <workItem from="1511314464734" duration="15050000" />
       <workItem from="1511505364489" duration="7701000" />
-      <workItem from="1512704706293" duration="2755000" />
+      <workItem from="1512704706293" duration="2888000" />
     </task>
     <task id="LOCAL-00001" summary="创建新项目">
       <created>1509073177415</created>
@@ -1338,11 +1338,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511505824262</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="增加阿里云通信的短信通道发送短信的集成">
+      <created>1512730827705</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1512730827705</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201730000" />
+    <option name="totallyTimeSpent" value="201863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1850,8 +1857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/swagger-ui/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="30" column="70" lean-forward="true" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+        <state relative-caret-position="336">
+          <caret line="40" column="67" lean-forward="true" selection-start-line="40" selection-start-column="67" selection-end-line="40" selection-end-column="67" />
           <folding />
         </state>
       </provider>
