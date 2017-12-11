@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="ask" property="ask" jdbcType="VARCHAR"/>
-        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="LONGVARCHAR"/>
         <result column="number" property="number" jdbcType="INTEGER"/>
         <result column="intime" property="intime" jdbcType="TIMESTAMP"/>
         <result column="isdel" property="isdel" jdbcType="INTEGER"/>
@@ -26,7 +26,7 @@
     insert into fr_questions_and_answers (id, ask, answer, 
       number, intime, isdel
       )
-    values (#{id,jdbcType=INTEGER}, #{ask,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{ask,jdbcType=VARCHAR}, #{answer,jdbcType=LONGVARCHAR},
       #{number,jdbcType=INTEGER}, #{intime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER}
       )
   </insert>
@@ -60,7 +60,7 @@
                 #{ask,jdbcType=VARCHAR},
             </if>
             <if test="answer != null">
-                #{answer,jdbcType=VARCHAR},
+                #{answer,jdbcType=LONGVARCHAR},
             </if>
             <if test="number != null">
                 #{number,jdbcType=INTEGER},
@@ -81,7 +81,7 @@
                 ask = #{ask,jdbcType=VARCHAR},
             </if>
             <if test="answer != null">
-                answer = #{answer,jdbcType=VARCHAR},
+                answer = #{answer,jdbcType=LONGVARCHAR},
             </if>
             <if test="number != null">
                 number = #{number,jdbcType=INTEGER},
@@ -98,7 +98,7 @@
     <update id="updateByPrimaryKey" parameterType="com.freetax.mybatis.questionsAndAnswers.entity.QuestionsAndAnswers">
     update fr_questions_and_answers
     set ask = #{ask,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=LONGVARCHAR},
       number = #{number,jdbcType=INTEGER},
       intime = #{intime,jdbcType=TIMESTAMP},
       isdel = #{isdel,jdbcType=INTEGER}
@@ -120,7 +120,7 @@
               AND ask LIKE concat('%',#{ask,jdbcType=VARCHAR},'%')
           </if>
           <if test="answer != null">
-              AND answer LIKE concat('%',#{answer,jdbcType=VARCHAR},'%')
+              AND answer LIKE concat('%',#{answer,jdbcType=LONGVARCHAR},'%')
           </if>
       ORDER BY number DESC
     </select>
